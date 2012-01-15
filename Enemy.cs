@@ -19,7 +19,7 @@ namespace ProfilesGenerator
         public Enemy()
         {
             ProfileName = "eNowyProfil";
-            WalkSpeed = "1.85";
+            WalkSpeed = "1,85";
             DisplayNameOffset = "x|y|z";
             HeadOffset = "x|y|z";
             BodyScaleFactor = "x|y|z";

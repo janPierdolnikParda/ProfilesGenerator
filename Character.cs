@@ -15,14 +15,16 @@ namespace ProfilesGenerator
         public String DisplayNameOffset;
         public String HeadOffset;
         public String BodyScaleFactor;
+        public String Type;
 
         public Character()
         {
             ProfileName = "cNowyProfil";
-            WalkSpeed = "1.85";
+            WalkSpeed = "1,85";
             DisplayNameOffset = "x|y|z";
             HeadOffset = "x|y|z";
             BodyScaleFactor = "x|y|z";
+            Type = "DescribedProfile";
         }
     }
 }

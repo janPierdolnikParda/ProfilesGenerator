@@ -15,14 +15,17 @@ namespace ProfilesGenerator
     {
         List<Enemy> EnemyProfiles;
         List<Character> CharacterProfiles;
+        List<ItemProfile> ItemProfiles;
 
         public Form1()
         {
             EnemyProfiles = new List<Enemy>();
             CharacterProfiles = new List<Character>();
+            ItemProfiles = new List<ItemProfile>();
 
             InitializeComponent();
             LadujZPliku();
+            LadujItemyZPliku();
             characterRadio.Checked = true;
             UpdateView();
         }
@@ -66,8 +69,61 @@ namespace ProfilesGenerator
                 BodyMass.Text = "";
                 BodyScaleFactor.Text = "";
                 HeadOffset.Text = "";
+
+                if (characterRadio.Checked && CharacterProfiles.Count > 0)
+                {
+                    comboBox1.SelectedIndex = 0;
+                    UpdateView();
+                }
+
+                if (enemyRadio.Checked && EnemyProfiles.Count > 0)
+                {
+                    comboBox1.SelectedIndex = 0;
+                    UpdateView();
+                }
             }
-            
+
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                idString.Text = ItemProfiles[comboBox2.SelectedIndex].IdString;
+                name.Text = ItemProfiles[comboBox2.SelectedIndex].Name;
+                mesh.Text = ItemProfiles[comboBox2.SelectedIndex].Mesh;
+
+                Equipment.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsEquipment));
+                Pickable.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsPickable));
+
+                if (ItemProfiles[comboBox2.SelectedIndex].Type == "DescribedProfile")
+                    describedRadio.Checked = true;
+                else
+                    itemSwordRadio.Checked = true;
+
+                mass.Text = ItemProfiles[comboBox2.SelectedIndex].Mass;
+                inventoryMaterial.Text = ItemProfiles[comboBox2.SelectedIndex].InventoryMaterial;
+                description.Text = ItemProfiles[comboBox2.SelectedIndex].Description;
+                nameOffset.Text = ItemProfiles[comboBox2.SelectedIndex].NameOffset;
+            }
+
+            else
+            {
+                idString.Text = "";
+                name.Text = "";
+                mesh.Text = "";
+                Equipment.Checked = false;
+                Pickable.Checked = false;
+                describedRadio.Checked = false;
+                itemSwordRadio.Checked = false;
+                mass.Text = "";
+                inventoryMaterial.Text = "";
+                description.Text = "";
+                nameOffset.Text = "";
+
+                if (ItemProfiles.Count > 0 && comboBox2.SelectedIndex < 0)
+                {
+                    comboBox2.SelectedIndex = 0;
+                    UpdateView();
+                }
+            }
+
         }
 
 
@@ -76,23 +132,18 @@ namespace ProfilesGenerator
             if (characterRadio.Checked)
             {
                 CharacterProfiles.Add(new Character());
-                UpdateView();
-                comboBox1.Items.Add(CharacterProfiles[CharacterProfiles.Count-1].ProfileName);
+                comboBox1.Items.Add(CharacterProfiles[CharacterProfiles.Count - 1].ProfileName);
                 comboBox1.SelectedIndex = CharacterProfiles.Count - 1;
+                UpdateView();
             }
 
             if (enemyRadio.Checked)
             {
                 EnemyProfiles.Add(new Enemy());
-                UpdateView();
-                comboBox1.Items.Add(EnemyProfiles[EnemyProfiles.Count-1].ProfileName);
+                comboBox1.Items.Add(EnemyProfiles[EnemyProfiles.Count - 1].ProfileName);
                 comboBox1.SelectedIndex = EnemyProfiles.Count - 1;
+                UpdateView();
             }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateView();
         }
 
         private void profileName_TextChanged(object sender, EventArgs e)
@@ -129,18 +180,6 @@ namespace ProfilesGenerator
                 foreach (Enemy e in EnemyProfiles)
                     comboBox1.Items.Add(e.ProfileName);
             }
-        }
-
-        private void characterRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            LadujZListy(true);
-            UpdateView();
-        }
-
-        private void enemyRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            LadujZListy(false);
-            UpdateView();
         }
 
         private void DisplayName_TextChanged(object sender, EventArgs e)
@@ -241,7 +280,7 @@ namespace ProfilesGenerator
             {
                 EnemyProfiles.RemoveAt(comboBox1.SelectedIndex);
                 comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
-                comboBox1.SelectedIndex = Tymczas-1;
+                comboBox1.SelectedIndex = Tymczas - 1;
 
                 if (comboBox1.SelectedIndex < 0 && EnemyProfiles.Count > 0)
                     comboBox1.SelectedIndex = 0;
@@ -251,7 +290,7 @@ namespace ProfilesGenerator
             {
                 CharacterProfiles.RemoveAt(comboBox1.SelectedIndex);
                 comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
-                comboBox1.SelectedIndex = Tymczas-1;
+                comboBox1.SelectedIndex = Tymczas - 1;
 
                 if (comboBox1.SelectedIndex < 0 && CharacterProfiles.Count > 0)
                     comboBox1.SelectedIndex = 0;
@@ -359,7 +398,7 @@ namespace ProfilesGenerator
                 x = "";
                 y = "";
                 z = "";
-                
+
                 while (ch.HeadOffset[licznik] != '|')
                 {
                     x += ch.HeadOffset[licznik];
@@ -475,7 +514,7 @@ namespace ProfilesGenerator
                 x = "";
                 y = "";
                 z = "";
-                
+
                 while (en.HeadOffset[licznik] != '|')
                 {
                     x += en.HeadOffset[licznik];
@@ -547,6 +586,239 @@ namespace ProfilesGenerator
         private void saveButton_Click(object sender, EventArgs e)
         {
             ZapiszDoPliku();
+        }
+
+        private void characterRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            LadujZListy(true);
+            UpdateView();
+        }
+
+        private void enemyRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            LadujZListy(false);
+            UpdateView();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void iCreateNewButton_Click(object sender, EventArgs e)
+        {
+            ItemProfiles.Add(new ItemProfile());
+            comboBox2.Items.Add(ItemProfiles[ItemProfiles.Count - 1].IdString);
+            comboBox2.SelectedIndex = ItemProfiles.Count - 1;
+            UpdateView();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void describedRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0 && describedRadio.Checked)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].Type = "DescribedProfile";
+            }
+        }
+
+        private void itemSwordRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0 && itemSwordRadio.Checked)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].Type = "ItemSword";
+            }
+        }
+
+        private void idString_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].IdString = idString.Text;
+                comboBox2.Items[comboBox2.SelectedIndex] = idString.Text;
+            }
+        }
+
+        private void name_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].Name = name.Text;
+            }
+        }
+
+        private void description_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].Description = description.Text;
+            }
+        }
+
+        private void mesh_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].Mesh = mesh.Text;
+            }
+        }
+
+        private void inventoryMaterial_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].InventoryMaterial = inventoryMaterial.Text;
+            }
+        }
+
+        private void mass_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].Mass = mass.Text;
+            }
+        }
+
+        private void nameOffset_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].NameOffset = nameOffset.Text;
+            }
+        }
+
+        private void Pickable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                if (Pickable.Checked)
+                    ItemProfiles[comboBox2.SelectedIndex].IsPickable = "true";
+                else
+                    ItemProfiles[comboBox2.SelectedIndex].IsPickable = "false";
+            }
+        }
+
+        private void Equipment_CheckedChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                if (Equipment.Checked)
+                    ItemProfiles[comboBox2.SelectedIndex].IsEquipment = "true";
+                else
+                    ItemProfiles[comboBox2.SelectedIndex].IsEquipment = "false";
+            }
+        }
+
+        private void iDeleteButton_Click(object sender, EventArgs e)
+        {
+            int Tymczas = comboBox2.SelectedIndex;
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles.RemoveAt(comboBox2.SelectedIndex);
+                comboBox2.Items.RemoveAt(comboBox2.SelectedIndex);
+                comboBox2.SelectedIndex = Tymczas - 1;
+
+                if (comboBox2.SelectedIndex < 0 && ItemProfiles.Count > 0)
+                    comboBox2.SelectedIndex = 0;
+            }
+        }
+
+        private void iSaveButton_Click(object sender, EventArgs e)
+        {
+            ZapiszItemyDoPliku();
+            MessageBox.Show("Itemy zapisane.", "Zapisywanie");
+        }
+
+        void ZapiszItemyDoPliku()
+        {
+            XmlTextWriter Items = new XmlTextWriter("Media\\Profiles\\Items.xml", (Encoding)null);
+            Items.WriteStartElement("items");
+
+            foreach (ItemProfile ip in ItemProfiles)
+            {
+                Items.WriteStartElement("item");
+                Items.WriteElementString("idstring", ip.IdString);
+                Items.WriteElementString("name", ip.Name);
+                Items.WriteElementString("mesh", ip.Mesh);
+                Items.WriteElementString("type", ip.Type);
+                Items.WriteElementString("description", ip.Description);
+                Items.WriteElementString("inventory_material", ip.InventoryMaterial);
+                Items.WriteElementString("mass", ip.Mass);
+                Items.WriteElementString("ispickable", ip.IsPickable);
+                Items.WriteElementString("isequipment", ip.IsEquipment);
+
+                string x = "";
+                string y = "";
+                string z = "";
+                int licznik = 0;
+
+                while (ip.NameOffset[licznik] != '|')
+                {
+                    x += ip.NameOffset[licznik];
+                    licznik++;
+                }
+
+                licznik++;
+
+                while (ip.NameOffset[licznik] != '|')
+                {
+                    y += ip.NameOffset[licznik];
+                    licznik++;
+                }
+
+                licznik++;
+
+                while (ip.NameOffset.Length != licznik)
+                {
+                    z += ip.NameOffset[licznik];
+                    licznik++;
+                }
+
+                licznik = 0;
+
+                Items.WriteElementString("nameoffsetx", x);
+                Items.WriteElementString("nameoffsety", y);
+                Items.WriteElementString("nameoffsetz", z);
+                Items.WriteEndElement();
+            }
+
+            Items.WriteEndElement();
+            Items.Flush();
+            Items.Close();
+        }
+
+        void LadujItemyZPliku()
+        {
+            if (File.Exists("Media\\Profiles\\Items.xml"))
+            {
+                XmlDocument File1 = new XmlDocument();
+                File1.Load("Media\\Profiles\\Items.xml");
+                XmlElement root = File1.DocumentElement;
+                XmlNodeList Items = root.SelectNodes("//items//item");
+
+                foreach (XmlNode item in Items)
+                {
+                    ItemProfile newChar = new ItemProfile();
+
+                    newChar.IdString = item["idstring"].InnerText;
+                    newChar.Mesh = item["mesh"].InnerText;
+                    newChar.Name = item["name"].InnerText;
+                    newChar.Mass = item["mass"].InnerText;
+                    newChar.NameOffset = item["nameoffsetx"].InnerText + "|" + item["nameoffsety"].InnerText + "|" + item["nameoffsetz"].InnerText;
+                    newChar.Type = item["type"].InnerText;
+                    newChar.Description = item["description"].InnerText;
+                    newChar.InventoryMaterial = item["inventory_material"].InnerText;
+                    newChar.IsPickable = item["ispickable"].InnerText;
+                    newChar.IsEquipment = item["isequipment"].InnerText;
+
+                    ItemProfiles.Add(newChar);
+                    comboBox2.Items.Add(newChar.IdString);
+                }
+            }
         }
     }
 }
