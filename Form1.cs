@@ -185,17 +185,33 @@ namespace ProfilesGenerator
 
         private void profileName_TextChanged(object sender, EventArgs e)
         {
-            if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
+            int counter = 0;
+			
+			if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
             {
                 CharacterProfiles[comboBox1.SelectedIndex].ProfileName = profileName.Text;
                 comboBox1.Items[comboBox1.SelectedIndex] = profileName.Text;
+
+				foreach (Character ip in CharacterProfiles)
+					if (ip.ProfileName == profileName.Text)
+						counter++;
             }
 
             if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
             {
                 EnemyProfiles[comboBox1.SelectedIndex].ProfileName = profileName.Text;
                 comboBox1.Items[comboBox1.SelectedIndex] = profileName.Text;
+
+				foreach (Enemy ip in EnemyProfiles)
+					if (ip.ProfileName == profileName.Text)
+						counter++;
             }
+
+			if (counter == 1)
+				profileName.BackColor = Color.White;
+			else
+				profileName.BackColor = Color.Red;
+
         }
 
         void LadujZListy(bool isCharacter)
@@ -675,8 +691,19 @@ namespace ProfilesGenerator
         {
             if (comboBox2.SelectedIndex >= 0)
             {
-                ItemProfiles[comboBox2.SelectedIndex].IdString = idString.Text;
-                comboBox2.Items[comboBox2.SelectedIndex] = idString.Text;
+				ItemProfiles[comboBox2.SelectedIndex].IdString = idString.Text;
+				comboBox2.Items[comboBox2.SelectedIndex] = idString.Text;
+				
+				int counter = 0;
+
+				foreach (ItemProfile ip in ItemProfiles)
+					if (ip.IdString == idString.Text)
+						counter++;
+
+				if (counter == 1)
+					idString.BackColor = Color.White;
+				else
+					idString.BackColor = Color.Red;
             }
         }
 
@@ -868,19 +895,34 @@ namespace ProfilesGenerator
 
         private void PrizeID_TextChanged(object sender, EventArgs e)
         {
-            if (comboBox4.SelectedIndex >= 0)
-            {
-                Prizes[comboBox4.SelectedIndex].PrizeID = PrizeID.Text;
-                comboBox4.Items[comboBox4.SelectedIndex] = PrizeID.Text;
-            }
+			if (comboBox4.SelectedIndex >= 0)
+			{
+				int counter = 0;
+				Prizes[comboBox4.SelectedIndex].PrizeID = PrizeID.Text;
+				comboBox4.Items[comboBox4.SelectedIndex] = PrizeID.Text;
+
+				foreach (Prize ip in Prizes)
+					if (ip.PrizeID == PrizeID.Text)
+						counter++;
+
+
+				if (counter == 1)
+					PrizeID.BackColor = Color.White;
+				else
+					PrizeID.BackColor = Color.Red;
+			}
+            
         }
 
         private void AddItemButton_Click(object sender, EventArgs e)
         {
             if (comboBox4.SelectedIndex >= 0 && comboBox3.SelectedIndex >= 0)
             {
-                listaItemow.Items.Add(comboBox3.Items[comboBox3.SelectedIndex]);
-                Prizes[comboBox4.SelectedIndex].Itemy.Add(ItemProfiles[comboBox3.SelectedIndex].IdString);
+				if (ItemProfiles[comboBox3.SelectedIndex].IsPickable == "true")
+				{
+					listaItemow.Items.Add(comboBox3.Items[comboBox3.SelectedIndex]);
+					Prizes[comboBox4.SelectedIndex].Itemy.Add(ItemProfiles[comboBox3.SelectedIndex].IdString);
+				}
             }
         }
 
@@ -1006,5 +1048,15 @@ namespace ProfilesGenerator
                 }
             }
         }
+
+		private void tabPage3_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
     }
 }
