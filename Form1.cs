@@ -16,16 +16,19 @@ namespace ProfilesGenerator
         List<Enemy> EnemyProfiles;
         List<Character> CharacterProfiles;
         List<ItemProfile> ItemProfiles;
+        List<Prize> Prizes;
 
         public Form1()
         {
             EnemyProfiles = new List<Enemy>();
             CharacterProfiles = new List<Character>();
             ItemProfiles = new List<ItemProfile>();
+            Prizes = new List<Prize>();
 
             InitializeComponent();
             LadujZPliku();
             LadujItemyZPliku();
+            LadujPrize();
             characterRadio.Checked = true;
             UpdateView();
         }
@@ -122,6 +125,40 @@ namespace ProfilesGenerator
                     comboBox2.SelectedIndex = 0;
                     UpdateView();
                 }
+            }
+
+            if (comboBox4.SelectedIndex >= 0)
+            {
+                PrizeID.Text = Prizes[comboBox4.SelectedIndex].PrizeID;
+                PrizeGold.Text = Prizes[comboBox4.SelectedIndex].Gold;
+                PrizeExp.Text = Prizes[comboBox4.SelectedIndex].EXP;
+
+                while (listaItemow.Items.Count > 0)
+                    listaItemow.Items.RemoveAt(0);
+
+                foreach (String str in Prizes[comboBox4.SelectedIndex].Itemy)
+                    listaItemow.Items.Add(str);
+
+                while (comboBox3.Items.Count > 0)
+                    comboBox3.Items.RemoveAt(0);
+
+                foreach (ItemProfile ip in ItemProfiles)
+                    comboBox3.Items.Add(ip.IdString);
+
+                comboBox3.SelectedIndex = 0;
+            }
+
+            else
+            {
+                PrizeID.Text = "";
+                PrizeGold.Text = "";
+                PrizeExp.Text = "";
+
+                while (listaItemow.Items.Count > 0)
+                    listaItemow.Items.RemoveAt(0);
+
+                while (comboBox3.Items.Count > 0)
+                    comboBox3.Items.RemoveAt(0);
             }
 
         }
@@ -817,6 +854,155 @@ namespace ProfilesGenerator
 
                     ItemProfiles.Add(newChar);
                     comboBox2.Items.Add(newChar.IdString);
+                }
+            }
+        }
+
+        private void AddNewPrize_Click(object sender, EventArgs e)
+        {
+            Prizes.Add(new Prize());
+            comboBox4.Items.Add(Prizes[Prizes.Count - 1].PrizeID);
+            comboBox4.SelectedIndex = Prizes.Count - 1;
+            UpdateView();            
+        }
+
+        private void PrizeID_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox4.SelectedIndex >= 0)
+            {
+                Prizes[comboBox4.SelectedIndex].PrizeID = PrizeID.Text;
+                comboBox4.Items[comboBox4.SelectedIndex] = PrizeID.Text;
+            }
+        }
+
+        private void AddItemButton_Click(object sender, EventArgs e)
+        {
+            if (comboBox4.SelectedIndex >= 0 && comboBox3.SelectedIndex >= 0)
+            {
+                listaItemow.Items.Add(comboBox3.Items[comboBox3.SelectedIndex]);
+                Prizes[comboBox4.SelectedIndex].Itemy.Add(ItemProfiles[comboBox3.SelectedIndex].IdString);
+            }
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void UsunWybranyItemButton_Click(object sender, EventArgs e)
+        {
+            if (comboBox4.SelectedIndex >= 0 && listaItemow.SelectedIndex >= 0)
+            {
+                int Tymczas = listaItemow.SelectedIndex;
+                listaItemow.Items.RemoveAt(listaItemow.SelectedIndex);
+
+                if (listaItemow.Items.Count > 0)
+                {
+                    if (Tymczas > 0)
+                        listaItemow.SelectedIndex = Tymczas - 1;
+                    else
+                        listaItemow.SelectedIndex = Tymczas;
+                }
+                
+            }
+        }
+
+        private void PrizeGold_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox4.SelectedIndex >= 0)
+                Prizes[comboBox4.SelectedIndex].Gold = PrizeGold.Text;
+        }
+
+        private void PrizeExp_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox4.SelectedIndex >= 0)
+                Prizes[comboBox4.SelectedIndex].EXP = PrizeExp.Text;
+        }
+
+        private void DeletePrizeButton_Click(object sender, EventArgs e)
+        {
+            if (comboBox4.SelectedIndex >= 0)
+            {
+                int Tymczas = comboBox4.SelectedIndex;
+
+                Prizes.RemoveAt(comboBox4.SelectedIndex);
+                comboBox4.Items.RemoveAt(comboBox4.SelectedIndex);
+
+                if (comboBox4.Items.Count > 0)
+                {
+                    if (Tymczas > 0)
+                        comboBox4.SelectedIndex = Tymczas - 1;
+                    else
+                        comboBox4.SelectedIndex = Tymczas;
+                }
+            }
+        }
+
+        private void SavePrizeButton_Click(object sender, EventArgs e)
+        {
+            if (comboBox4.SelectedIndex >= 0)
+            {
+                ZapiszPrize();
+
+                MessageBox.Show("Zapisano wszystkie prizy.", "Zapisywanie");
+            }
+        }
+
+        public void ZapiszPrize()
+        {
+            XmlTextWriter Items = new XmlTextWriter("Media\\Profiles\\Prizes.xml", (Encoding)null);
+            Items.WriteStartElement("prizes");
+
+            foreach (Prize pr in Prizes)
+            {
+                Items.WriteStartElement("prize");
+                Items.WriteElementString("PrizeID", pr.PrizeID);
+                Items.WriteElementString("Exp", pr.EXP);
+                Items.WriteElementString("Gold", pr.Gold);
+                Items.WriteStartElement("items");
+
+                foreach (String str in pr.Itemy)
+                {
+                    Items.WriteStartElement("item");
+                    Items.WriteElementString("idstring", str);
+                    Items.WriteEndElement();
+                }
+
+                Items.WriteEndElement();
+                Items.WriteEndElement();
+            }
+
+            Items.WriteEndElement();
+            Items.Flush();
+            Items.Close();
+        }
+
+        public void LadujPrize()
+        {
+            if (File.Exists("Media\\Profiles\\Prizes.xml"))
+            {
+                XmlDocument File1 = new XmlDocument();
+                File1.Load("Media\\Profiles\\Prizes.xml");
+                XmlElement root = File1.DocumentElement;
+                XmlNodeList Items = root.SelectNodes("//prizes//prize");
+
+                foreach (XmlNode item in Items)
+                {
+                    Prize newChar = new Prize();
+
+                    newChar.PrizeID = item["PrizeID"].InnerText;
+                    newChar.EXP = item["Exp"].InnerText;
+                    newChar.Gold = item["Gold"].InnerText;
+
+                    XmlNodeList Itemy = item["items"].ChildNodes;
+
+                    foreach (XmlNode it in Itemy)
+                    {
+                        newChar.Itemy.Add(it["idstring"].InnerText);
+                    }
+
+                    Prizes.Add(newChar);
+                    comboBox4.Items.Add(newChar.PrizeID);
                 }
             }
         }

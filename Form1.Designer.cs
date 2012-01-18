@@ -54,41 +54,61 @@
             this.label1 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.iCreateNewButton = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.describedRadio = new System.Windows.Forms.RadioButton();
-            this.itemSwordRadio = new System.Windows.Forms.RadioButton();
-            this.idString = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.name = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.description = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.mesh = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.inventoryMaterial = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.mass = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.Pickable = new System.Windows.Forms.CheckBox();
-            this.Equipment = new System.Windows.Forms.CheckBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.nameOffset = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.iDeleteButton = new System.Windows.Forms.Button();
             this.iSaveButton = new System.Windows.Forms.Button();
+            this.iDeleteButton = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.nameOffset = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.Equipment = new System.Windows.Forms.CheckBox();
+            this.Pickable = new System.Windows.Forms.CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.mass = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.inventoryMaterial = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.mesh = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.description = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.name = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.idString = new System.Windows.Forms.TextBox();
+            this.itemSwordRadio = new System.Windows.Forms.RadioButton();
+            this.describedRadio = new System.Windows.Forms.RadioButton();
+            this.label11 = new System.Windows.Forms.Label();
+            this.iCreateNewButton = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.PrizeID = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.AddNewPrize = new System.Windows.Forms.Button();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.DeletePrizeButton = new System.Windows.Forms.Button();
+            this.SavePrizeButton = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.PrizeExp = new System.Windows.Forms.TextBox();
+            this.PrizeGold = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.UsunWybranyItemButton = new System.Windows.Forms.Button();
+            this.AddItemButton = new System.Windows.Forms.Button();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.listaItemow = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(3, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -388,56 +408,191 @@
             this.tabPage2.Text = "Items";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // iSaveButton
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(6, 36);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(126, 21);
-            this.comboBox2.TabIndex = 0;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.iSaveButton.Location = new System.Drawing.Point(192, 339);
+            this.iSaveButton.Name = "iSaveButton";
+            this.iSaveButton.Size = new System.Drawing.Size(158, 25);
+            this.iSaveButton.TabIndex = 25;
+            this.iSaveButton.Text = "Zapisz profile";
+            this.iSaveButton.UseVisualStyleBackColor = true;
+            this.iSaveButton.Click += new System.EventHandler(this.iSaveButton_Click);
             // 
-            // label10
+            // iDeleteButton
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label10.Location = new System.Drawing.Point(26, 20);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(84, 13);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Wybierz profil";
+            this.iDeleteButton.Location = new System.Drawing.Point(3, 338);
+            this.iDeleteButton.Name = "iDeleteButton";
+            this.iDeleteButton.Size = new System.Drawing.Size(142, 26);
+            this.iDeleteButton.TabIndex = 24;
+            this.iDeleteButton.Text = "Usun profil";
+            this.iDeleteButton.UseVisualStyleBackColor = true;
+            this.iDeleteButton.Click += new System.EventHandler(this.iDeleteButton_Click);
             // 
-            // iCreateNewButton
+            // label20
             // 
-            this.iCreateNewButton.Location = new System.Drawing.Point(156, 36);
-            this.iCreateNewButton.Name = "iCreateNewButton";
-            this.iCreateNewButton.Size = new System.Drawing.Size(170, 20);
-            this.iCreateNewButton.TabIndex = 2;
-            this.iCreateNewButton.Text = "Stworz nowy";
-            this.iCreateNewButton.UseVisualStyleBackColor = true;
-            this.iCreateNewButton.Click += new System.EventHandler(this.iCreateNewButton_Click);
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(5, 306);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(63, 13);
+            this.label20.TabIndex = 23;
+            this.label20.Text = "NameOffset";
             // 
-            // label11
+            // nameOffset
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 80);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(31, 13);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Type";
+            this.nameOffset.Location = new System.Drawing.Point(97, 303);
+            this.nameOffset.Name = "nameOffset";
+            this.nameOffset.Size = new System.Drawing.Size(201, 20);
+            this.nameOffset.TabIndex = 22;
+            this.nameOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nameOffset.TextChanged += new System.EventHandler(this.nameOffset_TextChanged);
             // 
-            // describedRadio
+            // label19
             // 
-            this.describedRadio.AutoSize = true;
-            this.describedRadio.Location = new System.Drawing.Point(97, 78);
-            this.describedRadio.Name = "describedRadio";
-            this.describedRadio.Size = new System.Drawing.Size(102, 17);
-            this.describedRadio.TabIndex = 4;
-            this.describedRadio.TabStop = true;
-            this.describedRadio.Text = "DescribedProfile";
-            this.describedRadio.UseVisualStyleBackColor = true;
-            this.describedRadio.CheckedChanged += new System.EventHandler(this.describedRadio_CheckedChanged);
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 281);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(65, 13);
+            this.label19.TabIndex = 21;
+            this.label19.Text = "IsEquipment";
+            // 
+            // Equipment
+            // 
+            this.Equipment.AutoSize = true;
+            this.Equipment.Location = new System.Drawing.Point(170, 280);
+            this.Equipment.Name = "Equipment";
+            this.Equipment.Size = new System.Drawing.Size(48, 17);
+            this.Equipment.TabIndex = 20;
+            this.Equipment.Text = "True";
+            this.Equipment.UseVisualStyleBackColor = true;
+            this.Equipment.CheckedChanged += new System.EventHandler(this.Equipment_CheckedChanged);
+            // 
+            // Pickable
+            // 
+            this.Pickable.AutoSize = true;
+            this.Pickable.Location = new System.Drawing.Point(170, 257);
+            this.Pickable.Name = "Pickable";
+            this.Pickable.Size = new System.Drawing.Size(48, 17);
+            this.Pickable.TabIndex = 19;
+            this.Pickable.Text = "True";
+            this.Pickable.UseVisualStyleBackColor = true;
+            this.Pickable.CheckedChanged += new System.EventHandler(this.Pickable_CheckedChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 258);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(56, 13);
+            this.label18.TabIndex = 18;
+            this.label18.Text = "IsPickable";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 234);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 13);
+            this.label17.TabIndex = 17;
+            this.label17.Text = "Mass";
+            // 
+            // mass
+            // 
+            this.mass.Location = new System.Drawing.Point(97, 231);
+            this.mass.Name = "mass";
+            this.mass.Size = new System.Drawing.Size(201, 20);
+            this.mass.TabIndex = 16;
+            this.mass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mass.TextChanged += new System.EventHandler(this.mass_TextChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 208);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(88, 13);
+            this.label16.TabIndex = 15;
+            this.label16.Text = "InventoryMaterial";
+            // 
+            // inventoryMaterial
+            // 
+            this.inventoryMaterial.Location = new System.Drawing.Point(97, 205);
+            this.inventoryMaterial.Name = "inventoryMaterial";
+            this.inventoryMaterial.Size = new System.Drawing.Size(201, 20);
+            this.inventoryMaterial.TabIndex = 14;
+            this.inventoryMaterial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inventoryMaterial.TextChanged += new System.EventHandler(this.inventoryMaterial_TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 182);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(33, 13);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "Mesh";
+            // 
+            // mesh
+            // 
+            this.mesh.Location = new System.Drawing.Point(97, 179);
+            this.mesh.Name = "mesh";
+            this.mesh.Size = new System.Drawing.Size(201, 20);
+            this.mesh.TabIndex = 12;
+            this.mesh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mesh.TextChanged += new System.EventHandler(this.mesh_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 156);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 13);
+            this.label14.TabIndex = 11;
+            this.label14.Text = "Description";
+            // 
+            // description
+            // 
+            this.description.Location = new System.Drawing.Point(97, 153);
+            this.description.Name = "description";
+            this.description.Size = new System.Drawing.Size(201, 20);
+            this.description.TabIndex = 10;
+            this.description.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.description.TextChanged += new System.EventHandler(this.description_TextChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 130);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 13);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "Name";
+            // 
+            // name
+            // 
+            this.name.Location = new System.Drawing.Point(97, 127);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(201, 20);
+            this.name.TabIndex = 8;
+            this.name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.name.TextChanged += new System.EventHandler(this.name_TextChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 104);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 13);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "IdString";
+            // 
+            // idString
+            // 
+            this.idString.Location = new System.Drawing.Point(97, 101);
+            this.idString.Name = "idString";
+            this.idString.Size = new System.Drawing.Size(201, 20);
+            this.idString.TabIndex = 6;
+            this.idString.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.idString.TextChanged += new System.EventHandler(this.idString_TextChanged);
             // 
             // itemSwordRadio
             // 
@@ -451,197 +606,246 @@
             this.itemSwordRadio.UseVisualStyleBackColor = true;
             this.itemSwordRadio.CheckedChanged += new System.EventHandler(this.itemSwordRadio_CheckedChanged);
             // 
-            // idString
+            // describedRadio
             // 
-            this.idString.Location = new System.Drawing.Point(97, 101);
-            this.idString.Name = "idString";
-            this.idString.Size = new System.Drawing.Size(201, 20);
-            this.idString.TabIndex = 6;
-            this.idString.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.idString.TextChanged += new System.EventHandler(this.idString_TextChanged);
+            this.describedRadio.AutoSize = true;
+            this.describedRadio.Location = new System.Drawing.Point(97, 78);
+            this.describedRadio.Name = "describedRadio";
+            this.describedRadio.Size = new System.Drawing.Size(102, 17);
+            this.describedRadio.TabIndex = 4;
+            this.describedRadio.TabStop = true;
+            this.describedRadio.Text = "DescribedProfile";
+            this.describedRadio.UseVisualStyleBackColor = true;
+            this.describedRadio.CheckedChanged += new System.EventHandler(this.describedRadio_CheckedChanged);
             // 
-            // label12
+            // label11
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 104);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(43, 13);
-            this.label12.TabIndex = 7;
-            this.label12.Text = "IdString";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 80);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(31, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Type";
             // 
-            // name
+            // iCreateNewButton
             // 
-            this.name.Location = new System.Drawing.Point(97, 127);
-            this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(201, 20);
-            this.name.TabIndex = 8;
-            this.name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.name.TextChanged += new System.EventHandler(this.name_TextChanged);
+            this.iCreateNewButton.Location = new System.Drawing.Point(156, 36);
+            this.iCreateNewButton.Name = "iCreateNewButton";
+            this.iCreateNewButton.Size = new System.Drawing.Size(170, 20);
+            this.iCreateNewButton.TabIndex = 2;
+            this.iCreateNewButton.Text = "Stworz nowy";
+            this.iCreateNewButton.UseVisualStyleBackColor = true;
+            this.iCreateNewButton.Click += new System.EventHandler(this.iCreateNewButton_Click);
             // 
-            // label13
+            // label10
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 130);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(35, 13);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "Name";
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.Location = new System.Drawing.Point(26, 20);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 13);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Wybierz profil";
             // 
-            // description
+            // comboBox2
             // 
-            this.description.Location = new System.Drawing.Point(97, 153);
-            this.description.Name = "description";
-            this.description.Size = new System.Drawing.Size(201, 20);
-            this.description.TabIndex = 10;
-            this.description.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.description.TextChanged += new System.EventHandler(this.description_TextChanged);
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(6, 36);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(126, 21);
+            this.comboBox2.TabIndex = 0;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
-            // label14
+            // tabPage3
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 156);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(60, 13);
-            this.label14.TabIndex = 11;
-            this.label14.Text = "Description";
+            this.tabPage3.Controls.Add(this.PrizeID);
+            this.tabPage3.Controls.Add(this.label26);
+            this.tabPage3.Controls.Add(this.AddNewPrize);
+            this.tabPage3.Controls.Add(this.comboBox4);
+            this.tabPage3.Controls.Add(this.label25);
+            this.tabPage3.Controls.Add(this.label24);
+            this.tabPage3.Controls.Add(this.label23);
+            this.tabPage3.Controls.Add(this.DeletePrizeButton);
+            this.tabPage3.Controls.Add(this.SavePrizeButton);
+            this.tabPage3.Controls.Add(this.label22);
+            this.tabPage3.Controls.Add(this.PrizeExp);
+            this.tabPage3.Controls.Add(this.PrizeGold);
+            this.tabPage3.Controls.Add(this.label21);
+            this.tabPage3.Controls.Add(this.UsunWybranyItemButton);
+            this.tabPage3.Controls.Add(this.AddItemButton);
+            this.tabPage3.Controls.Add(this.comboBox3);
+            this.tabPage3.Controls.Add(this.listaItemow);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(357, 370);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Prize";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // mesh
+            // PrizeID
             // 
-            this.mesh.Location = new System.Drawing.Point(97, 179);
-            this.mesh.Name = "mesh";
-            this.mesh.Size = new System.Drawing.Size(201, 20);
-            this.mesh.TabIndex = 12;
-            this.mesh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.mesh.TextChanged += new System.EventHandler(this.mesh_TextChanged);
+            this.PrizeID.Location = new System.Drawing.Point(5, 96);
+            this.PrizeID.Name = "PrizeID";
+            this.PrizeID.Size = new System.Drawing.Size(147, 20);
+            this.PrizeID.TabIndex = 16;
+            this.PrizeID.TextChanged += new System.EventHandler(this.PrizeID_TextChanged);
             // 
-            // label15
+            // label26
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 182);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(33, 13);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "Mesh";
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(60, 80);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(41, 13);
+            this.label26.TabIndex = 15;
+            this.label26.Text = "PrizeID";
             // 
-            // inventoryMaterial
+            // AddNewPrize
             // 
-            this.inventoryMaterial.Location = new System.Drawing.Point(97, 205);
-            this.inventoryMaterial.Name = "inventoryMaterial";
-            this.inventoryMaterial.Size = new System.Drawing.Size(201, 20);
-            this.inventoryMaterial.TabIndex = 14;
-            this.inventoryMaterial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.inventoryMaterial.TextChanged += new System.EventHandler(this.inventoryMaterial_TextChanged);
+            this.AddNewPrize.Location = new System.Drawing.Point(185, 25);
+            this.AddNewPrize.Name = "AddNewPrize";
+            this.AddNewPrize.Size = new System.Drawing.Size(165, 21);
+            this.AddNewPrize.TabIndex = 14;
+            this.AddNewPrize.Text = "Stworz nowy prize";
+            this.AddNewPrize.UseVisualStyleBackColor = true;
+            this.AddNewPrize.Click += new System.EventHandler(this.AddNewPrize_Click);
             // 
-            // label16
+            // comboBox4
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 208);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(88, 13);
-            this.label16.TabIndex = 15;
-            this.label16.Text = "InventoryMaterial";
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(5, 25);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(147, 21);
+            this.comboBox4.TabIndex = 13;
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
-            // mass
+            // label25
             // 
-            this.mass.Location = new System.Drawing.Point(97, 231);
-            this.mass.Name = "mass";
-            this.mass.Size = new System.Drawing.Size(201, 20);
-            this.mass.TabIndex = 16;
-            this.mass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.mass.TextChanged += new System.EventHandler(this.mass_TextChanged);
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label25.Location = new System.Drawing.Point(38, 9);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(83, 13);
+            this.label25.TabIndex = 12;
+            this.label25.Text = "Wybierz prize";
             // 
-            // label17
+            // label24
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 234);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(32, 13);
-            this.label17.TabIndex = 17;
-            this.label17.Text = "Mass";
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(235, 119);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(65, 13);
+            this.label24.TabIndex = 11;
+            this.label24.Text = "Lista itemow";
             // 
-            // label18
+            // label23
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 258);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(56, 13);
-            this.label18.TabIndex = 18;
-            this.label18.Text = "IsPickable";
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(60, 119);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(32, 13);
+            this.label23.TabIndex = 10;
+            this.label23.Text = "Itemy";
             // 
-            // Pickable
+            // DeletePrizeButton
             // 
-            this.Pickable.AutoSize = true;
-            this.Pickable.Location = new System.Drawing.Point(170, 257);
-            this.Pickable.Name = "Pickable";
-            this.Pickable.Size = new System.Drawing.Size(48, 17);
-            this.Pickable.TabIndex = 19;
-            this.Pickable.Text = "True";
-            this.Pickable.UseVisualStyleBackColor = true;
-            this.Pickable.CheckedChanged += new System.EventHandler(this.Pickable_CheckedChanged);
+            this.DeletePrizeButton.Location = new System.Drawing.Point(5, 336);
+            this.DeletePrizeButton.Name = "DeletePrizeButton";
+            this.DeletePrizeButton.Size = new System.Drawing.Size(147, 26);
+            this.DeletePrizeButton.TabIndex = 9;
+            this.DeletePrizeButton.Text = "Usun prize";
+            this.DeletePrizeButton.UseVisualStyleBackColor = true;
+            this.DeletePrizeButton.Click += new System.EventHandler(this.DeletePrizeButton_Click);
             // 
-            // Equipment
+            // SavePrizeButton
             // 
-            this.Equipment.AutoSize = true;
-            this.Equipment.Location = new System.Drawing.Point(170, 280);
-            this.Equipment.Name = "Equipment";
-            this.Equipment.Size = new System.Drawing.Size(48, 17);
-            this.Equipment.TabIndex = 20;
-            this.Equipment.Text = "True";
-            this.Equipment.UseVisualStyleBackColor = true;
-            this.Equipment.CheckedChanged += new System.EventHandler(this.Equipment_CheckedChanged);
+            this.SavePrizeButton.Location = new System.Drawing.Point(5, 304);
+            this.SavePrizeButton.Name = "SavePrizeButton";
+            this.SavePrizeButton.Size = new System.Drawing.Size(147, 26);
+            this.SavePrizeButton.TabIndex = 8;
+            this.SavePrizeButton.Text = "Zapisz wszystkie prize";
+            this.SavePrizeButton.UseVisualStyleBackColor = true;
+            this.SavePrizeButton.Click += new System.EventHandler(this.SavePrizeButton_Click);
             // 
-            // label19
+            // label22
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 281);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(65, 13);
-            this.label19.TabIndex = 21;
-            this.label19.Text = "IsEquipment";
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(60, 262);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(28, 13);
+            this.label22.TabIndex = 7;
+            this.label22.Text = "EXP";
             // 
-            // nameOffset
+            // PrizeExp
             // 
-            this.nameOffset.Location = new System.Drawing.Point(97, 303);
-            this.nameOffset.Name = "nameOffset";
-            this.nameOffset.Size = new System.Drawing.Size(201, 20);
-            this.nameOffset.TabIndex = 22;
-            this.nameOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nameOffset.TextChanged += new System.EventHandler(this.nameOffset_TextChanged);
+            this.PrizeExp.Location = new System.Drawing.Point(5, 278);
+            this.PrizeExp.Name = "PrizeExp";
+            this.PrizeExp.Size = new System.Drawing.Size(147, 20);
+            this.PrizeExp.TabIndex = 6;
+            this.PrizeExp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.PrizeExp.TextChanged += new System.EventHandler(this.PrizeExp_TextChanged);
             // 
-            // label20
+            // PrizeGold
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(5, 306);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(63, 13);
-            this.label20.TabIndex = 23;
-            this.label20.Text = "NameOffset";
+            this.PrizeGold.Location = new System.Drawing.Point(5, 239);
+            this.PrizeGold.Name = "PrizeGold";
+            this.PrizeGold.Size = new System.Drawing.Size(147, 20);
+            this.PrizeGold.TabIndex = 5;
+            this.PrizeGold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.PrizeGold.TextChanged += new System.EventHandler(this.PrizeGold_TextChanged);
             // 
-            // iDeleteButton
+            // label21
             // 
-            this.iDeleteButton.Location = new System.Drawing.Point(3, 338);
-            this.iDeleteButton.Name = "iDeleteButton";
-            this.iDeleteButton.Size = new System.Drawing.Size(142, 26);
-            this.iDeleteButton.TabIndex = 24;
-            this.iDeleteButton.Text = "Usun profil";
-            this.iDeleteButton.UseVisualStyleBackColor = true;
-            this.iDeleteButton.Click += new System.EventHandler(this.iDeleteButton_Click);
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(60, 223);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(29, 13);
+            this.label21.TabIndex = 4;
+            this.label21.Text = "Gold";
             // 
-            // iSaveButton
+            // UsunWybranyItemButton
             // 
-            this.iSaveButton.Location = new System.Drawing.Point(192, 339);
-            this.iSaveButton.Name = "iSaveButton";
-            this.iSaveButton.Size = new System.Drawing.Size(158, 25);
-            this.iSaveButton.TabIndex = 25;
-            this.iSaveButton.Text = "Zapisz profile";
-            this.iSaveButton.UseVisualStyleBackColor = true;
-            this.iSaveButton.Click += new System.EventHandler(this.iSaveButton_Click);
+            this.UsunWybranyItemButton.Location = new System.Drawing.Point(5, 195);
+            this.UsunWybranyItemButton.Name = "UsunWybranyItemButton";
+            this.UsunWybranyItemButton.Size = new System.Drawing.Size(147, 25);
+            this.UsunWybranyItemButton.TabIndex = 3;
+            this.UsunWybranyItemButton.Text = "Usun wybrany item";
+            this.UsunWybranyItemButton.UseVisualStyleBackColor = true;
+            this.UsunWybranyItemButton.Click += new System.EventHandler(this.UsunWybranyItemButton_Click);
+            // 
+            // AddItemButton
+            // 
+            this.AddItemButton.Location = new System.Drawing.Point(5, 162);
+            this.AddItemButton.Name = "AddItemButton";
+            this.AddItemButton.Size = new System.Drawing.Size(147, 27);
+            this.AddItemButton.TabIndex = 2;
+            this.AddItemButton.Text = "Dodaj wybrany item";
+            this.AddItemButton.UseVisualStyleBackColor = true;
+            this.AddItemButton.Click += new System.EventHandler(this.AddItemButton_Click);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(5, 135);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(147, 21);
+            this.comboBox3.TabIndex = 1;
+            // 
+            // listaItemow
+            // 
+            this.listaItemow.FormattingEnabled = true;
+            this.listaItemow.Location = new System.Drawing.Point(185, 137);
+            this.listaItemow.Name = "listaItemow";
+            this.listaItemow.Size = new System.Drawing.Size(165, 225);
+            this.listaItemow.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 397);
+            this.ClientSize = new System.Drawing.Size(367, 397);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -651,6 +855,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -709,6 +915,24 @@
         private System.Windows.Forms.Button iCreateNewButton;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ListBox listaItemow;
+        private System.Windows.Forms.Button AddItemButton;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox PrizeExp;
+        private System.Windows.Forms.TextBox PrizeGold;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button UsunWybranyItemButton;
+        private System.Windows.Forms.Button AddNewPrize;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button DeletePrizeButton;
+        private System.Windows.Forms.Button SavePrizeButton;
+        private System.Windows.Forms.TextBox PrizeID;
+        private System.Windows.Forms.Label label26;
 
 
 
