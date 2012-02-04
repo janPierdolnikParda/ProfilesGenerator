@@ -17,6 +17,7 @@ namespace ProfilesGenerator
         List<Character> CharacterProfiles;
         List<ItemProfile> ItemProfiles;
         List<Prize> Prizes;
+        List<Dialog> Dialogs;
 
         public Form1()
         {
@@ -24,8 +25,24 @@ namespace ProfilesGenerator
             CharacterProfiles = new List<Character>();
             ItemProfiles = new List<ItemProfile>();
             Prizes = new List<Prize>();
+            Dialogs = new List<Dialog>();
 
             InitializeComponent();
+
+            comboBox5.Items.Add("NEUTRAL");
+            comboBox5.Items.Add("FRIENDLY");
+            comboBox5.Items.Add("ENEMY");
+            comboBox5.SelectedIndex = 0;
+
+            actionBox.Items.Add("MakeQuestFinished");
+            actionBox.Items.Add("MakeFirstFalse");
+            actionBox.Items.Add("MakeFirstTrue");
+            actionBox.Items.Add("MakeEdgeTrue");
+            actionBox.Items.Add("MakeEdgeFalse");
+            actionBox.Items.Add("GiveQuest");
+            actionBox.Items.Add("ActivateActivator");
+            actionBox.SelectedIndex = 0;
+
             LadujZPliku();
             LadujItemyZPliku();
             LadujPrize();
@@ -47,6 +64,16 @@ namespace ProfilesGenerator
                     BodyMass.Text = CharacterProfiles[comboBox1.SelectedIndex].BodyMass;
                     BodyScaleFactor.Text = CharacterProfiles[comboBox1.SelectedIndex].BodyScaleFactor;
                     HeadOffset.Text = CharacterProfiles[comboBox1.SelectedIndex].HeadOffset;
+                    zasiegOgl.Enabled = false;
+                    zasiegWzr.Enabled = false;
+                    walkaWrecz.Text = CharacterProfiles[comboBox1.SelectedIndex].WW;
+                    zrecznosc.Text = CharacterProfiles[comboBox1.SelectedIndex].ZR;
+                    opanowanie.Text = CharacterProfiles[comboBox1.SelectedIndex].OP;
+                    zywotnosc.Text = CharacterProfiles[comboBox1.SelectedIndex].ZY;
+                    charyzma.Text = CharacterProfiles[comboBox1.SelectedIndex].CH;
+                    Sila.Text = CharacterProfiles[comboBox1.SelectedIndex].SI;
+                    wytrzymalosc.Text = CharacterProfiles[comboBox1.SelectedIndex].WY;
+                    comboBox5.SelectedIndex = int.Parse(CharacterProfiles[comboBox1.SelectedIndex].FriendlyType);
                 }
 
                 if (enemyRadio.Checked)
@@ -59,6 +86,18 @@ namespace ProfilesGenerator
                     BodyMass.Text = EnemyProfiles[comboBox1.SelectedIndex].BodyMass;
                     BodyScaleFactor.Text = EnemyProfiles[comboBox1.SelectedIndex].BodyScaleFactor;
                     HeadOffset.Text = EnemyProfiles[comboBox1.SelectedIndex].HeadOffset;
+                    zasiegOgl.Enabled = true;
+                    zasiegWzr.Enabled = true;
+                    zasiegOgl.Text = EnemyProfiles[comboBox1.SelectedIndex].ZasiegOgolny;
+                    zasiegWzr.Text = EnemyProfiles[comboBox1.SelectedIndex].ZasiegWzroku;
+                    walkaWrecz.Text = EnemyProfiles[comboBox1.SelectedIndex].WW;
+                    zrecznosc.Text = EnemyProfiles[comboBox1.SelectedIndex].ZR;
+                    opanowanie.Text = EnemyProfiles[comboBox1.SelectedIndex].OP;
+                    zywotnosc.Text = EnemyProfiles[comboBox1.SelectedIndex].ZY;
+                    charyzma.Text = EnemyProfiles[comboBox1.SelectedIndex].CH;
+                    Sila.Text = EnemyProfiles[comboBox1.SelectedIndex].SI;
+                    wytrzymalosc.Text = EnemyProfiles[comboBox1.SelectedIndex].WY;
+                    comboBox5.SelectedIndex = int.Parse(EnemyProfiles[comboBox1.SelectedIndex].FriendlyType);
                 }
             }
 
@@ -161,6 +200,255 @@ namespace ProfilesGenerator
                     comboBox3.Items.RemoveAt(0);
             }
 
+            if (dialogBox.SelectedIndex >= 0)
+            {
+                dialogID.Enabled = true;
+                reactionsBox.Enabled = true;
+                reactionID.Enabled = true;
+                connectedEdgesBox.Enabled = true;
+                connectedNodeBox.Enabled = true;
+                edgeID.Enabled = true;
+                FirstTalk.Enabled = true;
+                GotQuest.Enabled = true;
+                IsQuestDone.Enabled = true;
+                IsQuestFinished.Enabled = true;
+                questIDBox.Enabled = true;
+                nodeBox.Enabled = true;
+                nodeID.Enabled = true;
+                nodeText.Enabled = true;
+                nodeActionsBox.Enabled = true;
+                actionBox.Enabled = true;
+                actionQuest.Enabled = true;
+                actionEdge.Enabled = true;
+                nReplyBox.Enabled = true;
+                nodeRepliesBox.Enabled = true;
+                replyBox.Enabled = true;
+                replyID.Enabled = true;
+                replyText.Enabled = true;
+                replyIsEnding.Enabled = true;
+                rReactionsBox.Enabled = true;
+                createReaction.Enabled = true;
+                deleteReaction.Enabled = true;
+                createEdge.Enabled = true;
+                deleteEdge.Enabled = true;
+                createNode.Enabled = true;
+                deleteNode.Enabled = true;
+                addAction.Enabled = true;
+                deleteAction.Enabled = true;
+                addReply.Enabled = true;
+                nDeleteReply.Enabled = true;
+                deleteReply.Enabled = true;
+                createReply.Enabled = true;
+                deleteReply.Enabled = true;
+                saveDialogs.Enabled = true;
+                deleteDialog.Enabled = true;
+
+                dialogID.Text = Dialogs[dialogBox.SelectedIndex].ID;
+                reactionsBox.Items.Clear();
+
+                foreach (TalkReaction r in Dialogs[dialogBox.SelectedIndex].Reactions)
+                    reactionsBox.Items.Add(r.ID);
+
+                if (Dialogs[dialogBox.SelectedIndex].Reactions.Count > 0)
+                    reactionsBox.SelectedIndex = 0;
+
+                if (reactionsBox.SelectedIndex >= 0)
+                {
+                    reactionID.Text = Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].ID;
+                    connectedEdgesBox.Items.Clear();
+                    foreach (String e in Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges)
+                        connectedEdgesBox.Items.Add(e);
+
+                    if (Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges.Count > 0)
+                        connectedEdgesBox.SelectedIndex = 0;
+
+                    connectedNodeBox.Items.Clear();
+                    foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
+                        connectedNodeBox.Items.Add(n.ID);
+
+                    if (Dialogs[dialogBox.SelectedIndex].Nodes.Count > 0)
+                        connectedNodeBox.SelectedIndex = connectedNodeBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges[connectedEdgesBox.SelectedIndex]);
+
+                    if (connectedEdgesBox.SelectedIndex > 0)
+                    {
+                        edgeID.Text = Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges[connectedEdgesBox.SelectedIndex];
+                        FirstTalk.Checked = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].FirstTalk;
+                        GotQuest.Checked = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].GotQuest;
+                        IsQuestDone.Checked = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].IsQuestDone;
+                        IsQuestFinished.Checked = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].IsQuestFinished;
+
+                        questIDBox.Items.Clear();
+                        questIDBox.Items.Add("");
+                        questIDBox.Items.Add("pierwszy");
+                        questIDBox.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        edgeID.Text = "";
+                        FirstTalk.Checked = false;
+                        GotQuest.Checked = false;
+                        IsQuestDone.Checked = false;
+                        IsQuestFinished.Checked = false;
+                        questIDBox.Items.Clear();
+                    }
+                }
+
+                else
+                {
+                    reactionID.Text = "";
+                    connectedEdgesBox.Items.Clear();
+                    connectedNodeBox.Items.Clear();
+                    edgeID.Text = "";
+                    FirstTalk.Checked = false;
+                    GotQuest.Checked = false;
+                    IsQuestDone.Checked = false;
+                    IsQuestFinished.Checked = false;
+                    questIDBox.Items.Clear();
+                }
+
+
+                nodeBox.Items.Clear();
+                foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
+                    nodeBox.Items.Add(n.ID);
+
+                if (nodeBox.Items.Count > 0)
+                    nodeBox.SelectedIndex = 0;
+
+                if (nodeBox.SelectedIndex >= 0)
+                {
+                    nodeID.Text = (String)nodeBox.Items[0];
+                    nodeText.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Text;
+
+                    nodeActionsBox.Items.Clear();
+                    foreach (int i in Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Actions)
+                        nodeActionsBox.Items.Add(actionBox.Items[i]);
+
+                    if (nodeActionsBox.Items.Count > 0)
+                        nodeActionsBox.SelectedIndex = 0;
+
+                    actionQuest.Items.Clear();
+                    actionQuest.Items.Add("");
+                    actionQuest.Items.Add("pierwszy");
+                    actionQuest.SelectedIndex = 0;
+
+                    actionEdge.Items.Clear();
+                    actionEdge.Items.Add("");
+                    foreach(TalkEdge e in Dialogs[dialogBox.SelectedIndex].Edges)
+                        actionEdge.Items.Add(e.ID);// + "(" + Dialogs[dialogBox.SelectedIndex].ID + ")");
+
+                    /*foreach(Dialog d in Dialogs)
+                    {
+                        if (d.ID != Dialogs[dialogBox.SelectedIndex].ID)
+                            foreach (TalkEdge e in Dialogs[dialogBox.SelectedIndex].Edges)
+                                actionEdge.Items.Add(e.ID + "(" + Dialogs[dialogBox.SelectedIndex].ID + ")");
+                    }*/
+
+                    actionEdge.SelectedIndex = actionEdge.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge);
+
+                    nReplyBox.Items.Clear();
+                    foreach (TalkReply r in Dialogs[dialogBox.SelectedIndex].Replies)
+                        nReplyBox.Items.Add(r.ID);
+
+                    if (nReplyBox.Items.Count > 0)
+                        nReplyBox.SelectedIndex = 0;
+
+                    nodeRepliesBox.Items.Clear();
+                    foreach (String s in Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Replies)
+                        nodeRepliesBox.Items.Add(s);
+
+                    if (nodeRepliesBox.Items.Count > 0)
+                        nodeRepliesBox.SelectedIndex = 0;
+                }
+
+                else
+                {
+                }
+
+                replyBox.Items.Clear();
+                foreach (TalkReply r in Dialogs[dialogBox.SelectedIndex].Replies)
+                    replyBox.Items.Add(r.ID);
+
+                if (replyBox.Items.Count > 0)
+                    replyBox.SelectedIndex = 0;
+
+                if (replyBox.SelectedIndex >= 0)
+                {
+                    replyID.Text = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].ID;
+                    replyText.Text = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].Text;
+                    replyIsEnding.Checked = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].isEnding;
+
+                    rReactionsBox.Items.Clear();
+                    rReactionsBox.Enabled = replyIsEnding.Checked;
+                    foreach (TalkReaction r in Dialogs[dialogBox.SelectedIndex].Reactions)
+                        rReactionsBox.Items.Add(r.ID);
+
+                    if (rReactionsBox.Items.Count > 0)
+                        rReactionsBox.SelectedIndex = rReactionsBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].ReactionID);
+                }
+
+                else
+                {
+                    replyID.Text = "";
+                    replyText.Text = "";
+                    replyIsEnding.Checked = false;
+                    rReactionsBox.Items.Clear();
+                    rReactionsBox.Enabled = true;
+                }
+            }
+
+            else
+            {
+                dialogID.Enabled = false;
+                reactionsBox.Enabled = false;
+                reactionID.Enabled = false;
+                connectedEdgesBox.Enabled = false;
+                connectedNodeBox.Enabled = false;
+                edgeID.Enabled = false;
+                FirstTalk.Enabled = false;
+                GotQuest.Enabled = false;
+                IsQuestDone.Enabled = false;
+                IsQuestFinished.Enabled = false;
+                questIDBox.Enabled = false;
+                nodeBox.Enabled = false;
+                nodeID.Enabled = false;
+                nodeText.Enabled = false;
+                nodeActionsBox.Enabled = false;
+                actionBox.Enabled = false;
+                actionQuest.Enabled = false;
+                actionEdge.Enabled = false;
+                nReplyBox.Enabled = false;
+                nodeRepliesBox.Enabled = false;
+                replyBox.Enabled = false;
+                replyID.Enabled = false;
+                replyText.Enabled = false;
+                replyIsEnding.Enabled = false;
+                rReactionsBox.Enabled = false;
+                createReaction.Enabled = false;
+                deleteReaction.Enabled = false;
+                createEdge.Enabled = false;
+                deleteEdge.Enabled = false;
+                createNode.Enabled = false;
+                deleteNode.Enabled = false;
+                addAction.Enabled = false;
+                deleteAction.Enabled = false;
+                addReply.Enabled = false;
+                nDeleteReply.Enabled = false;
+                deleteReply.Enabled = false;
+                createReply.Enabled = false;
+                deleteReply.Enabled = false;
+                saveDialogs.Enabled = false;
+                deleteDialog.Enabled = false;
+            }
+        }
+
+        public int IndexOfEdgeWithID(String ID)
+        {
+            int ret = 0;
+
+            for (int i = 0; i < Dialogs[dialogBox.SelectedIndex].Edges.Count; i++)
+                if (Dialogs[dialogBox.SelectedIndex].Edges[i].ID == ID)
+                    ret = i;
+            return ret;
         }
 
 
@@ -371,6 +659,14 @@ namespace ProfilesGenerator
                     newChar.DisplayNameOffset = item["DisplayNameOffset_x"].InnerText + "|" + item["DisplayNameOffset_y"].InnerText + "|" + item["DisplayNameOffset_z"].InnerText;
                     newChar.BodyScaleFactor = item["BodyScaleFactor_x"].InnerText + "|" + item["BodyScaleFactor_y"].InnerText + "|" + item["BodyScaleFactor_z"].InnerText;
                     newChar.HeadOffset = item["HeadOffset_x"].InnerText + "|" + item["HeadOffset_y"].InnerText + "|" + item["HeadOffset_z"].InnerText;
+                    newChar.WW = item["WalkaWrecz"].InnerText;
+                    newChar.SI = item["Sila"].InnerText;
+                    newChar.FriendlyType = item["FriendlyType"].InnerText;
+                    newChar.CH = item["Charyzma"].InnerText;
+                    newChar.ZR = item["Zrecznosc"].InnerText;
+                    newChar.ZY = item["Zywotnosc"].InnerText;
+                    newChar.OP = item["Opanowanie"].InnerText;
+                    newChar.WY = item["Wytrzymalosc"].InnerText;
 
                     CharacterProfiles.Add(newChar);
                 }
@@ -395,6 +691,16 @@ namespace ProfilesGenerator
                     newChar.DisplayNameOffset = item["DisplayNameOffset_x"].InnerText + "|" + item["DisplayNameOffset_y"].InnerText + "|" + item["DisplayNameOffset_z"].InnerText;
                     newChar.BodyScaleFactor = item["BodyScaleFactor_x"].InnerText + "|" + item["BodyScaleFactor_y"].InnerText + "|" + item["BodyScaleFactor_z"].InnerText;
                     newChar.HeadOffset = item["HeadOffset_x"].InnerText + "|" + item["HeadOffset_y"].InnerText + "|" + item["HeadOffset_z"].InnerText;
+                    newChar.WW = item["WalkaWrecz"].InnerText;
+                    newChar.SI = item["Sila"].InnerText;
+                    newChar.FriendlyType = item["FriendlyType"].InnerText;
+                    newChar.CH = item["Charyzma"].InnerText;
+                    newChar.ZR = item["Zrecznosc"].InnerText;
+                    newChar.ZY = item["Zywotnosc"].InnerText;
+                    newChar.OP = item["Opanowanie"].InnerText;
+                    newChar.WY = item["Wytrzymalosc"].InnerText;
+                    newChar.ZasiegOgolny = item["ZasiegOgolny"].InnerText;
+                    newChar.ZasiegWzroku = item["ZasiegWzroku"].InnerText;
 
                     EnemyProfiles.Add(newChar);
                 }
@@ -512,6 +818,16 @@ namespace ProfilesGenerator
                 NPCs.WriteElementString("BodyScaleFactor_x", x);
                 NPCs.WriteElementString("BodyScaleFactor_y", y);
                 NPCs.WriteElementString("BodyScaleFactor_z", z);
+
+                NPCs.WriteElementString("FriendlyType", ch.FriendlyType);
+                NPCs.WriteElementString("WalkaWrecz", ch.WW);
+                NPCs.WriteElementString("Zywotnosc", ch.ZY);
+                NPCs.WriteElementString("Opanowanie", ch.OP);
+                NPCs.WriteElementString("Wytrzymalosc", ch.WY);
+                NPCs.WriteElementString("Zrecznosc", ch.ZR);
+                NPCs.WriteElementString("Sila", ch.SI);
+                NPCs.WriteElementString("Charyzma", ch.CH);
+
                 NPCs.WriteEndElement();
             }
 
@@ -628,6 +944,18 @@ namespace ProfilesGenerator
                 Enemies.WriteElementString("BodyScaleFactor_x", x);
                 Enemies.WriteElementString("BodyScaleFactor_y", y);
                 Enemies.WriteElementString("BodyScaleFactor_z", z);
+
+                Enemies.WriteElementString("FriendlyType", en.FriendlyType);
+                Enemies.WriteElementString("WalkaWrecz", en.WW);
+                Enemies.WriteElementString("Zywotnosc", en.ZY);
+                Enemies.WriteElementString("Opanowanie", en.OP);
+                Enemies.WriteElementString("Wytrzymalosc", en.WY);
+                Enemies.WriteElementString("Zrecznosc", en.ZR);
+                Enemies.WriteElementString("Sila", en.SI);
+                Enemies.WriteElementString("Charyzma", en.CH);
+                Enemies.WriteElementString("ZasiegWzroku", en.ZasiegWzroku);
+                Enemies.WriteElementString("ZasiegOgolny", en.ZasiegOgolny);
+
                 Enemies.WriteEndElement();
             }
 
@@ -1049,14 +1377,153 @@ namespace ProfilesGenerator
             }
         }
 
-		private void tabPage3_Click(object sender, EventArgs e)
-		{
+        private void walkaWrecz_TextChanged(object sender, EventArgs e)
+        {
+            if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
+                CharacterProfiles[comboBox1.SelectedIndex].WW = walkaWrecz.Text;
 
-		}
+            if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].WW = walkaWrecz.Text;
+        }
 
-		private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-		{
+        private void Sila_TextChanged(object sender, EventArgs e)
+        {
+            if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
+                CharacterProfiles[comboBox1.SelectedIndex].SI = Sila.Text;
 
-		}
+            if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].SI = Sila.Text;
+        }
+
+        private void zrecznosc_TextChanged(object sender, EventArgs e)
+        {
+            if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
+                CharacterProfiles[comboBox1.SelectedIndex].ZR = zrecznosc.Text;
+
+            if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].ZR = zrecznosc.Text;
+        }
+
+        private void zywotnosc_TextChanged(object sender, EventArgs e)
+        {
+            if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
+                CharacterProfiles[comboBox1.SelectedIndex].ZY = zywotnosc.Text;
+
+            if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].ZY = zywotnosc.Text;
+        }
+
+        private void wytrzymalosc_TextChanged(object sender, EventArgs e)
+        {
+            if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
+                CharacterProfiles[comboBox1.SelectedIndex].WY = wytrzymalosc.Text;
+
+            if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].WY = wytrzymalosc.Text;
+        }
+
+        private void opanowanie_TextChanged(object sender, EventArgs e)
+        {
+            if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
+                CharacterProfiles[comboBox1.SelectedIndex].OP = opanowanie.Text;
+
+            if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].OP = opanowanie.Text;
+        }
+
+        private void charyzma_TextChanged(object sender, EventArgs e)
+        {
+            if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
+                CharacterProfiles[comboBox1.SelectedIndex].CH = charyzma.Text;
+
+            if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].CH = charyzma.Text;
+        }
+
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
+                CharacterProfiles[comboBox1.SelectedIndex].FriendlyType = comboBox5.SelectedIndex.ToString();
+
+            if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].FriendlyType = comboBox5.SelectedIndex.ToString();
+        }
+
+        private void zasiegWzr_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].ZasiegWzroku = zasiegWzr.Text;
+        }
+
+        private void zasiegOgl_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0)
+                EnemyProfiles[comboBox1.SelectedIndex].ZasiegOgolny = zasiegOgl.Text;
+        }
+
+        private void createDialog_Click(object sender, EventArgs e)
+        {
+            Dialogs.Add(new Dialog());
+            dialogBox.Items.Add(Dialogs[Dialogs.Count - 1].ID);
+            dialogBox.SelectedIndex = Dialogs.Count - 1;
+            UpdateView();
+        }
+
+        private void deleteDialog_Click(object sender, EventArgs e)
+        {
+            Dialogs.RemoveAt(dialogBox.SelectedIndex);
+            int tym = dialogBox.SelectedIndex;
+            dialogBox.Items.RemoveAt(dialogBox.SelectedIndex);
+
+            if (tym == 0 && dialogBox.Items.Count > 0)
+                dialogBox.SelectedIndex = 0;
+            else
+                dialogBox.SelectedIndex = tym - 1;
+
+            UpdateView();
+        }
+
+        private void dialogID_TextChanged(object sender, EventArgs e)
+        {
+            Dialogs[dialogBox.SelectedIndex].ID = dialogID.Text;
+            dialogBox.Items[dialogBox.SelectedIndex] = dialogID.Text;
+            UpdateView();
+        }
+
+        private void dialogBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void reactionsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void createReaction_Click(object sender, EventArgs e)
+        {
+            Dialogs[dialogBox.SelectedIndex].Reactions.Add(new TalkReaction());
+            UpdateView();
+        }
+
+        private void deleteReaction_Click(object sender, EventArgs e)
+        {
+            Dialogs[dialogBox.SelectedIndex].Reactions.RemoveAt(reactionsBox.SelectedIndex);
+            int tym = reactionsBox.SelectedIndex;
+            reactionsBox.Items.RemoveAt(reactionsBox.SelectedIndex);
+
+            if (tym == 0 && reactionsBox.Items.Count > 0)
+                reactionsBox.SelectedIndex = 0;
+            else
+                reactionsBox.SelectedIndex = tym - 1;
+
+            UpdateView();
+        }
+
+        private void reactionID_TextChanged(object sender, EventArgs e)
+        {
+            Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].ID = reactionID.Text;
+            reactionsBox.Items[reactionsBox.SelectedIndex] = reactionID.Text;
+        }
     }
 }

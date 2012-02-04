@@ -16,6 +16,14 @@ namespace ProfilesGenerator
         public String HeadOffset;
         public String BodyScaleFactor;
         public String Type;
+        public String WW;
+        public String ZR;
+        public String ZY;
+        public String OP;
+        public String CH;
+        public String SI;
+        public String WY;
+        public String FriendlyType;
 
         public Character()
         {
@@ -25,6 +33,16 @@ namespace ProfilesGenerator
             HeadOffset = "x|y|z";
             BodyScaleFactor = "x|y|z";
             Type = "DescribedProfile";
+
+            WW = "30";
+            SI = "2";
+            ZR = "30";
+            ZY = "4";
+            OP = "30";
+            WY = "2";
+            CH = "30";
+
+            FriendlyType = "0";
         }
     }
 }
