@@ -50,6 +50,7 @@ namespace ProfilesGenerator
             LadujZPliku();
             LadujItemyZPliku();
             LadujPrize();
+            LadujDialogi();
             characterRadio.Checked = true;
             UpdateView();
         }
@@ -259,7 +260,7 @@ namespace ProfilesGenerator
 
                     if (reactionsBox.Items.Count > 0)
                     {
-                        reactionsBox.SelectedIndex = 0;
+                        //reactionsBox.SelectedIndex = 0;
                     }
                 }
 
@@ -2089,6 +2090,137 @@ namespace ProfilesGenerator
         private void saveDialogs_Click(object sender, EventArgs e)
         {
             ZapiszDialogi();
+        }
+
+        private void LadujDialogi()
+        {
+            if (File.Exists("Media\\Others\\Dialogi.xml"))
+            {
+                XmlDocument File1 = new XmlDocument();
+                File1.Load("Media\\Others\\Dialogi.xml");
+                XmlElement root = File1.DocumentElement;
+                XmlNodeList Items = root.SelectNodes("//Dialogs//Dialog");
+
+                foreach (XmlNode item in Items)
+                {
+                    Dialog justDialog = new Dialog();
+
+                    XmlNodeList TalkReactions = item["Reactions"].ChildNodes;
+
+                    foreach (XmlNode tr in TalkReactions)
+                    {
+                        TalkReaction justReaction = new TalkReaction();
+                        justReaction.ID = tr["TalkReactionID"].InnerText;
+                        justDialog.Reactions.Add(justReaction);
+                        reactionsBox.Items.Add(justReaction.ID);
+                        rReactionsBox.Items.Add(justReaction.ID);
+                    }
+
+                    XmlNodeList TalkReplies = item["Replies"].ChildNodes;
+
+                    foreach (XmlNode rep in TalkReplies)
+                    {
+                        TalkReply justReply = new TalkReply();
+                        justReply.isEnding = bool.Parse(rep["IsEnding"].InnerText);
+                        justReply.Text = rep["Text"].InnerText;
+
+                        if (!justReply.isEnding)
+                            justReply.ReactionID = rep["TalkReaction"].InnerText;
+
+                        justReply.ID = rep["TalkReplyID"].InnerText;
+                        replyBox.Items.Add(justReply.ID);
+                        nReplyBox.Items.Add(justReply.ID);
+                        justDialog.Replies.Add(justReply);
+                    }
+
+                    XmlNodeList TalkNodes = item["Nodes"].ChildNodes;
+
+                    foreach (XmlNode tn in TalkNodes)
+                    {
+                        TalkNode justNode = new TalkNode();
+                        justNode.Text = tn["Text"].InnerText;
+
+                        XmlNodeList RepliesInNode = tn["NodeReplies"].ChildNodes;
+
+                        foreach (XmlNode rin in RepliesInNode)
+                        {
+                            justNode.Replies.Add(rin["ReplyID"].InnerText);
+                            nodeRepliesBox.Items.Add(rin["ReplyID"].InnerText);
+                            
+                        }
+
+                        XmlNodeList ActionsInNode = tn["Actions"].ChildNodes;
+
+                        foreach (XmlNode ain in ActionsInNode)
+                        {
+                            justNode.Actions.Add(int.Parse(ain["ActionType"].InnerText));
+                            nodeActionsBox.Items.Add(actionBox.Items[int.Parse(ain["ActionType"].InnerText)]);
+                        }
+
+                        justNode.ActionEdge = tn["TalkEdgeID"].InnerText;
+                      
+                        justNode.ActionQuestID = tn["QuestID"].InnerText;
+                        justNode.ID = tn["TalkNodeID"].InnerText;
+                        justDialog.Nodes.Add(justNode);
+                        nodeBox.Items.Add(justNode.ID);
+                        connectedNodeBox.Items.Add(justNode.ID);
+                    }
+
+                    XmlNodeList TalkEdges = item["Edges"].ChildNodes;
+
+                    foreach (XmlNode te in TalkEdges)
+                    {
+                        TalkEdge justEdge = new TalkEdge();
+
+                        justEdge.Node = te["ToWhere"].InnerText;
+
+                        XmlNodeList ConditionsInEdge = te["Conditions"].ChildNodes;
+
+                        foreach (XmlNode cin in ConditionsInEdge)
+                        {
+                            int Buf = int.Parse(cin["ConditionType"].InnerText);
+
+                            switch (Buf)
+                            {
+                                case 0:
+                                    justEdge.FirstTalk = true;
+                                    break;
+                                case 1:
+                                    justEdge.GotQuest = true;
+                                    break;
+                                case 2:
+                                    justEdge.IsQuestDone = true;
+                                    break;
+                                case 3:
+                                    justEdge.IsQuestFinished = true;
+                                    break;
+                            }
+                        }
+                        justEdge.ID = te["TalkEdgeID"].InnerText;
+                        justDialog.Edges.Add(justEdge);
+                        actionEdge.Items.Add(te["TalkEdgeID"].InnerText);
+
+                        foreach (TalkReaction r in justDialog.Reactions)
+                        {
+                            if (r.ID == te["FromWhere"].InnerText)
+                            {
+                                r.Edges.Add(te["TalkEdgeID"].InnerText);
+                                break;
+                            }
+                        }
+                    }
+
+                    justDialog.ID = item["DialogID"].InnerText;
+                    Dialogs.Add(justDialog);
+                    dialogBox.Items.Add(item["DialogID"].InnerText);
+
+                    foreach (TalkReaction e in justDialog.Reactions)
+                    {
+                        foreach (String str in e.Edges)
+                            connectedEdgesBox.Items.Add(str);
+                    }
+                }
+            }
         }
     }
 }
