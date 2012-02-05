@@ -50,9 +50,10 @@ namespace ProfilesGenerator
             LadujZPliku();
             LadujItemyZPliku();
             LadujPrize();
-            LadujDialogi();
+
             characterRadio.Checked = true;
             UpdateView();
+            LadujDialogi();
         }
 
         void UpdateView()
@@ -247,7 +248,6 @@ namespace ProfilesGenerator
                 deleteReply.Enabled = true;
                 saveDialogs.Enabled = true;
                 deleteDialog.Enabled = true;
-
                 dialogID.Text = Dialogs[dialogBox.SelectedIndex].ID;
 
                 if (DialogChanged)
@@ -1596,7 +1596,7 @@ namespace ProfilesGenerator
 
         private void dialogBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DialogChanged = true;
+            //DialogChanged = true;
             UpdateView();
         }
 
@@ -2096,6 +2096,10 @@ namespace ProfilesGenerator
         {
             if (File.Exists("Media\\Others\\Dialogi.xml"))
             {
+                DialogChanged = false;
+                NodeChanged = false;
+                ReactionsChanged = false;
+                RepliesChanged = false;
                 XmlDocument File1 = new XmlDocument();
                 File1.Load("Media\\Others\\Dialogi.xml");
                 XmlElement root = File1.DocumentElement;
@@ -2113,7 +2117,9 @@ namespace ProfilesGenerator
                         justReaction.ID = tr["TalkReactionID"].InnerText;
                         justDialog.Reactions.Add(justReaction);
                         reactionsBox.Items.Add(justReaction.ID);
+                        //reactionsBox.SelectedIndex = 0;
                         rReactionsBox.Items.Add(justReaction.ID);
+                        //rReactionsBox.SelectedIndex = 0;
                     }
 
                     XmlNodeList TalkReplies = item["Replies"].ChildNodes;
@@ -2129,7 +2135,9 @@ namespace ProfilesGenerator
 
                         justReply.ID = rep["TalkReplyID"].InnerText;
                         replyBox.Items.Add(justReply.ID);
+                        //replyBox.SelectedIndex = 0;
                         nReplyBox.Items.Add(justReply.ID);
+                        //nReplyBox.SelectedIndex = 0;
                         justDialog.Replies.Add(justReply);
                     }
 
@@ -2146,7 +2154,7 @@ namespace ProfilesGenerator
                         {
                             justNode.Replies.Add(rin["ReplyID"].InnerText);
                             nodeRepliesBox.Items.Add(rin["ReplyID"].InnerText);
-                            
+                            //nodeRepliesBox.SelectedIndex = 0;                            
                         }
 
                         XmlNodeList ActionsInNode = tn["Actions"].ChildNodes;
@@ -2155,6 +2163,7 @@ namespace ProfilesGenerator
                         {
                             justNode.Actions.Add(int.Parse(ain["ActionType"].InnerText));
                             nodeActionsBox.Items.Add(actionBox.Items[int.Parse(ain["ActionType"].InnerText)]);
+                            //nodeActionsBox.SelectedIndex = 0;
                         }
 
                         justNode.ActionEdge = tn["TalkEdgeID"].InnerText;
@@ -2163,7 +2172,9 @@ namespace ProfilesGenerator
                         justNode.ID = tn["TalkNodeID"].InnerText;
                         justDialog.Nodes.Add(justNode);
                         nodeBox.Items.Add(justNode.ID);
+                        //nodeBox.SelectedIndex = 0;
                         connectedNodeBox.Items.Add(justNode.ID);
+                        //connectedNodeBox.SelectedIndex = 0;
                     }
 
                     XmlNodeList TalkEdges = item["Edges"].ChildNodes;
@@ -2199,6 +2210,7 @@ namespace ProfilesGenerator
                         justEdge.ID = te["TalkEdgeID"].InnerText;
                         justDialog.Edges.Add(justEdge);
                         actionEdge.Items.Add(te["TalkEdgeID"].InnerText);
+                        //actionEdge.SelectedIndex = 0;
 
                         foreach (TalkReaction r in justDialog.Reactions)
                         {
@@ -2217,7 +2229,10 @@ namespace ProfilesGenerator
                     foreach (TalkReaction e in justDialog.Reactions)
                     {
                         foreach (String str in e.Edges)
+                        {
                             connectedEdgesBox.Items.Add(str);
+                            //connectedEdgesBox.SelectedIndex = 0;
+                        }
                     }
                 }
             }
