@@ -12,7 +12,7 @@ namespace ProfilesGenerator
 
         public TalkReaction()
         {
-            ID = "rNowaReakcja";
+            ID = "NowaReakcja";
             Edges = new List<String>();
         }
     }

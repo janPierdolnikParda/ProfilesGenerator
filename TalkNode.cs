@@ -17,9 +17,11 @@ namespace ProfilesGenerator
 
         public TalkNode()
         {
-            ID = "nNowyNode";
+            ID = "NowyNode";
             Actions = new List<int>();
             Replies = new List<String>();
+            ActionQuestID = "";
+            ActionEdge = "";
         }
     }
 }

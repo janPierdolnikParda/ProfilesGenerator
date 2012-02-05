@@ -1200,6 +1200,7 @@
             this.saveDialogs.TabIndex = 61;
             this.saveDialogs.Text = "Zapisz wszystkie dialogi";
             this.saveDialogs.UseVisualStyleBackColor = true;
+            this.saveDialogs.Click += new System.EventHandler(this.saveDialogs_Click);
             // 
             // deleteReply
             // 
@@ -1209,6 +1210,7 @@
             this.deleteReply.TabIndex = 60;
             this.deleteReply.Text = "Usun wybrany reply";
             this.deleteReply.UseVisualStyleBackColor = true;
+            this.deleteReply.Click += new System.EventHandler(this.deleteReply_Click);
             // 
             // deleteNode
             // 
@@ -1218,6 +1220,7 @@
             this.deleteNode.TabIndex = 59;
             this.deleteNode.Text = "Usun wybrany node";
             this.deleteNode.UseVisualStyleBackColor = true;
+            this.deleteNode.Click += new System.EventHandler(this.deleteNode_Click);
             // 
             // deleteEdge
             // 
@@ -1227,6 +1230,7 @@
             this.deleteEdge.TabIndex = 58;
             this.deleteEdge.Text = "Usun wybranego edge";
             this.deleteEdge.UseVisualStyleBackColor = true;
+            this.deleteEdge.Click += new System.EventHandler(this.deleteEdge_Click);
             // 
             // deleteReaction
             // 
@@ -1256,6 +1260,7 @@
             this.nDeleteReply.TabIndex = 55;
             this.nDeleteReply.Text = "-";
             this.nDeleteReply.UseVisualStyleBackColor = true;
+            this.nDeleteReply.Click += new System.EventHandler(this.nDeleteReply_Click);
             // 
             // deleteAction
             // 
@@ -1265,6 +1270,7 @@
             this.deleteAction.TabIndex = 54;
             this.deleteAction.Text = "-";
             this.deleteAction.UseVisualStyleBackColor = true;
+            this.deleteAction.Click += new System.EventHandler(this.deleteAction_Click);
             // 
             // rReactionsBox
             // 
@@ -1274,6 +1280,7 @@
             this.rReactionsBox.Name = "rReactionsBox";
             this.rReactionsBox.Size = new System.Drawing.Size(146, 21);
             this.rReactionsBox.TabIndex = 53;
+            this.rReactionsBox.SelectedIndexChanged += new System.EventHandler(this.rReactionsBox_SelectedIndexChanged);
             // 
             // label55
             // 
@@ -1300,6 +1307,7 @@
             this.replyText.Size = new System.Drawing.Size(361, 20);
             this.replyText.TabIndex = 50;
             this.replyText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.replyText.TextChanged += new System.EventHandler(this.replyText_TextChanged);
             // 
             // label53
             // 
@@ -1317,6 +1325,7 @@
             this.replyID.Size = new System.Drawing.Size(361, 20);
             this.replyID.TabIndex = 48;
             this.replyID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.replyID.TextChanged += new System.EventHandler(this.replyID_TextChanged);
             // 
             // createReply
             // 
@@ -1326,6 +1335,7 @@
             this.createReply.TabIndex = 47;
             this.createReply.Text = "Stworz nowego reply";
             this.createReply.UseVisualStyleBackColor = true;
+            this.createReply.Click += new System.EventHandler(this.createReply_Click);
             // 
             // label52
             // 
@@ -1344,6 +1354,7 @@
             this.replyBox.Name = "replyBox";
             this.replyBox.Size = new System.Drawing.Size(175, 21);
             this.replyBox.TabIndex = 45;
+            this.replyBox.SelectedIndexChanged += new System.EventHandler(this.replyBox_SelectedIndexChanged);
             // 
             // nodeRepliesBox
             // 
@@ -1362,6 +1373,7 @@
             this.addReply.TabIndex = 43;
             this.addReply.Text = ">";
             this.addReply.UseVisualStyleBackColor = true;
+            this.addReply.Click += new System.EventHandler(this.addReply_Click);
             // 
             // label49
             // 
@@ -1389,6 +1401,7 @@
             this.addAction.TabIndex = 40;
             this.addAction.Text = ">";
             this.addAction.UseVisualStyleBackColor = true;
+            this.addAction.Click += new System.EventHandler(this.addAction_Click);
             // 
             // label51
             // 
@@ -1416,6 +1429,7 @@
             this.actionEdge.Name = "actionEdge";
             this.actionEdge.Size = new System.Drawing.Size(149, 21);
             this.actionEdge.TabIndex = 37;
+            this.actionEdge.SelectedIndexChanged += new System.EventHandler(this.actionEdge_SelectedIndexChanged);
             // 
             // actionQuest
             // 
@@ -1425,6 +1439,7 @@
             this.actionQuest.Name = "actionQuest";
             this.actionQuest.Size = new System.Drawing.Size(149, 21);
             this.actionQuest.TabIndex = 36;
+            this.actionQuest.SelectedIndexChanged += new System.EventHandler(this.actionQuest_SelectedIndexChanged);
             // 
             // label48
             // 
@@ -1505,6 +1520,7 @@
             this.edgeID.Size = new System.Drawing.Size(360, 20);
             this.edgeID.TabIndex = 26;
             this.edgeID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.edgeID.TextChanged += new System.EventHandler(this.edgeID_TextChanged);
             // 
             // label44
             // 
@@ -1522,6 +1538,7 @@
             this.nodeID.Size = new System.Drawing.Size(361, 20);
             this.nodeID.TabIndex = 24;
             this.nodeID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nodeID.TextChanged += new System.EventHandler(this.nodeID_TextChanged);
             // 
             // replyIsEnding
             // 
@@ -1532,6 +1549,7 @@
             this.replyIsEnding.TabIndex = 23;
             this.replyIsEnding.Text = "isEnding";
             this.replyIsEnding.UseVisualStyleBackColor = true;
+            this.replyIsEnding.CheckedChanged += new System.EventHandler(this.replyIsEnding_CheckedChanged);
             // 
             // label43
             // 
@@ -1549,6 +1567,7 @@
             this.nodeText.Size = new System.Drawing.Size(361, 20);
             this.nodeText.TabIndex = 21;
             this.nodeText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nodeText.TextChanged += new System.EventHandler(this.nodeText_TextChanged);
             // 
             // createNode
             // 
@@ -1558,6 +1577,7 @@
             this.createNode.TabIndex = 20;
             this.createNode.Text = "Stworz nowego node";
             this.createNode.UseVisualStyleBackColor = true;
+            this.createNode.Click += new System.EventHandler(this.createNode_Click);
             // 
             // nodeBox
             // 
@@ -1567,6 +1587,7 @@
             this.nodeBox.Name = "nodeBox";
             this.nodeBox.Size = new System.Drawing.Size(175, 21);
             this.nodeBox.TabIndex = 19;
+            this.nodeBox.SelectedIndexChanged += new System.EventHandler(this.nodeBox_SelectedIndexChanged);
             // 
             // label42
             // 
@@ -1585,6 +1606,7 @@
             this.questIDBox.Name = "questIDBox";
             this.questIDBox.Size = new System.Drawing.Size(157, 21);
             this.questIDBox.TabIndex = 17;
+            this.questIDBox.SelectedIndexChanged += new System.EventHandler(this.questIDBox_SelectedIndexChanged);
             // 
             // label41
             // 
@@ -1604,6 +1626,7 @@
             this.IsQuestFinished.TabIndex = 15;
             this.IsQuestFinished.Text = "IsQuestFinished";
             this.IsQuestFinished.UseVisualStyleBackColor = true;
+            this.IsQuestFinished.CheckedChanged += new System.EventHandler(this.IsQuestFinished_CheckedChanged);
             // 
             // IsQuestDone
             // 
@@ -1614,6 +1637,7 @@
             this.IsQuestDone.TabIndex = 14;
             this.IsQuestDone.Text = "IsQuestDone";
             this.IsQuestDone.UseVisualStyleBackColor = true;
+            this.IsQuestDone.CheckedChanged += new System.EventHandler(this.IsQuestDone_CheckedChanged);
             // 
             // GotQuest
             // 
@@ -1624,6 +1648,7 @@
             this.GotQuest.TabIndex = 13;
             this.GotQuest.Text = "GotQuest";
             this.GotQuest.UseVisualStyleBackColor = true;
+            this.GotQuest.CheckedChanged += new System.EventHandler(this.GotQuest_CheckedChanged);
             // 
             // label40
             // 
@@ -1643,6 +1668,7 @@
             this.FirstTalk.TabIndex = 11;
             this.FirstTalk.Text = "FirstTalk";
             this.FirstTalk.UseVisualStyleBackColor = true;
+            this.FirstTalk.CheckedChanged += new System.EventHandler(this.FirstTalk_CheckedChanged);
             // 
             // createEdge
             // 
@@ -1652,6 +1678,7 @@
             this.createEdge.TabIndex = 10;
             this.createEdge.Text = "Stworz nowego edge";
             this.createEdge.UseVisualStyleBackColor = true;
+            this.createEdge.Click += new System.EventHandler(this.createEdge_Click);
             // 
             // connectedNodeBox
             // 
@@ -1661,6 +1688,7 @@
             this.connectedNodeBox.Name = "connectedNodeBox";
             this.connectedNodeBox.Size = new System.Drawing.Size(175, 21);
             this.connectedNodeBox.TabIndex = 9;
+            this.connectedNodeBox.SelectedIndexChanged += new System.EventHandler(this.connectedNodeBox_SelectedIndexChanged);
             // 
             // label39
             // 
@@ -1679,6 +1707,7 @@
             this.connectedEdgesBox.Name = "connectedEdgesBox";
             this.connectedEdgesBox.Size = new System.Drawing.Size(175, 21);
             this.connectedEdgesBox.TabIndex = 7;
+            this.connectedEdgesBox.SelectedIndexChanged += new System.EventHandler(this.connectedEdgesBox_SelectedIndexChanged);
             // 
             // label38
             // 

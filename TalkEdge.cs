@@ -17,12 +17,12 @@ namespace ProfilesGenerator
 
         public TalkEdge()
         {
-            ID = "eNowyEdge";
+            ID = "NowyEdge";
             FirstTalk = false;
             GotQuest = false;
             IsQuestDone = false;
             IsQuestFinished = false;
-            ConditionQuestID = "pierwszy";
+            ConditionQuestID = "";
         }
     }
 }

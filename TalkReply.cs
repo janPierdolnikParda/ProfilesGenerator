@@ -10,11 +10,12 @@ namespace ProfilesGenerator
         public String ID;
         public String ReactionID;
         public String Text;
-        public bool isEnding;
+        public bool isEnding = false;
 
         public TalkReply()
         {
-            ID = "rNowyReply";
+            ID = "NowyReply";
+            ReactionID = "";
         }
     }
 }

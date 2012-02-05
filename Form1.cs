@@ -18,6 +18,10 @@ namespace ProfilesGenerator
         List<ItemProfile> ItemProfiles;
         List<Prize> Prizes;
         List<Dialog> Dialogs;
+        bool DialogChanged = true;
+        bool ReactionsChanged = true;
+        bool NodeChanged = true;
+        bool RepliesChanged = true;
 
         public Form1()
         {
@@ -244,32 +248,70 @@ namespace ProfilesGenerator
                 deleteDialog.Enabled = true;
 
                 dialogID.Text = Dialogs[dialogBox.SelectedIndex].ID;
-                reactionsBox.Items.Clear();
 
-                foreach (TalkReaction r in Dialogs[dialogBox.SelectedIndex].Reactions)
-                    reactionsBox.Items.Add(r.ID);
+                if (DialogChanged)
+                {
+                    while (reactionsBox.Items.Count > 0)
+                        reactionsBox.Items.RemoveAt(0);
 
-                if (Dialogs[dialogBox.SelectedIndex].Reactions.Count > 0)
-                    reactionsBox.SelectedIndex = 0;
+                    foreach (TalkReaction r in Dialogs[dialogBox.SelectedIndex].Reactions)
+                        reactionsBox.Items.Add(r.ID);
+
+                    if (reactionsBox.Items.Count > 0)
+                    {
+                        reactionsBox.SelectedIndex = 0;
+                    }
+                }
 
                 if (reactionsBox.SelectedIndex >= 0)
                 {
+                    reactionID.Enabled = true;
+                    connectedNodeBox.Enabled = true;
+                    connectedEdgesBox.Enabled = true;
+                    edgeID.Enabled = true;
+                    FirstTalk.Enabled = true;
+                    GotQuest.Enabled = true;
+                    IsQuestDone.Enabled = true;
+                    IsQuestFinished.Enabled = true;
+                    questIDBox.Enabled = true;
+                    createEdge.Enabled = true;
+                    deleteEdge.Enabled = true;
+
                     reactionID.Text = Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].ID;
-                    connectedEdgesBox.Items.Clear();
-                    foreach (String e in Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges)
-                        connectedEdgesBox.Items.Add(e);
+                    
+                    if (ReactionsChanged)
+                    {
+                        while (connectedEdgesBox.Items.Count > 0)
+                            connectedEdgesBox.Items.RemoveAt(0);
+                        foreach (String e in Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges)
+                            connectedEdgesBox.Items.Add(e);
 
-                    if (Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges.Count > 0)
-                        connectedEdgesBox.SelectedIndex = 0;
+                        //if (Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges.Count > 0)
+                            //connectedEdgesBox.SelectedIndex = 0;
 
-                    connectedNodeBox.Items.Clear();
-                    foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
-                        connectedNodeBox.Items.Add(n.ID);
+                        connectedNodeBox.Items.Clear();
+                        foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
+                            connectedNodeBox.Items.Add(n.ID);
 
-                    if (Dialogs[dialogBox.SelectedIndex].Nodes.Count > 0)
-                        connectedNodeBox.SelectedIndex = connectedNodeBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges[connectedEdgesBox.SelectedIndex]);
+                        ReactionsChanged = false;
+                    }
 
-                    if (connectedEdgesBox.SelectedIndex > 0)
+                    if (NodeChanged)
+                    {
+                        connectedNodeBox.Items.Clear();
+                        foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
+                            connectedNodeBox.Items.Add(n.ID);
+
+                        NodeChanged = false;
+                    }
+
+                    if (Dialogs[dialogBox.SelectedIndex].Nodes.Count > 0 && Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].Node != null)
+                        //connectedNodeBox.SelectedIndex = connectedNodeBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges[connectedEdgesBox.SelectedIndex]);
+                        connectedNodeBox.SelectedIndex = connectedNodeBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].Node);
+                    else
+                        connectedNodeBox.SelectedIndex = -1;
+
+                    if (connectedEdgesBox.SelectedIndex >= 0)
                     {
                         edgeID.Text = Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges[connectedEdgesBox.SelectedIndex];
                         FirstTalk.Checked = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].FirstTalk;
@@ -280,7 +322,7 @@ namespace ProfilesGenerator
                         questIDBox.Items.Clear();
                         questIDBox.Items.Add("");
                         questIDBox.Items.Add("pierwszy");
-                        questIDBox.SelectedIndex = 0;
+                        questIDBox.SelectedIndex = questIDBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].ConditionQuestID);
                     }
                     else
                     {
@@ -304,19 +346,46 @@ namespace ProfilesGenerator
                     IsQuestDone.Checked = false;
                     IsQuestFinished.Checked = false;
                     questIDBox.Items.Clear();
+
+                    reactionID.Enabled = false;
+                    connectedNodeBox.Enabled = false;
+                    connectedEdgesBox.Enabled = false;
+                    edgeID.Enabled = false;
+                    FirstTalk.Enabled = false;
+                    GotQuest.Enabled = false;
+                    IsQuestDone.Enabled = false;
+                    IsQuestFinished.Enabled = false;
+                    questIDBox.Enabled = false;
+                    createEdge.Enabled = false;
+                    deleteEdge.Enabled = false;
                 }
 
+                if (DialogChanged)
+                {
+                    nodeBox.Items.Clear();
+                    foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
+                        nodeBox.Items.Add(n.ID);
 
-                nodeBox.Items.Clear();
-                foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
-                    nodeBox.Items.Add(n.ID);
-
-                if (nodeBox.Items.Count > 0)
-                    nodeBox.SelectedIndex = 0;
+                    if (nodeBox.Items.Count > 0)
+                        nodeBox.SelectedIndex = 0;
+                }
 
                 if (nodeBox.SelectedIndex >= 0)
                 {
-                    nodeID.Text = (String)nodeBox.Items[0];
+                    nodeID.Enabled = true;
+                    nodeText.Enabled = true;
+                    actionBox.Enabled = true;
+                    addAction.Enabled = true;
+                    deleteAction.Enabled = true;
+                    nodeActionsBox.Enabled = true;
+                    actionQuest.Enabled = true;
+                    actionEdge.Enabled = true;
+                    addReply.Enabled = true;
+                    nDeleteReply.Enabled = true;
+                    nReplyBox.Enabled = true;
+                    nodeRepliesBox.Enabled = true;
+
+                    nodeID.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ID;
                     nodeText.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Text;
 
                     nodeActionsBox.Items.Clear();
@@ -329,13 +398,14 @@ namespace ProfilesGenerator
                     actionQuest.Items.Clear();
                     actionQuest.Items.Add("");
                     actionQuest.Items.Add("pierwszy");
-                    actionQuest.SelectedIndex = 0;
+                    actionQuest.SelectedIndex = actionQuest.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionQuestID);
 
                     actionEdge.Items.Clear();
                     actionEdge.Items.Add("");
                     foreach(TalkEdge e in Dialogs[dialogBox.SelectedIndex].Edges)
                         actionEdge.Items.Add(e.ID);// + "(" + Dialogs[dialogBox.SelectedIndex].ID + ")");
 
+                    actionEdge.SelectedIndex = actionEdge.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge);
                     /*foreach(Dialog d in Dialogs)
                     {
                         if (d.ID != Dialogs[dialogBox.SelectedIndex].ID)
@@ -343,46 +413,71 @@ namespace ProfilesGenerator
                                 actionEdge.Items.Add(e.ID + "(" + Dialogs[dialogBox.SelectedIndex].ID + ")");
                     }*/
 
-                    actionEdge.SelectedIndex = actionEdge.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge);
+                    //actionEdge.SelectedIndex = actionEdge.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge);
 
-                    nReplyBox.Items.Clear();
-                    foreach (TalkReply r in Dialogs[dialogBox.SelectedIndex].Replies)
-                        nReplyBox.Items.Add(r.ID);
+                    if (RepliesChanged)
+                    {
+                        nReplyBox.Items.Clear();
+                        foreach (TalkReply r in Dialogs[dialogBox.SelectedIndex].Replies)
+                            nReplyBox.Items.Add(r.ID);
 
-                    if (nReplyBox.Items.Count > 0)
-                        nReplyBox.SelectedIndex = 0;
+                        if (nReplyBox.Items.Count > 0)
+                            nReplyBox.SelectedIndex = 0;
 
-                    nodeRepliesBox.Items.Clear();
-                    foreach (String s in Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Replies)
-                        nodeRepliesBox.Items.Add(s);
+                        nodeRepliesBox.Items.Clear();
+                        foreach (String s in Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Replies)
+                            nodeRepliesBox.Items.Add(s);
 
-                    if (nodeRepliesBox.Items.Count > 0)
-                        nodeRepliesBox.SelectedIndex = 0;
+                        if (nodeRepliesBox.Items.Count > 0)
+                            nodeRepliesBox.SelectedIndex = 0;
+                    }
                 }
 
                 else
                 {
+                    nodeID.Text = "";
+                    nodeID.Enabled = false;
+                    nodeText.Text = "";
+                    nodeText.Enabled = false;
+                    actionBox.Enabled = false;
+                    addAction.Enabled = false;
+                    deleteAction.Enabled = false;
+                    nodeActionsBox.Enabled = false;
+                    actionQuest.Enabled = false;
+                    actionEdge.Enabled = false;
+                    addReply.Enabled = false;
+                    nDeleteReply.Enabled = false;
+                    nReplyBox.Enabled = false;
+                    nodeRepliesBox.Enabled = false;
                 }
 
-                replyBox.Items.Clear();
-                foreach (TalkReply r in Dialogs[dialogBox.SelectedIndex].Replies)
-                    replyBox.Items.Add(r.ID);
+                if (DialogChanged)
+                {
+                    replyBox.Items.Clear();
+                    foreach (TalkReply r in Dialogs[dialogBox.SelectedIndex].Replies)
+                        replyBox.Items.Add(r.ID);
 
-                if (replyBox.Items.Count > 0)
-                    replyBox.SelectedIndex = 0;
+                    if (replyBox.Items.Count > 0)
+                        replyBox.SelectedIndex = 0;
+                    DialogChanged = false;
+                }
 
                 if (replyBox.SelectedIndex >= 0)
                 {
+                    replyID.Enabled = true;
+                    replyText.Enabled = true;
+                    replyIsEnding.Enabled = true;
+
                     replyID.Text = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].ID;
                     replyText.Text = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].Text;
                     replyIsEnding.Checked = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].isEnding;
 
                     rReactionsBox.Items.Clear();
-                    rReactionsBox.Enabled = replyIsEnding.Checked;
+                    rReactionsBox.Enabled = !replyIsEnding.Checked;
                     foreach (TalkReaction r in Dialogs[dialogBox.SelectedIndex].Reactions)
                         rReactionsBox.Items.Add(r.ID);
 
-                    if (rReactionsBox.Items.Count > 0)
+                    if (rReactionsBox.Items.Count > 0 && Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].ReactionID != "")
                         rReactionsBox.SelectedIndex = rReactionsBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].ReactionID);
                 }
 
@@ -392,12 +487,17 @@ namespace ProfilesGenerator
                     replyText.Text = "";
                     replyIsEnding.Checked = false;
                     rReactionsBox.Items.Clear();
-                    rReactionsBox.Enabled = true;
+
+                    replyID.Enabled = false;
+                    replyText.Enabled = false;
+                    replyIsEnding.Enabled = false;
+                    rReactionsBox.Enabled = false;
                 }
             }
 
             else
             {
+                dialogID.Text = "";
                 dialogID.Enabled = false;
                 reactionsBox.Enabled = false;
                 reactionID.Enabled = false;
@@ -1485,29 +1585,46 @@ namespace ProfilesGenerator
 
         private void dialogID_TextChanged(object sender, EventArgs e)
         {
-            Dialogs[dialogBox.SelectedIndex].ID = dialogID.Text;
-            dialogBox.Items[dialogBox.SelectedIndex] = dialogID.Text;
-            UpdateView();
+            if (dialogBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].ID = dialogID.Text;
+                dialogBox.Items[dialogBox.SelectedIndex] = dialogID.Text;
+                UpdateView();
+            }
         }
 
         private void dialogBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DialogChanged = true;
             UpdateView();
         }
 
         private void reactionsBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ReactionsChanged = true;
             UpdateView();
         }
 
         private void createReaction_Click(object sender, EventArgs e)
         {
             Dialogs[dialogBox.SelectedIndex].Reactions.Add(new TalkReaction());
+            reactionsBox.Items.Add("NowaReakcja");
             UpdateView();
+            reactionsBox.SelectedIndex = reactionsBox.Items.Count - 1;
         }
 
         private void deleteReaction_Click(object sender, EventArgs e)
         {
+            while (Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges.Count > 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Edges.RemoveAt(IndexOfEdgeWithID(Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges[0]));
+                Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges.RemoveAt(0);
+            }
+
+            foreach (TalkReply r in Dialogs[dialogBox.SelectedIndex].Replies)
+                if (r.ReactionID == (String)reactionsBox.Items[reactionsBox.SelectedIndex])
+                    r.ReactionID = "";
+
             Dialogs[dialogBox.SelectedIndex].Reactions.RemoveAt(reactionsBox.SelectedIndex);
             int tym = reactionsBox.SelectedIndex;
             reactionsBox.Items.RemoveAt(reactionsBox.SelectedIndex);
@@ -1522,8 +1639,456 @@ namespace ProfilesGenerator
 
         private void reactionID_TextChanged(object sender, EventArgs e)
         {
-            Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].ID = reactionID.Text;
-            reactionsBox.Items[reactionsBox.SelectedIndex] = reactionID.Text;
+            if (reactionsBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].ID = reactionID.Text;
+                reactionsBox.Items[reactionsBox.SelectedIndex] = reactionID.Text;
+            }
+        }
+
+        private void createEdge_Click(object sender, EventArgs e)
+        {
+            Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges.Add("NowyEdge");
+            Dialogs[dialogBox.SelectedIndex].Edges.Add(new TalkEdge());
+            connectedEdgesBox.Items.Add("NowyEdge");
+            connectedEdgesBox.SelectedIndex = connectedEdgesBox.Items.Count - 1;
+            UpdateView();
+        }
+
+        private void deleteEdge_Click(object sender, EventArgs e)
+        {
+            Dialogs[dialogBox.SelectedIndex].Edges.RemoveAt(IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem));
+            Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges.RemoveAt(connectedEdgesBox.SelectedIndex);
+
+            foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
+                if (n.ActionEdge == (String)connectedEdgesBox.SelectedItem)
+                    n.ActionEdge = "";
+
+            int tym = connectedEdgesBox.SelectedIndex;
+            connectedEdgesBox.Items.RemoveAt(connectedEdgesBox.SelectedIndex);
+
+            if (tym == 0 && connectedEdgesBox.Items.Count > 0)
+                connectedEdgesBox.SelectedIndex = 0;
+            else
+                connectedEdgesBox.SelectedIndex = tym - 1;
+
+            UpdateView();
+        }
+
+        private void edgeID_TextChanged(object sender, EventArgs e)
+        {
+            if (reactionsBox.SelectedIndex >= 0 && connectedEdgesBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].ID = edgeID.Text;
+                Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges[connectedEdgesBox.SelectedIndex] = edgeID.Text;
+                connectedEdgesBox.Items[connectedEdgesBox.SelectedIndex] = edgeID.Text;
+                UpdateView();
+            }
+        }
+
+        private void FirstTalk_CheckedChanged(object sender, EventArgs e)
+        {
+            if (reactionsBox.SelectedIndex >= 0 && connectedEdgesBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].FirstTalk = FirstTalk.Checked;
+            }
+        }
+
+        private void GotQuest_CheckedChanged(object sender, EventArgs e)
+        {
+            if (reactionsBox.SelectedIndex >= 0 && connectedEdgesBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].GotQuest = GotQuest.Checked;
+            }
+        }
+
+        private void IsQuestDone_CheckedChanged(object sender, EventArgs e)
+        {
+            if (reactionsBox.SelectedIndex >= 0 && connectedEdgesBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].IsQuestDone = IsQuestDone.Checked;
+            }
+        }
+
+        private void IsQuestFinished_CheckedChanged(object sender, EventArgs e)
+        {
+            if (reactionsBox.SelectedIndex >= 0 && connectedEdgesBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].IsQuestFinished = IsQuestFinished.Checked;
+            }
+        }
+
+        private void questIDBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (reactionsBox.SelectedIndex >= 0 && connectedEdgesBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].ConditionQuestID = (String)questIDBox.SelectedItem;
+            }
+        }
+
+        private void connectedEdgesBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void createNode_Click(object sender, EventArgs e)
+        {
+            Dialogs[dialogBox.SelectedIndex].Nodes.Add(new TalkNode());
+            nodeBox.Items.Add("NowyNode");
+            connectedNodeBox.Items.Add("NowyNode");
+            UpdateView();
+            nodeBox.SelectedIndex = nodeBox.Items.Count - 1;
+        }
+
+        private void connectedNodeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (connectedEdgesBox.SelectedIndex >= 0  && connectedNodeBox.SelectedItem != null)
+            {
+                Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].Node = Dialogs[dialogBox.SelectedIndex].Nodes[connectedNodeBox.SelectedIndex].ID;
+            }
+        }
+
+        private void nodeID_TextChanged(object sender, EventArgs e)
+        {
+            if (nodeBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ID = nodeID.Text;
+                if (connectedNodeBox.Items.Count > 0)
+                    connectedNodeBox.Items[nodeBox.SelectedIndex] = nodeID.Text;
+                nodeBox.Items[nodeBox.SelectedIndex] = nodeID.Text;
+                UpdateView();
+            }
+        }
+
+        private void nodeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NodeChanged = true;
+            UpdateView();
+        }
+
+        private void nodeText_TextChanged(object sender, EventArgs e)
+        {
+            if (nodeBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Text = nodeText.Text;
+                UpdateView();
+            }
+        }
+
+        private void addAction_Click(object sender, EventArgs e)
+        {
+            if (nodeBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Actions.Add(actionBox.SelectedIndex);
+                UpdateView();
+            }
+        }
+
+        private void deleteAction_Click(object sender, EventArgs e)
+        {
+            if (nodeBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Actions.RemoveAt(nodeActionsBox.SelectedIndex);
+                UpdateView();
+            }
+        }
+
+        private void actionQuest_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (nodeBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionQuestID = (String)actionQuest.Items[actionQuest.SelectedIndex];
+                //UpdateView();
+            }
+        }
+
+        private void actionEdge_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (nodeBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge = (String)actionEdge.Items[actionEdge.SelectedIndex];
+                //UpdateView();
+            }
+        }
+
+        private void deleteNode_Click(object sender, EventArgs e)
+        {
+            if (nodeBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes.RemoveAt(nodeBox.SelectedIndex);
+                if (connectedNodeBox.Items.Count > 0)
+                    connectedNodeBox.Items.RemoveAt(nodeBox.SelectedIndex);
+
+                foreach (TalkEdge te in Dialogs[dialogBox.SelectedIndex].Edges)
+                    if (te.Node == (String)nodeBox.Items[nodeBox.SelectedIndex])
+                        te.Node = "";
+                int tym = nodeBox.SelectedIndex;
+                nodeBox.Items.RemoveAt(nodeBox.SelectedIndex);
+
+                if (tym == 0 && nodeBox.Items.Count > 0)
+                    nodeBox.SelectedIndex = tym;
+
+                else if (tym > 0)
+                    nodeBox.SelectedIndex = tym - 1;
+
+                //NodeChanged = true;
+
+                UpdateView();
+            }
+        }
+
+        private void addReply_Click(object sender, EventArgs e)
+        {
+            if (nReplyBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0)
+            {
+                nodeRepliesBox.Items.Add(nReplyBox.Items[nReplyBox.SelectedIndex]);
+                nodeRepliesBox.SelectedIndex = nodeRepliesBox.Items.Count - 1;
+
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Replies.Add((String)nReplyBox.Items[nReplyBox.SelectedIndex]);
+            }
+        }
+
+        private void nDeleteReply_Click(object sender, EventArgs e)
+        {
+            if (nodeRepliesBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Replies.RemoveAt(nodeRepliesBox.SelectedIndex);
+                int tym = nodeRepliesBox.SelectedIndex;
+                nodeRepliesBox.Items.RemoveAt(nodeRepliesBox.SelectedIndex);
+
+                if (tym == 0 && nodeRepliesBox.Items.Count > 0)
+                    nodeRepliesBox.SelectedIndex = tym;
+
+                else if (tym > 0)
+                    nodeRepliesBox.SelectedIndex = tym - 1;
+
+                UpdateView();
+            }
+        }
+
+        private void createReply_Click(object sender, EventArgs e)
+        {
+            Dialogs[dialogBox.SelectedIndex].Replies.Add(new TalkReply());
+            replyBox.Items.Add("NowyReply");
+            nReplyBox.Items.Add("NowyReply");
+            UpdateView();
+            replyBox.SelectedIndex = replyBox.Items.Count - 1;
+        }
+
+        private void replyID_TextChanged(object sender, EventArgs e)
+        {
+            if (replyBox.SelectedIndex >= 0)
+            {
+                foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
+                {
+                    for (int i = 0; i < n.Replies.Count; i++)
+                    {
+                        String r = n.Replies[i];
+                        if (r == (String)replyBox.Items[replyBox.SelectedIndex])
+                        {
+                            n.Replies[i] = replyID.Text;
+                            nodeRepliesBox.Items[i] = replyID.Text;
+                        }
+                    }
+                }
+
+                Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].ID = replyID.Text;
+                replyBox.Items[replyBox.SelectedIndex] = replyID.Text;
+                nReplyBox.Items[replyBox.SelectedIndex] = replyID.Text;
+            }
+        }
+
+        private void replyBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RepliesChanged = true;
+            UpdateView();
+        }
+
+        private void replyText_TextChanged(object sender, EventArgs e)
+        {
+            if (replyBox.SelectedIndex >= 0)
+                Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].Text = replyText.Text;
+        }
+
+        private void replyIsEnding_CheckedChanged(object sender, EventArgs e)
+        {
+            if (replyBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].isEnding = replyIsEnding.Checked;
+                UpdateView();
+            }
+        }
+
+        private void rReactionsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (replyBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].ReactionID = (String)rReactionsBox.Items[rReactionsBox.SelectedIndex];
+            }
+        }
+
+        private void deleteReply_Click(object sender, EventArgs e)
+        {
+            if (replyBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Replies.RemoveAt(replyBox.SelectedIndex);
+                nReplyBox.Items.RemoveAt(replyBox.SelectedIndex);
+
+                foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
+                {
+                    for (int i = 0; i < n.Replies.Count; i++)
+                    {
+                        if ((String)replyBox.Items[replyBox.SelectedIndex] == n.Replies[i])
+                        {
+                            n.Replies.RemoveAt(i);
+                            nodeRepliesBox.Items.RemoveAt(i);
+                        }
+                    }
+                }
+
+                int tym = replyBox.SelectedIndex;
+                replyBox.Items.RemoveAt(replyBox.SelectedIndex);
+
+                if (tym == 0 && replyBox.Items.Count > 0)
+                    replyBox.SelectedIndex = tym;
+                if (tym > 0)
+                    replyBox.SelectedIndex = tym - 1;
+
+                UpdateView();
+            }
+        }
+
+        void ZapiszDialogi()
+        {
+            XmlTextWriter Items = new XmlTextWriter("Media\\Others\\Dialogi.xml", (Encoding)null);
+            Items.WriteStartElement("Dialogs");
+
+            foreach (Dialog d in Dialogs)
+            {
+                Items.WriteStartElement("Dialog");
+                Items.WriteElementString("DialogID", d.ID);
+                Items.WriteStartElement("Reactions");
+
+                foreach (TalkReaction tr in d.Reactions)
+                {
+                    Items.WriteStartElement("TalkReaction");
+                    Items.WriteElementString("TalkReactionID", tr.ID);
+                    Items.WriteEndElement();
+                }
+
+                Items.WriteEndElement();
+                Items.WriteStartElement("Replies");
+
+                foreach (TalkReply rep in d.Replies)
+                {
+                    Items.WriteStartElement("TalkReply");
+                    Items.WriteElementString("TalkReplyID", rep.ID);
+                    Items.WriteElementString("IsEnding", rep.isEnding.ToString());
+                    Items.WriteElementString("Text", rep.Text);
+                    if (!rep.isEnding)
+                        Items.WriteElementString("TalkReaction", rep.ReactionID);
+                    Items.WriteEndElement();
+                }
+                Items.WriteEndElement();
+                Items.WriteStartElement("Nodes");
+
+                foreach (TalkNode n in d.Nodes)
+                {
+                    Items.WriteStartElement("TalkNode");
+                    Items.WriteElementString("TalkNodeID", n.ID);
+                    Items.WriteElementString("Text", n.Text);
+                    Items.WriteStartElement("NodeReplies");
+
+                    foreach (String str in n.Replies)
+                    {
+                        Items.WriteStartElement("Reply");
+                        Items.WriteElementString("ReplyID", str);
+                        Items.WriteEndElement();
+                    }
+
+                    Items.WriteEndElement();
+                    Items.WriteStartElement("Actions");
+
+                    foreach (int a in n.Actions)
+                    {
+                        Items.WriteStartElement("Action");
+                        Items.WriteElementString("ActionType", a.ToString());
+                        Items.WriteEndElement();
+                    }
+
+                    Items.WriteEndElement();
+
+                    if (n.ActionEdge != null && n.ActionEdge != "")
+                        Items.WriteElementString("TalkEdgeID", n.ActionEdge);
+
+                    if (n.ActionQuestID != null && n.ActionQuestID != "")
+                        Items.WriteElementString("QuestID", n.ActionQuestID);
+                    Items.WriteEndElement();
+                }
+
+                Items.WriteEndElement();
+                Items.WriteStartElement("Edges");
+
+                foreach (TalkEdge e in d.Edges)
+                {
+                    Items.WriteStartElement("TalkEdge");
+                    Items.WriteElementString("TalkEdgeID", e.ID);
+
+                    string fromWhere = "";
+
+                    foreach (TalkReaction r in d.Reactions)
+                        foreach (String str in r.Edges)
+                            if (str == e.ID)
+                                fromWhere = r.ID;
+
+                    Items.WriteElementString("FromWhere", fromWhere);
+                    Items.WriteElementString("ToWhere", e.Node);
+                    Items.WriteStartElement("Conditions");
+
+                    if (e.FirstTalk)
+                    {
+                        Items.WriteStartElement("Condition");
+                        Items.WriteElementString("ConditionType", "0");
+                        Items.WriteEndElement();
+                    }
+
+                    if (e.GotQuest)
+                    {
+                        Items.WriteStartElement("Condition");
+                        Items.WriteElementString("ConditionType", "1");
+                        Items.WriteEndElement();
+                    }
+
+                    if (e.IsQuestDone)
+                    {
+                        Items.WriteStartElement("Condition");
+                        Items.WriteElementString("ConditionType", "2");
+                        Items.WriteEndElement();
+                    }
+
+                    if (e.IsQuestFinished)
+                    {
+                        Items.WriteStartElement("Condition");
+                        Items.WriteElementString("ConditionType", "3");
+                        Items.WriteEndElement();
+                    }
+
+                    Items.WriteEndElement();
+                    Items.WriteEndElement();
+                }
+
+                Items.WriteEndElement();
+                Items.WriteEndElement();
+            }
+
+            Items.WriteEndElement();
+            Items.Flush();
+            Items.Close();
+        }
+
+        private void saveDialogs_Click(object sender, EventArgs e)
+        {
+            ZapiszDialogi();
         }
     }
 }
