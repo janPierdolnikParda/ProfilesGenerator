@@ -74,6 +74,7 @@
     <Compile Include="Prize.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quest.cs" />
     <Compile Include="TalkEdge.cs" />
     <Compile Include="TalkNode.cs" />
     <Compile Include="TalkReaction.cs" />

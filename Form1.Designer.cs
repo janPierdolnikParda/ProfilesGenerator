@@ -181,11 +181,39 @@
             this.label36 = new System.Windows.Forms.Label();
             this.dialogBox = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.Items = new System.Windows.Forms.Label();
+            this.removeEnemyFromQuest = new System.Windows.Forms.Button();
+            this.addEnemy2Quest = new System.Windows.Forms.Button();
+            this.label61 = new System.Windows.Forms.Label();
+            this.enemiesAmount = new System.Windows.Forms.TextBox();
+            this.removeItemFromQuest = new System.Windows.Forms.Button();
+            this.addItem2Quest = new System.Windows.Forms.Button();
+            this.label60 = new System.Windows.Forms.Label();
+            this.itemsAmount = new System.Windows.Forms.TextBox();
+            this.QuestsSave = new System.Windows.Forms.Button();
+            this.enemiesInQuest = new System.Windows.Forms.ListBox();
+            this.enemiesListBox = new System.Windows.Forms.ListBox();
+            this.itemsInQuest = new System.Windows.Forms.ListBox();
+            this.itemsListBox = new System.Windows.Forms.ListBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.questPrizeID = new System.Windows.Forms.ComboBox();
+            this.questNameText = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.questIDText = new System.Windows.Forms.TextBox();
+            this.deleteQuest = new System.Windows.Forms.Button();
+            this.createQuest = new System.Windows.Forms.Button();
+            this.questBox = new System.Windows.Forms.ComboBox();
+            this.label56 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1779,12 +1807,288 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label64);
+            this.tabPage5.Controls.Add(this.label63);
+            this.tabPage5.Controls.Add(this.label62);
+            this.tabPage5.Controls.Add(this.Items);
+            this.tabPage5.Controls.Add(this.removeEnemyFromQuest);
+            this.tabPage5.Controls.Add(this.addEnemy2Quest);
+            this.tabPage5.Controls.Add(this.label61);
+            this.tabPage5.Controls.Add(this.enemiesAmount);
+            this.tabPage5.Controls.Add(this.removeItemFromQuest);
+            this.tabPage5.Controls.Add(this.addItem2Quest);
+            this.tabPage5.Controls.Add(this.label60);
+            this.tabPage5.Controls.Add(this.itemsAmount);
+            this.tabPage5.Controls.Add(this.QuestsSave);
+            this.tabPage5.Controls.Add(this.enemiesInQuest);
+            this.tabPage5.Controls.Add(this.enemiesListBox);
+            this.tabPage5.Controls.Add(this.itemsInQuest);
+            this.tabPage5.Controls.Add(this.itemsListBox);
+            this.tabPage5.Controls.Add(this.label59);
+            this.tabPage5.Controls.Add(this.questPrizeID);
+            this.tabPage5.Controls.Add(this.questNameText);
+            this.tabPage5.Controls.Add(this.label58);
+            this.tabPage5.Controls.Add(this.label57);
+            this.tabPage5.Controls.Add(this.questIDText);
+            this.tabPage5.Controls.Add(this.deleteQuest);
+            this.tabPage5.Controls.Add(this.createQuest);
+            this.tabPage5.Controls.Add(this.questBox);
+            this.tabPage5.Controls.Add(this.label56);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(649, 592);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Questy";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(435, 363);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(89, 13);
+            this.label64.TabIndex = 26;
+            this.label64.Text = "Enemies in Quest";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(176, 363);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(47, 13);
+            this.label63.TabIndex = 25;
+            this.label63.Text = "Enemies";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(450, 150);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(74, 13);
+            this.label62.TabIndex = 24;
+            this.label62.Text = "Items in Quest";
+            // 
+            // Items
+            // 
+            this.Items.AutoSize = true;
+            this.Items.Location = new System.Drawing.Point(176, 150);
+            this.Items.Name = "Items";
+            this.Items.Size = new System.Drawing.Size(32, 13);
+            this.Items.TabIndex = 23;
+            this.Items.Text = "Items";
+            // 
+            // removeEnemyFromQuest
+            // 
+            this.removeEnemyFromQuest.Location = new System.Drawing.Point(315, 494);
+            this.removeEnemyFromQuest.Name = "removeEnemyFromQuest";
+            this.removeEnemyFromQuest.Size = new System.Drawing.Size(49, 22);
+            this.removeEnemyFromQuest.TabIndex = 22;
+            this.removeEnemyFromQuest.Text = "<<";
+            this.removeEnemyFromQuest.UseVisualStyleBackColor = true;
+            this.removeEnemyFromQuest.Click += new System.EventHandler(this.removeEnemyFromQuest_Click);
+            // 
+            // addEnemy2Quest
+            // 
+            this.addEnemy2Quest.Location = new System.Drawing.Point(315, 466);
+            this.addEnemy2Quest.Name = "addEnemy2Quest";
+            this.addEnemy2Quest.Size = new System.Drawing.Size(49, 22);
+            this.addEnemy2Quest.TabIndex = 21;
+            this.addEnemy2Quest.Text = ">>";
+            this.addEnemy2Quest.UseVisualStyleBackColor = true;
+            this.addEnemy2Quest.Click += new System.EventHandler(this.addEnemy2Quest_Click);
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(323, 424);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(29, 13);
+            this.label61.TabIndex = 20;
+            this.label61.Text = "Ilosc";
+            // 
+            // enemiesAmount
+            // 
+            this.enemiesAmount.Location = new System.Drawing.Point(315, 440);
+            this.enemiesAmount.Name = "enemiesAmount";
+            this.enemiesAmount.Size = new System.Drawing.Size(49, 20);
+            this.enemiesAmount.TabIndex = 19;
+            this.enemiesAmount.Text = "1";
+            this.enemiesAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // removeItemFromQuest
+            // 
+            this.removeItemFromQuest.Location = new System.Drawing.Point(315, 265);
+            this.removeItemFromQuest.Name = "removeItemFromQuest";
+            this.removeItemFromQuest.Size = new System.Drawing.Size(49, 22);
+            this.removeItemFromQuest.TabIndex = 18;
+            this.removeItemFromQuest.Text = "<<";
+            this.removeItemFromQuest.UseVisualStyleBackColor = true;
+            this.removeItemFromQuest.Click += new System.EventHandler(this.removeItemFromQuest_Click);
+            // 
+            // addItem2Quest
+            // 
+            this.addItem2Quest.Location = new System.Drawing.Point(315, 237);
+            this.addItem2Quest.Name = "addItem2Quest";
+            this.addItem2Quest.Size = new System.Drawing.Size(49, 22);
+            this.addItem2Quest.TabIndex = 17;
+            this.addItem2Quest.Text = ">>";
+            this.addItem2Quest.UseVisualStyleBackColor = true;
+            this.addItem2Quest.Click += new System.EventHandler(this.addItem2Quest_Click);
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(323, 195);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(29, 13);
+            this.label60.TabIndex = 16;
+            this.label60.Text = "Ilosc";
+            // 
+            // itemsAmount
+            // 
+            this.itemsAmount.Location = new System.Drawing.Point(315, 211);
+            this.itemsAmount.Name = "itemsAmount";
+            this.itemsAmount.Size = new System.Drawing.Size(49, 20);
+            this.itemsAmount.TabIndex = 15;
+            this.itemsAmount.Text = "1";
+            this.itemsAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // QuestsSave
+            // 
+            this.QuestsSave.Location = new System.Drawing.Point(34, 571);
+            this.QuestsSave.Name = "QuestsSave";
+            this.QuestsSave.Size = new System.Drawing.Size(580, 21);
+            this.QuestsSave.TabIndex = 14;
+            this.QuestsSave.Text = "Zapisz wszystkie questy";
+            this.QuestsSave.UseVisualStyleBackColor = true;
+            this.QuestsSave.Click += new System.EventHandler(this.QuestsSave_Click);
+            // 
+            // enemiesInQuest
+            // 
+            this.enemiesInQuest.FormattingEnabled = true;
+            this.enemiesInQuest.Location = new System.Drawing.Point(397, 379);
+            this.enemiesInQuest.Name = "enemiesInQuest";
+            this.enemiesInQuest.Size = new System.Drawing.Size(173, 186);
+            this.enemiesInQuest.TabIndex = 13;
+            // 
+            // enemiesListBox
+            // 
+            this.enemiesListBox.FormattingEnabled = true;
+            this.enemiesListBox.Location = new System.Drawing.Point(114, 379);
+            this.enemiesListBox.Name = "enemiesListBox";
+            this.enemiesListBox.Size = new System.Drawing.Size(173, 186);
+            this.enemiesListBox.TabIndex = 12;
+            // 
+            // itemsInQuest
+            // 
+            this.itemsInQuest.FormattingEnabled = true;
+            this.itemsInQuest.Location = new System.Drawing.Point(397, 166);
+            this.itemsInQuest.Name = "itemsInQuest";
+            this.itemsInQuest.Size = new System.Drawing.Size(173, 186);
+            this.itemsInQuest.TabIndex = 11;
+            // 
+            // itemsListBox
+            // 
+            this.itemsListBox.FormattingEnabled = true;
+            this.itemsListBox.Location = new System.Drawing.Point(114, 166);
+            this.itemsListBox.Name = "itemsListBox";
+            this.itemsListBox.Size = new System.Drawing.Size(173, 186);
+            this.itemsListBox.TabIndex = 10;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(111, 129);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(41, 13);
+            this.label59.TabIndex = 9;
+            this.label59.Text = "PrizeID";
+            // 
+            // questPrizeID
+            // 
+            this.questPrizeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.questPrizeID.FormattingEnabled = true;
+            this.questPrizeID.Location = new System.Drawing.Point(179, 126);
+            this.questPrizeID.Name = "questPrizeID";
+            this.questPrizeID.Size = new System.Drawing.Size(391, 21);
+            this.questPrizeID.TabIndex = 8;
+            this.questPrizeID.SelectedIndexChanged += new System.EventHandler(this.questPrizeID_SelectedIndexChanged);
+            // 
+            // questNameText
+            // 
+            this.questNameText.Location = new System.Drawing.Point(179, 100);
+            this.questNameText.Name = "questNameText";
+            this.questNameText.Size = new System.Drawing.Size(391, 20);
+            this.questNameText.TabIndex = 7;
+            this.questNameText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.questNameText.TextChanged += new System.EventHandler(this.questNameText_TextChanged);
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(111, 103);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(40, 13);
+            this.label58.TabIndex = 6;
+            this.label58.Text = "Nazwa";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(111, 75);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(46, 13);
+            this.label57.TabIndex = 5;
+            this.label57.Text = "QuestID";
+            // 
+            // questIDText
+            // 
+            this.questIDText.Location = new System.Drawing.Point(179, 72);
+            this.questIDText.Name = "questIDText";
+            this.questIDText.Size = new System.Drawing.Size(391, 20);
+            this.questIDText.TabIndex = 4;
+            this.questIDText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.questIDText.TextChanged += new System.EventHandler(this.questIDText_TextChanged);
+            // 
+            // deleteQuest
+            // 
+            this.deleteQuest.Location = new System.Drawing.Point(406, 32);
+            this.deleteQuest.Name = "deleteQuest";
+            this.deleteQuest.Size = new System.Drawing.Size(164, 22);
+            this.deleteQuest.TabIndex = 3;
+            this.deleteQuest.Text = "Usun questa";
+            this.deleteQuest.UseVisualStyleBackColor = true;
+            this.deleteQuest.Click += new System.EventHandler(this.deleteQuest_Click);
+            // 
+            // createQuest
+            // 
+            this.createQuest.Location = new System.Drawing.Point(236, 32);
+            this.createQuest.Name = "createQuest";
+            this.createQuest.Size = new System.Drawing.Size(164, 21);
+            this.createQuest.TabIndex = 2;
+            this.createQuest.Text = "Stworz nowego questa";
+            this.createQuest.UseVisualStyleBackColor = true;
+            this.createQuest.Click += new System.EventHandler(this.createQuest_Click);
+            // 
+            // questBox
+            // 
+            this.questBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.questBox.FormattingEnabled = true;
+            this.questBox.Location = new System.Drawing.Point(8, 33);
+            this.questBox.Name = "questBox";
+            this.questBox.Size = new System.Drawing.Size(222, 21);
+            this.questBox.TabIndex = 1;
+            this.questBox.SelectedIndexChanged += new System.EventHandler(this.questBox_SelectedIndexChanged);
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label56.Location = new System.Drawing.Point(63, 17);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(94, 13);
+            this.label56.TabIndex = 0;
+            this.label56.Text = "Wybierz questa";
             // 
             // Form1
             // 
@@ -1804,6 +2108,8 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1963,6 +2269,33 @@
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.ComboBox dialogBox;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label Items;
+        private System.Windows.Forms.Button removeEnemyFromQuest;
+        private System.Windows.Forms.Button addEnemy2Quest;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.TextBox enemiesAmount;
+        private System.Windows.Forms.Button removeItemFromQuest;
+        private System.Windows.Forms.Button addItem2Quest;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.TextBox itemsAmount;
+        private System.Windows.Forms.Button QuestsSave;
+        private System.Windows.Forms.ListBox enemiesInQuest;
+        private System.Windows.Forms.ListBox enemiesListBox;
+        private System.Windows.Forms.ListBox itemsInQuest;
+        private System.Windows.Forms.ListBox itemsListBox;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.ComboBox questPrizeID;
+        private System.Windows.Forms.TextBox questNameText;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.TextBox questIDText;
+        private System.Windows.Forms.Button deleteQuest;
+        private System.Windows.Forms.Button createQuest;
+        private System.Windows.Forms.ComboBox questBox;
+        private System.Windows.Forms.Label label56;
 
 
 

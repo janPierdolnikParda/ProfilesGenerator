@@ -18,6 +18,7 @@ namespace ProfilesGenerator
         List<ItemProfile> ItemProfiles;
         List<Prize> Prizes;
         List<Dialog> Dialogs;
+        List<Quest> Quests;
         bool DialogChanged = true;
         bool ReactionsChanged = true;
         bool NodeChanged = true;
@@ -30,6 +31,7 @@ namespace ProfilesGenerator
             ItemProfiles = new List<ItemProfile>();
             Prizes = new List<Prize>();
             Dialogs = new List<Dialog>();
+            Quests = new List<Quest>();
 
             InitializeComponent();
 
@@ -539,6 +541,74 @@ namespace ProfilesGenerator
                 deleteReply.Enabled = false;
                 saveDialogs.Enabled = false;
                 deleteDialog.Enabled = false;
+            }
+
+            if (questBox.SelectedIndex >= 0)
+            {
+                questIDText.Enabled = true;
+                questNameText.Enabled = true;
+                questPrizeID.Enabled = true;
+                itemsListBox.Enabled = true;
+                itemsInQuest.Enabled = true;
+                enemiesListBox.Enabled = true;
+                enemiesInQuest.Enabled = true;
+                itemsAmount.Enabled = true;
+                addItem2Quest.Enabled = true;
+                removeItemFromQuest.Enabled = true;
+                enemiesAmount.Enabled = true;
+                addEnemy2Quest.Enabled = true;
+                removeEnemyFromQuest.Enabled = true;
+
+                questIDText.Text = Quests[questBox.SelectedIndex].ID;
+                questNameText.Text = Quests[questBox.SelectedIndex].Name;
+
+                questPrizeID.Items.Clear();
+
+                foreach (Object o in comboBox4.Items)
+                    questPrizeID.Items.Add(o);
+
+                if (Quests[questBox.SelectedIndex].PrizeID != "" && Quests[questBox.SelectedIndex].PrizeID != null)
+                    questPrizeID.SelectedIndex = questPrizeID.Items.IndexOf(Quests[questBox.SelectedIndex].PrizeID);
+
+                itemsListBox.Items.Clear();
+
+                foreach (Object o in comboBox2.Items)
+                    itemsListBox.Items.Add(o);
+
+                itemsInQuest.Items.Clear();
+
+                foreach (String str in Quests[questBox.SelectedIndex].Items.Keys)
+                    itemsInQuest.Items.Add(Quests[questBox.SelectedIndex].Items[str].ToString() + "x " + str);
+
+                enemiesListBox.Items.Clear();
+
+                foreach (Enemy e in EnemyProfiles)
+                    enemiesListBox.Items.Add(e.ProfileName);
+
+                enemiesInQuest.Items.Clear();
+
+                foreach (String str in Quests[questBox.SelectedIndex].Enemies.Keys)
+                    enemiesInQuest.Items.Add(Quests[questBox.SelectedIndex].Enemies[str].ToString() + "x " + str);
+            }
+
+            else
+            {
+                questIDText.Text = "";
+                questNameText.Text = "";
+
+                questIDText.Enabled = false;
+                questNameText.Enabled = false;
+                questPrizeID.Enabled = false;
+                itemsListBox.Enabled = false;
+                itemsInQuest.Enabled = false;
+                enemiesListBox.Enabled = false;
+                enemiesInQuest.Enabled = false;
+                itemsAmount.Enabled = false;
+                addItem2Quest.Enabled = false;
+                removeItemFromQuest.Enabled = false;
+                enemiesAmount.Enabled = false;
+                addEnemy2Quest.Enabled = false;
+                removeEnemyFromQuest.Enabled = false;
             }
         }
 
@@ -2238,6 +2308,129 @@ namespace ProfilesGenerator
                     }
                 }
             }
+        }
+
+        private void createQuest_Click(object sender, EventArgs e)
+        {
+            Quests.Add(new Quest());
+            questBox.Items.Add("qNowyQuest");
+            questBox.SelectedIndex = questBox.Items.Count - 1;
+            UpdateView();
+        }
+
+        private void questBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void questIDText_TextChanged(object sender, EventArgs e)
+        {
+            Quests[questBox.SelectedIndex].ID = questIDText.Text;
+            questBox.Items[questBox.SelectedIndex] = questIDText.Text;
+            UpdateView();
+        }
+
+        private void questNameText_TextChanged(object sender, EventArgs e)
+        {
+            Quests[questBox.SelectedIndex].Name = questNameText.Text;
+        }
+
+        private void questPrizeID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Quests[questBox.SelectedIndex].PrizeID = (String)questPrizeID.SelectedItem;
+        }
+
+        private void addItem2Quest_Click(object sender, EventArgs e)
+        {
+            if (itemsListBox.SelectedIndex >= 0)
+            {
+                Quests[questBox.SelectedIndex].Items.Add((String)itemsListBox.SelectedItem, int.Parse(itemsAmount.Text));
+                UpdateView();
+            }
+        }
+
+        private void removeItemFromQuest_Click(object sender, EventArgs e)
+        {
+            if (itemsInQuest.SelectedIndex >= 0)
+            {
+                Quests[questBox.SelectedIndex].Items.Remove(Quests[questBox.SelectedIndex].Items.Keys.ElementAt(itemsInQuest.SelectedIndex));
+                UpdateView();
+            }
+        }
+
+        private void addEnemy2Quest_Click(object sender, EventArgs e)
+        {
+            if (enemiesListBox.SelectedIndex >= 0)
+            {
+                Quests[questBox.SelectedIndex].Enemies.Add((String)enemiesListBox.SelectedItem, int.Parse(enemiesAmount.Text));
+                UpdateView();
+            }
+        }
+
+        private void removeEnemyFromQuest_Click(object sender, EventArgs e)
+        {
+            if (enemiesInQuest.SelectedIndex >= 0)
+            {
+                Quests[questBox.SelectedIndex].Enemies.Remove(Quests[questBox.SelectedIndex].Enemies.Keys.ElementAt(enemiesInQuest.SelectedIndex));
+                UpdateView();
+            }
+        }
+
+        private void deleteQuest_Click(object sender, EventArgs e)
+        {
+            if (questBox.SelectedIndex >= 0)
+            {
+                Quests.RemoveAt(questBox.SelectedIndex);
+                UpdateView();
+            }
+        }
+
+        private void QuestsSave_Click(object sender, EventArgs e)
+        {
+            ZapiszQuesty();
+        }
+
+        void ZapiszQuesty()
+        {
+            XmlTextWriter Items = new XmlTextWriter("Media\\Others\\Quests.xml", (Encoding)null);
+            Items.WriteStartElement("Quests");
+
+            foreach (Quest q in Quests)
+            {
+                Items.WriteStartElement("Quest");
+                Items.WriteElementString("QuestID", q.ID);
+                Items.WriteElementString("Name", q.Name);
+                Items.WriteElementString("PrizeID", q.PrizeID);
+
+                Items.WriteStartElement("Enemies");
+
+                foreach (String str in q.Enemies.Keys)
+                {
+                    Items.WriteStartElement("Enemy");
+                    Items.WriteElementString("EnemyID", str);
+                    Items.WriteElementString("EnemyAmount", q.Enemies[str].ToString());
+                    Items.WriteEndElement();
+                }
+
+                Items.WriteEndElement();
+
+                Items.WriteStartElement("Items");
+
+                foreach (String str in q.Items.Keys)
+                {
+                    Items.WriteStartElement("Items");
+                    Items.WriteElementString("ItemID", str);
+                    Items.WriteElementString("ItemAmount", q.Items[str].ToString());
+                    Items.WriteEndElement();
+                }
+
+                Items.WriteEndElement();
+                Items.WriteEndElement();
+            }
+
+            Items.WriteEndElement();
+            Items.Flush();
+            Items.Close();
         }
     }
 }
