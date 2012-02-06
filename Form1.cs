@@ -2019,11 +2019,11 @@ namespace ProfilesGenerator
 
                     Items.WriteEndElement();
 
-                    if (n.ActionEdge != null && n.ActionEdge != "")
-                        Items.WriteElementString("TalkEdgeID", n.ActionEdge);
+                    
+                    Items.WriteElementString("TalkEdgeID", n.ActionEdge);
 
-                    if (n.ActionQuestID != null && n.ActionQuestID != "")
-                        Items.WriteElementString("QuestID", n.ActionQuestID);
+                    
+                    Items.WriteElementString("QuestID", n.ActionQuestID);
                     Items.WriteEndElement();
                 }
 
@@ -2034,6 +2034,7 @@ namespace ProfilesGenerator
                 {
                     Items.WriteStartElement("TalkEdge");
                     Items.WriteElementString("TalkEdgeID", e.ID);
+                    Items.WriteElementString("ConditionQuestID", e.ConditionQuestID);
 
                     string fromWhere = "";
 
@@ -2184,6 +2185,7 @@ namespace ProfilesGenerator
                         TalkEdge justEdge = new TalkEdge();
 
                         justEdge.Node = te["ToWhere"].InnerText;
+                        justEdge.ConditionQuestID = te["ConditionQuestID"].InnerText;
 
                         XmlNodeList ConditionsInEdge = te["Conditions"].ChildNodes;
 
