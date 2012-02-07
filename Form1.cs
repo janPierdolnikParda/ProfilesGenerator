@@ -153,6 +153,20 @@ namespace ProfilesGenerator
 
                 Equipment.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsEquipment));
                 Pickable.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsPickable));
+                Container.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsContainer));
+
+                itemPrize.Enabled = Container.Checked;
+
+                if (comboBox4.Items.Count > 0)
+                {
+                    itemPrize.Items.Clear();
+                    itemPrize.Items.Add("");
+
+                    foreach (Object o in comboBox4.Items)
+                        itemPrize.Items.Add(o);
+
+                    itemPrize.SelectedIndex = itemPrize.Items.IndexOf(ItemProfiles[comboBox2.SelectedIndex].PrizeID);
+                }
 
                 if (ItemProfiles[comboBox2.SelectedIndex].Type == "DescribedProfile")
                     describedRadio.Checked = true;
@@ -262,6 +276,10 @@ namespace ProfilesGenerator
                 deleteReply.Enabled = true;
                 saveDialogs.Enabled = true;
                 deleteDialog.Enabled = true;
+                textDurationNode.Enabled = true;
+                textDurationReply.Enabled = true;
+                soundNode.Enabled = true;
+                soundReply.Enabled = true;
                 dialogID.Text = Dialogs[dialogBox.SelectedIndex].ID;
 
                 if (DialogChanged)
@@ -402,10 +420,14 @@ namespace ProfilesGenerator
                     nDeleteReply.Enabled = true;
                     nReplyBox.Enabled = true;
                     nodeRepliesBox.Enabled = true;
+                    textDurationNode.Enabled = true;
+                    soundNode.Enabled = true;
 
                     nodeID.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ID;
                     nodeText.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Text;
-
+                    textDurationNode.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Duration;
+                    soundNode.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Sound;
+                    
                     nodeActionsBox.Items.Clear();
                     foreach (int i in Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Actions)
                         nodeActionsBox.Items.Add(actionBox.Items[i]);
@@ -470,6 +492,8 @@ namespace ProfilesGenerator
                     nDeleteReply.Enabled = false;
                     nReplyBox.Enabled = false;
                     nodeRepliesBox.Enabled = false;
+                    textDurationNode.Enabled = false;
+                    soundNode.Enabled = false;
                 }
 
                 if (DialogChanged)
@@ -488,10 +512,14 @@ namespace ProfilesGenerator
                     replyID.Enabled = true;
                     replyText.Enabled = true;
                     replyIsEnding.Enabled = true;
+                    textDurationReply.Enabled = true;
+                    soundReply.Enabled = true;
 
                     replyID.Text = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].ID;
                     replyText.Text = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].Text;
                     replyIsEnding.Checked = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].isEnding;
+                    textDurationReply.Text = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].Duration;
+                    soundReply.Text = Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].Sound;
 
                     rReactionsBox.Items.Clear();
                     rReactionsBox.Enabled = !replyIsEnding.Checked;
@@ -513,6 +541,8 @@ namespace ProfilesGenerator
                     replyText.Enabled = false;
                     replyIsEnding.Enabled = false;
                     rReactionsBox.Enabled = false;
+                    textDurationReply.Enabled = false;
+                    soundReply.Enabled = false;
                 }
             }
 
@@ -559,6 +589,10 @@ namespace ProfilesGenerator
                 deleteReply.Enabled = false;
                 saveDialogs.Enabled = false;
                 deleteDialog.Enabled = false;
+                textDurationNode.Enabled = false;
+                textDurationReply.Enabled = false;
+                soundReply.Enabled = false;
+                soundNode.Enabled = false;
             }
 
             if (questBox.SelectedIndex >= 0)
@@ -1333,6 +1367,8 @@ namespace ProfilesGenerator
                 Items.WriteElementString("mass", ip.Mass);
                 Items.WriteElementString("ispickable", ip.IsPickable);
                 Items.WriteElementString("isequipment", ip.IsEquipment);
+                Items.WriteElementString("iscontainer", ip.IsContainer);
+                Items.WriteElementString("prizeid", ip.PrizeID);
 
                 string x = "";
                 string y = "";
@@ -1397,6 +1433,8 @@ namespace ProfilesGenerator
                     newChar.InventoryMaterial = item["inventory_material"].InnerText;
                     newChar.IsPickable = item["ispickable"].InnerText;
                     newChar.IsEquipment = item["isequipment"].InnerText;
+                    newChar.IsContainer = item["iscontainer"].InnerText;
+                    newChar.PrizeID = item["prizeid"].InnerText;
 
                     ItemProfiles.Add(newChar);
                     comboBox2.Items.Add(newChar.IdString);
@@ -2076,6 +2114,8 @@ namespace ProfilesGenerator
                     Items.WriteElementString("TalkReplyID", rep.ID);
                     Items.WriteElementString("IsEnding", rep.isEnding.ToString());
                     Items.WriteElementString("Text", rep.Text);
+                    Items.WriteElementString("Duration", rep.Duration);
+                    Items.WriteElementString("Sound", rep.Sound);
                     if (!rep.isEnding)
                         Items.WriteElementString("TalkReaction", rep.ReactionID);
                     Items.WriteEndElement();
@@ -2088,6 +2128,8 @@ namespace ProfilesGenerator
                     Items.WriteStartElement("TalkNode");
                     Items.WriteElementString("TalkNodeID", n.ID);
                     Items.WriteElementString("Text", n.Text);
+                    Items.WriteElementString("Duration", n.Duration);
+                    Items.WriteElementString("Sound", n.Sound);
                     Items.WriteStartElement("NodeReplies");
 
                     foreach (String str in n.Replies)
@@ -2220,6 +2262,8 @@ namespace ProfilesGenerator
                         TalkReply justReply = new TalkReply();
                         justReply.isEnding = bool.Parse(rep["IsEnding"].InnerText);
                         justReply.Text = rep["Text"].InnerText;
+                        justReply.Duration = rep["Duration"].InnerText;
+                        justReply.Sound = rep["Sound"].InnerText;
 
                         if (!justReply.isEnding)
                             justReply.ReactionID = rep["TalkReaction"].InnerText;
@@ -2238,6 +2282,8 @@ namespace ProfilesGenerator
                     {
                         TalkNode justNode = new TalkNode();
                         justNode.Text = tn["Text"].InnerText;
+                        justNode.Duration = tn["Duration"].InnerText;
+                        justNode.Sound = tn["Sound"].InnerText;
 
                         XmlNodeList RepliesInNode = tn["NodeReplies"].ChildNodes;
 
@@ -2510,6 +2556,47 @@ namespace ProfilesGenerator
                 if (characterRadio.Checked)
                     CharacterProfiles[comboBox1.SelectedIndex].TalkRoot = (String)talkRootBox.SelectedItem;
             }
+        }
+
+        private void Container_CheckedChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].IsContainer = Container.Checked.ToString();
+                UpdateView();
+            }
+        }
+
+        private void itemPrize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+            {
+                ItemProfiles[comboBox2.SelectedIndex].PrizeID = (String)itemPrize.SelectedItem;
+            }
+        }
+
+        private void textDurationNode_TextChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0)
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Duration = textDurationNode.Text;
+        }
+
+        private void soundNode_TextChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0)
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Sound = soundNode.Text;
+        }
+
+        private void textDurationReply_TextChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && replyBox.SelectedIndex >= 0)
+                Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].Duration = textDurationReply.Text;
+        }
+
+        private void soundReply_TextChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && replyBox.SelectedIndex >= 0)
+                Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].Sound = soundReply.Text;
         }
     }
 }

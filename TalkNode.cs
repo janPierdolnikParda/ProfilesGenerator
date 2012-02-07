@@ -14,6 +14,8 @@ namespace ProfilesGenerator
         public String ActionEdge;
         public String ActionEdgeDialog;
         public String Text;
+        public String Duration;
+        public String Sound;
 
         public TalkNode()
         {
@@ -22,6 +24,8 @@ namespace ProfilesGenerator
             Replies = new List<String>();
             ActionQuestID = "";
             ActionEdge = "";
+            Duration = "3,0";
+            Sound = "";
         }
     }
 }
