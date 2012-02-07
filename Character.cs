@@ -24,6 +24,7 @@ namespace ProfilesGenerator
         public String SI;
         public String WY;
         public String FriendlyType;
+        public String TalkRoot;
 
         public Character()
         {
@@ -43,6 +44,7 @@ namespace ProfilesGenerator
             CH = "30";
 
             FriendlyType = "0";
+            TalkRoot = "";
         }
     }
 }

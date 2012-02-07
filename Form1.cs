@@ -52,6 +52,7 @@ namespace ProfilesGenerator
             LadujZPliku();
             LadujItemyZPliku();
             LadujPrize();
+            LadujQuesty();
 
             characterRadio.Checked = true;
             UpdateView();
@@ -62,6 +63,14 @@ namespace ProfilesGenerator
         {
             if (comboBox1.SelectedIndex >= 0)
             {
+                if (dialogBox.Items.Count > 0)
+                {
+                    talkRootBox.Items.Clear();
+                    talkRootBox.Items.Add("");
+                    foreach (Object o in dialogBox.Items)
+                        talkRootBox.Items.Add(o);
+                }
+
                 if (characterRadio.Checked)
                 {
                     profileName.Text = CharacterProfiles[comboBox1.SelectedIndex].ProfileName;
@@ -82,6 +91,9 @@ namespace ProfilesGenerator
                     Sila.Text = CharacterProfiles[comboBox1.SelectedIndex].SI;
                     wytrzymalosc.Text = CharacterProfiles[comboBox1.SelectedIndex].WY;
                     comboBox5.SelectedIndex = int.Parse(CharacterProfiles[comboBox1.SelectedIndex].FriendlyType);
+
+                    if (talkRootBox.Items.Count > 0)
+                        talkRootBox.SelectedIndex = talkRootBox.Items.IndexOf(CharacterProfiles[comboBox1.SelectedIndex].TalkRoot);
                 }
 
                 if (enemyRadio.Checked)
@@ -324,7 +336,10 @@ namespace ProfilesGenerator
 
                         questIDBox.Items.Clear();
                         questIDBox.Items.Add("");
-                        questIDBox.Items.Add("pierwszy");
+
+                        foreach (Object o in questBox.Items)
+                            questIDBox.Items.Add(o);
+
                         questIDBox.SelectedIndex = questIDBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].ConditionQuestID);
                     }
                     else
@@ -400,7 +415,10 @@ namespace ProfilesGenerator
 
                     actionQuest.Items.Clear();
                     actionQuest.Items.Add("");
-                    actionQuest.Items.Add("pierwszy");
+
+                    foreach (Object o in questBox.Items)
+                        actionQuest.Items.Add(o);
+
                     actionQuest.SelectedIndex = actionQuest.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionQuestID);
 
                     actionEdge.Items.Clear();
@@ -838,6 +856,7 @@ namespace ProfilesGenerator
                     newChar.ZY = item["Zywotnosc"].InnerText;
                     newChar.OP = item["Opanowanie"].InnerText;
                     newChar.WY = item["Wytrzymalosc"].InnerText;
+                    newChar.TalkRoot = item["DialogRoot"].InnerText;
 
                     CharacterProfiles.Add(newChar);
                 }
@@ -998,6 +1017,7 @@ namespace ProfilesGenerator
                 NPCs.WriteElementString("Zrecznosc", ch.ZR);
                 NPCs.WriteElementString("Sila", ch.SI);
                 NPCs.WriteElementString("Charyzma", ch.CH);
+                NPCs.WriteElementString("DialogRoot", ch.TalkRoot);
 
                 NPCs.WriteEndElement();
             }
@@ -2325,19 +2345,24 @@ namespace ProfilesGenerator
 
         private void questIDText_TextChanged(object sender, EventArgs e)
         {
-            Quests[questBox.SelectedIndex].ID = questIDText.Text;
-            questBox.Items[questBox.SelectedIndex] = questIDText.Text;
-            UpdateView();
+            if (questBox.SelectedIndex >= 0)
+            {
+                Quests[questBox.SelectedIndex].ID = questIDText.Text;
+                questBox.Items[questBox.SelectedIndex] = questIDText.Text;
+                UpdateView();
+            }
         }
 
         private void questNameText_TextChanged(object sender, EventArgs e)
         {
-            Quests[questBox.SelectedIndex].Name = questNameText.Text;
+            if (questBox.SelectedIndex >= 0)
+                Quests[questBox.SelectedIndex].Name = questNameText.Text;
         }
 
         private void questPrizeID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Quests[questBox.SelectedIndex].PrizeID = (String)questPrizeID.SelectedItem;
+            if (questBox.SelectedIndex >= 0)
+                Quests[questBox.SelectedIndex].PrizeID = (String)questPrizeID.SelectedItem;
         }
 
         private void addItem2Quest_Click(object sender, EventArgs e)
@@ -2380,7 +2405,15 @@ namespace ProfilesGenerator
         {
             if (questBox.SelectedIndex >= 0)
             {
+                int tym = questBox.SelectedIndex;
                 Quests.RemoveAt(questBox.SelectedIndex);
+                questBox.Items.RemoveAt(questBox.SelectedIndex);
+
+                if (tym == 0 && questBox.Items.Count > 0)
+                    questBox.SelectedIndex = tym;
+                if (tym > 0)
+                    questBox.SelectedIndex = tym - 1;
+
                 UpdateView();
             }
         }
@@ -2431,6 +2464,52 @@ namespace ProfilesGenerator
             Items.WriteEndElement();
             Items.Flush();
             Items.Close();
+        }
+
+        void LadujQuesty()
+        {
+            if (File.Exists("Media\\Others\\Quests.xml"))
+            {
+                XmlDocument File1 = new XmlDocument();
+                File1.Load("Media\\Others\\Quests.xml");
+                XmlElement root = File1.DocumentElement;
+                XmlNodeList Items = root.SelectNodes("//Quests//Quest");
+
+                foreach (XmlNode item in Items)
+                {
+                    Quest justQuest = new Quest();
+
+                    justQuest.ID = item["QuestID"].InnerText;
+                    justQuest.Name = item["Name"].InnerText;
+                    justQuest.PrizeID = item["PrizeID"].InnerText;
+
+                    XmlNodeList Enemies = item["Enemies"].ChildNodes;
+
+                    foreach (XmlNode e in Enemies)
+                    {
+                        justQuest.Enemies.Add(e["EnemyID"].InnerText, int.Parse(e["EnemyAmount"].InnerText));
+                    }
+
+                    XmlNodeList Itemy = item["Items"].ChildNodes;
+
+                    foreach (XmlNode i in Itemy)
+                    {
+                        justQuest.Items.Add(i["ItemID"].InnerText, int.Parse(i["ItemAmount"].InnerText));
+                    }
+
+                    Quests.Add(justQuest);
+                    questBox.Items.Add(justQuest.ID);
+                }
+            }
+        }
+
+        private void talkRootBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0)
+            {
+                if (characterRadio.Checked)
+                    CharacterProfiles[comboBox1.SelectedIndex].TalkRoot = (String)talkRootBox.SelectedItem;
+            }
         }
     }
 }

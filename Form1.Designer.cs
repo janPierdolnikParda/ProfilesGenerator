@@ -208,6 +208,8 @@
             this.createQuest = new System.Windows.Forms.Button();
             this.questBox = new System.Windows.Forms.ComboBox();
             this.label56 = new System.Windows.Forms.Label();
+            this.talkRootBox = new System.Windows.Forms.ComboBox();
+            this.label65 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -231,6 +233,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label65);
+            this.tabPage1.Controls.Add(this.talkRootBox);
             this.tabPage1.Controls.Add(this.label35);
             this.tabPage1.Controls.Add(this.comboBox5);
             this.tabPage1.Controls.Add(this.label34);
@@ -2090,6 +2094,25 @@
             this.label56.TabIndex = 0;
             this.label56.Text = "Wybierz questa";
             // 
+            // talkRootBox
+            // 
+            this.talkRootBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.talkRootBox.FormattingEnabled = true;
+            this.talkRootBox.Location = new System.Drawing.Point(499, 301);
+            this.talkRootBox.Name = "talkRootBox";
+            this.talkRootBox.Size = new System.Drawing.Size(144, 21);
+            this.talkRootBox.TabIndex = 69;
+            this.talkRootBox.SelectedIndexChanged += new System.EventHandler(this.talkRootBox_SelectedIndexChanged);
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(384, 304);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(37, 13);
+            this.label65.TabIndex = 70;
+            this.label65.Text = "Dialog";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2296,6 +2319,8 @@
         private System.Windows.Forms.Button createQuest;
         private System.Windows.Forms.ComboBox questBox;
         private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.ComboBox talkRootBox;
 
 
 
