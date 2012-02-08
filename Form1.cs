@@ -47,6 +47,7 @@ namespace ProfilesGenerator
             actionBox.Items.Add("MakeEdgeFalse");
             actionBox.Items.Add("GiveQuest");
             actionBox.Items.Add("ActivateActivator");
+            actionBox.Items.Add("StartShop");
             actionBox.SelectedIndex = 0;
 
             LadujZPliku();
