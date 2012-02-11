@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label71 = new System.Windows.Forms.Label();
+            this.characterMnoznik = new System.Windows.Forms.TextBox();
             this.label65 = new System.Windows.Forms.Label();
             this.talkRootBox = new System.Windows.Forms.ComboBox();
             this.label35 = new System.Windows.Forms.Label();
@@ -76,6 +78,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label72 = new System.Windows.Forms.Label();
+            this.itemPrice = new System.Windows.Forms.TextBox();
             this.itemPrize = new System.Windows.Forms.ComboBox();
             this.label66 = new System.Windows.Forms.Label();
             this.Container = new System.Windows.Forms.CheckBox();
@@ -83,8 +87,6 @@
             this.iDeleteButton = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.nameOffset = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.Equipment = new System.Windows.Forms.CheckBox();
             this.Pickable = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -221,10 +223,8 @@
             this.createQuest = new System.Windows.Forms.Button();
             this.questBox = new System.Windows.Forms.ComboBox();
             this.label56 = new System.Windows.Forms.Label();
-            this.characterMnoznik = new System.Windows.Forms.TextBox();
-            this.label71 = new System.Windows.Forms.Label();
-            this.itemPrice = new System.Windows.Forms.TextBox();
-            this.label72 = new System.Windows.Forms.Label();
+            this.shopPrize = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -248,6 +248,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label19);
+            this.tabPage1.Controls.Add(this.shopPrize);
             this.tabPage1.Controls.Add(this.label71);
             this.tabPage1.Controls.Add(this.characterMnoznik);
             this.tabPage1.Controls.Add(this.label65);
@@ -302,6 +304,24 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Character/Enemy";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(384, 326);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(83, 13);
+            this.label71.TabIndex = 72;
+            this.label71.Text = "Mnoznik Sklepu";
+            // 
+            // characterMnoznik
+            // 
+            this.characterMnoznik.Location = new System.Drawing.Point(499, 323);
+            this.characterMnoznik.Name = "characterMnoznik";
+            this.characterMnoznik.Size = new System.Drawing.Size(144, 20);
+            this.characterMnoznik.TabIndex = 71;
+            this.characterMnoznik.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.characterMnoznik.TextChanged += new System.EventHandler(this.characterMnoznik_TextChanged);
             // 
             // label65
             // 
@@ -508,7 +528,7 @@
             // 
             // DeleteProfileButton
             // 
-            this.DeleteProfileButton.Location = new System.Drawing.Point(15, 349);
+            this.DeleteProfileButton.Location = new System.Drawing.Point(15, 383);
             this.DeleteProfileButton.Name = "DeleteProfileButton";
             this.DeleteProfileButton.Size = new System.Drawing.Size(151, 37);
             this.DeleteProfileButton.TabIndex = 47;
@@ -712,7 +732,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(417, 349);
+            this.saveButton.Location = new System.Drawing.Point(425, 383);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(169, 37);
             this.saveButton.TabIndex = 26;
@@ -731,8 +751,6 @@
             this.tabPage2.Controls.Add(this.iDeleteButton);
             this.tabPage2.Controls.Add(this.label20);
             this.tabPage2.Controls.Add(this.nameOffset);
-            this.tabPage2.Controls.Add(this.label19);
-            this.tabPage2.Controls.Add(this.Equipment);
             this.tabPage2.Controls.Add(this.Pickable);
             this.tabPage2.Controls.Add(this.label18);
             this.tabPage2.Controls.Add(this.label17);
@@ -761,11 +779,29 @@
             this.tabPage2.Text = "Items";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(6, 334);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(31, 13);
+            this.label72.TabIndex = 30;
+            this.label72.Text = "Price";
+            // 
+            // itemPrice
+            // 
+            this.itemPrice.Location = new System.Drawing.Point(97, 331);
+            this.itemPrice.Name = "itemPrice";
+            this.itemPrice.Size = new System.Drawing.Size(201, 20);
+            this.itemPrice.TabIndex = 29;
+            this.itemPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.itemPrice.TextChanged += new System.EventHandler(this.itemPrice_TextChanged);
+            // 
             // itemPrize
             // 
             this.itemPrize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.itemPrize.FormattingEnabled = true;
-            this.itemPrize.Location = new System.Drawing.Point(151, 301);
+            this.itemPrize.Location = new System.Drawing.Point(151, 280);
             this.itemPrize.Name = "itemPrize";
             this.itemPrize.Size = new System.Drawing.Size(147, 21);
             this.itemPrize.TabIndex = 28;
@@ -774,7 +810,7 @@
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(6, 304);
+            this.label66.Location = new System.Drawing.Point(6, 283);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(60, 13);
             this.label66.TabIndex = 27;
@@ -783,7 +819,7 @@
             // Container
             // 
             this.Container.AutoSize = true;
-            this.Container.Location = new System.Drawing.Point(97, 303);
+            this.Container.Location = new System.Drawing.Point(97, 282);
             this.Container.Name = "Container";
             this.Container.Size = new System.Drawing.Size(48, 17);
             this.Container.TabIndex = 26;
@@ -793,7 +829,7 @@
             // 
             // iSaveButton
             // 
-            this.iSaveButton.Location = new System.Drawing.Point(193, 387);
+            this.iSaveButton.Location = new System.Drawing.Point(193, 366);
             this.iSaveButton.Name = "iSaveButton";
             this.iSaveButton.Size = new System.Drawing.Size(158, 26);
             this.iSaveButton.TabIndex = 25;
@@ -803,7 +839,7 @@
             // 
             // iDeleteButton
             // 
-            this.iDeleteButton.Location = new System.Drawing.Point(5, 387);
+            this.iDeleteButton.Location = new System.Drawing.Point(5, 366);
             this.iDeleteButton.Name = "iDeleteButton";
             this.iDeleteButton.Size = new System.Drawing.Size(142, 26);
             this.iDeleteButton.TabIndex = 24;
@@ -814,7 +850,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 329);
+            this.label20.Location = new System.Drawing.Point(6, 308);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(63, 13);
             this.label20.TabIndex = 23;
@@ -822,32 +858,12 @@
             // 
             // nameOffset
             // 
-            this.nameOffset.Location = new System.Drawing.Point(97, 326);
+            this.nameOffset.Location = new System.Drawing.Point(97, 305);
             this.nameOffset.Name = "nameOffset";
             this.nameOffset.Size = new System.Drawing.Size(201, 20);
             this.nameOffset.TabIndex = 22;
             this.nameOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nameOffset.TextChanged += new System.EventHandler(this.nameOffset_TextChanged);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 281);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(65, 13);
-            this.label19.TabIndex = 21;
-            this.label19.Text = "IsEquipment";
-            // 
-            // Equipment
-            // 
-            this.Equipment.AutoSize = true;
-            this.Equipment.Location = new System.Drawing.Point(170, 280);
-            this.Equipment.Name = "Equipment";
-            this.Equipment.Size = new System.Drawing.Size(48, 17);
-            this.Equipment.TabIndex = 20;
-            this.Equipment.Text = "True";
-            this.Equipment.UseVisualStyleBackColor = true;
-            this.Equipment.CheckedChanged += new System.EventHandler(this.Equipment_CheckedChanged);
             // 
             // Pickable
             // 
@@ -2245,41 +2261,24 @@
             this.label56.TabIndex = 0;
             this.label56.Text = "Wybierz questa";
             // 
-            // characterMnoznik
+            // shopPrize
             // 
-            this.characterMnoznik.Location = new System.Drawing.Point(499, 323);
-            this.characterMnoznik.Name = "characterMnoznik";
-            this.characterMnoznik.Size = new System.Drawing.Size(144, 20);
-            this.characterMnoznik.TabIndex = 71;
-            this.characterMnoznik.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.characterMnoznik.TextChanged += new System.EventHandler(this.characterMnoznik_TextChanged);
+            this.shopPrize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shopPrize.FormattingEnabled = true;
+            this.shopPrize.Location = new System.Drawing.Point(499, 349);
+            this.shopPrize.Name = "shopPrize";
+            this.shopPrize.Size = new System.Drawing.Size(144, 21);
+            this.shopPrize.TabIndex = 73;
+            this.shopPrize.SelectedIndexChanged += new System.EventHandler(this.shopPrize_SelectedIndexChanged);
             // 
-            // label71
+            // label19
             // 
-            this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(384, 326);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(83, 13);
-            this.label71.TabIndex = 72;
-            this.label71.Text = "Mnoznik Sklepu";
-            // 
-            // itemPrice
-            // 
-            this.itemPrice.Location = new System.Drawing.Point(97, 352);
-            this.itemPrice.Name = "itemPrice";
-            this.itemPrice.Size = new System.Drawing.Size(201, 20);
-            this.itemPrice.TabIndex = 29;
-            this.itemPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.itemPrice.TextChanged += new System.EventHandler(this.itemPrice_TextChanged);
-            // 
-            // label72
-            // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(6, 355);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(31, 13);
-            this.label72.TabIndex = 30;
-            this.label72.Text = "Price";
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(384, 352);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(63, 13);
+            this.label19.TabIndex = 74;
+            this.label19.Text = "Sklep(Prize)";
             // 
             // Form1
             // 
@@ -2337,8 +2336,6 @@
         private System.Windows.Forms.Button iDeleteButton;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox nameOffset;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.CheckBox Equipment;
         private System.Windows.Forms.CheckBox Pickable;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
@@ -2504,6 +2501,8 @@
         private System.Windows.Forms.TextBox characterMnoznik;
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.TextBox itemPrice;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox shopPrize;
 
 
 

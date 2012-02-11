@@ -72,8 +72,18 @@ namespace ProfilesGenerator
                         talkRootBox.Items.Add(o);
                 }
 
+                if (comboBox4.Items.Count > 0)
+                {
+                    shopPrize.Items.Clear();
+                    shopPrize.Items.Add("");
+                    foreach (Object o in comboBox4.Items)
+                        shopPrize.Items.Add(o);
+                }
+
                 if (characterRadio.Checked)
                 {
+                    talkRootBox.Enabled = true;
+                    shopPrize.Enabled = true;
                     profileName.Text = CharacterProfiles[comboBox1.SelectedIndex].ProfileName;
                     DisplayName.Text = CharacterProfiles[comboBox1.SelectedIndex].DisplayName;
                     MeshName.Text = CharacterProfiles[comboBox1.SelectedIndex].MeshName;
@@ -97,6 +107,9 @@ namespace ProfilesGenerator
 
                     if (talkRootBox.Items.Count > 0)
                         talkRootBox.SelectedIndex = talkRootBox.Items.IndexOf(CharacterProfiles[comboBox1.SelectedIndex].TalkRoot);
+
+                    if (shopPrize.Items.Count > 0)
+                        shopPrize.SelectedIndex = shopPrize.Items.IndexOf(CharacterProfiles[comboBox1.SelectedIndex].ShopPrizeID);
                 }
 
                 if (enemyRadio.Checked)
@@ -123,6 +136,8 @@ namespace ProfilesGenerator
                     comboBox5.SelectedIndex = int.Parse(EnemyProfiles[comboBox1.SelectedIndex].FriendlyType);
                     characterMnoznik.Text = "";
                     characterMnoznik.Enabled = false;
+                    talkRootBox.Enabled = false;
+                    shopPrize.Enabled = false;
                 }
             }
 
@@ -157,7 +172,6 @@ namespace ProfilesGenerator
                 name.Text = ItemProfiles[comboBox2.SelectedIndex].Name;
                 mesh.Text = ItemProfiles[comboBox2.SelectedIndex].Mesh;
 
-                Equipment.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsEquipment));
                 Pickable.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsPickable));
                 Container.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsContainer));
 
@@ -191,7 +205,6 @@ namespace ProfilesGenerator
                 idString.Text = "";
                 name.Text = "";
                 mesh.Text = "";
-                Equipment.Checked = false;
                 Pickable.Checked = false;
                 describedRadio.Checked = false;
                 itemSwordRadio.Checked = false;
@@ -900,6 +913,7 @@ namespace ProfilesGenerator
                     newChar.WY = item["Wytrzymalosc"].InnerText;
                     newChar.TalkRoot = item["DialogRoot"].InnerText;
                     newChar.MnoznikSklepu = item["ShopMnoznik"].InnerText;
+                    newChar.ShopPrizeID = item["ShopPrizeID"].InnerText;
 
                     CharacterProfiles.Add(newChar);
                 }
@@ -1062,6 +1076,7 @@ namespace ProfilesGenerator
                 NPCs.WriteElementString("Charyzma", ch.CH);
                 NPCs.WriteElementString("DialogRoot", ch.TalkRoot);
                 NPCs.WriteElementString("ShopMnoznik", ch.MnoznikSklepu);
+                NPCs.WriteElementString("ShopPrizeID", ch.ShopPrizeID);
 
                 NPCs.WriteEndElement();
             }
@@ -1329,17 +1344,6 @@ namespace ProfilesGenerator
             }
         }
 
-        private void Equipment_CheckedChanged(object sender, EventArgs e)
-        {
-            if (comboBox2.SelectedIndex >= 0)
-            {
-                if (Equipment.Checked)
-                    ItemProfiles[comboBox2.SelectedIndex].IsEquipment = "true";
-                else
-                    ItemProfiles[comboBox2.SelectedIndex].IsEquipment = "false";
-            }
-        }
-
         private void iDeleteButton_Click(object sender, EventArgs e)
         {
             int Tymczas = comboBox2.SelectedIndex;
@@ -1376,7 +1380,6 @@ namespace ProfilesGenerator
                 Items.WriteElementString("inventory_material", ip.InventoryMaterial);
                 Items.WriteElementString("mass", ip.Mass);
                 Items.WriteElementString("ispickable", ip.IsPickable);
-                Items.WriteElementString("isequipment", ip.IsEquipment);
                 Items.WriteElementString("iscontainer", ip.IsContainer);
                 Items.WriteElementString("prizeid", ip.PrizeID);
 
@@ -1443,7 +1446,6 @@ namespace ProfilesGenerator
                     newChar.Description = item["description"].InnerText;
                     newChar.InventoryMaterial = item["inventory_material"].InnerText;
                     newChar.IsPickable = item["ispickable"].InnerText;
-                    newChar.IsEquipment = item["isequipment"].InnerText;
                     newChar.IsContainer = item["iscontainer"].InnerText;
                     newChar.PrizeID = item["prizeid"].InnerText;
                     newChar.Price = item["price"].InnerText;
@@ -2621,6 +2623,12 @@ namespace ProfilesGenerator
         {
             if (comboBox2.SelectedIndex >= 0)
                 ItemProfiles[comboBox2.SelectedIndex].Price = itemPrice.Text;
+        }
+
+        private void shopPrize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0 && characterRadio.Checked)
+                CharacterProfiles[comboBox1.SelectedIndex].ShopPrizeID = (String)shopPrize.SelectedItem;
         }
     }
 }

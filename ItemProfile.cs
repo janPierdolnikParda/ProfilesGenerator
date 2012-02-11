@@ -15,7 +15,6 @@ namespace ProfilesGenerator
         public string InventoryMaterial;
         public string Mass;
         public string IsPickable;
-        public string IsEquipment;
         public string IsContainer;
         public string NameOffset;
         public string PrizeID;
@@ -26,7 +25,6 @@ namespace ProfilesGenerator
             IdString = "iNowyProfil";
             NameOffset = "x|y|z";
             IsPickable = "false";
-            IsEquipment = "false";
             IsContainer = "false";
             Type = "DescribedProfile";
             PrizeID = "";
