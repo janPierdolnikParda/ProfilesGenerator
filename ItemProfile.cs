@@ -19,6 +19,7 @@ namespace ProfilesGenerator
         public string IsContainer;
         public string NameOffset;
         public string PrizeID;
+        public string Price;
 
         public ItemProfile()
         {
@@ -29,6 +30,7 @@ namespace ProfilesGenerator
             IsContainer = "false";
             Type = "DescribedProfile";
             PrizeID = "";
+            Price = "0";
         }
     }
 }

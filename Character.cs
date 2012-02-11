@@ -25,6 +25,7 @@ namespace ProfilesGenerator
         public String WY;
         public String FriendlyType;
         public String TalkRoot;
+        public String MnoznikSklepu;
 
         public Character()
         {
@@ -45,6 +46,7 @@ namespace ProfilesGenerator
 
             FriendlyType = "0";
             TalkRoot = "";
+            MnoznikSklepu = "1,0";
         }
     }
 }

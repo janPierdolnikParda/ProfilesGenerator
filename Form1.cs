@@ -92,6 +92,8 @@ namespace ProfilesGenerator
                     Sila.Text = CharacterProfiles[comboBox1.SelectedIndex].SI;
                     wytrzymalosc.Text = CharacterProfiles[comboBox1.SelectedIndex].WY;
                     comboBox5.SelectedIndex = int.Parse(CharacterProfiles[comboBox1.SelectedIndex].FriendlyType);
+                    characterMnoznik.Enabled = true;
+                    characterMnoznik.Text = CharacterProfiles[comboBox1.SelectedIndex].MnoznikSklepu;
 
                     if (talkRootBox.Items.Count > 0)
                         talkRootBox.SelectedIndex = talkRootBox.Items.IndexOf(CharacterProfiles[comboBox1.SelectedIndex].TalkRoot);
@@ -119,6 +121,8 @@ namespace ProfilesGenerator
                     Sila.Text = EnemyProfiles[comboBox1.SelectedIndex].SI;
                     wytrzymalosc.Text = EnemyProfiles[comboBox1.SelectedIndex].WY;
                     comboBox5.SelectedIndex = int.Parse(EnemyProfiles[comboBox1.SelectedIndex].FriendlyType);
+                    characterMnoznik.Text = "";
+                    characterMnoznik.Enabled = false;
                 }
             }
 
@@ -132,6 +136,7 @@ namespace ProfilesGenerator
                 BodyMass.Text = "";
                 BodyScaleFactor.Text = "";
                 HeadOffset.Text = "";
+                characterMnoznik.Text = "";
 
                 if (characterRadio.Checked && CharacterProfiles.Count > 0)
                 {
@@ -178,6 +183,7 @@ namespace ProfilesGenerator
                 inventoryMaterial.Text = ItemProfiles[comboBox2.SelectedIndex].InventoryMaterial;
                 description.Text = ItemProfiles[comboBox2.SelectedIndex].Description;
                 nameOffset.Text = ItemProfiles[comboBox2.SelectedIndex].NameOffset;
+                itemPrice.Text = ItemProfiles[comboBox2.SelectedIndex].Price;
             }
 
             else
@@ -193,6 +199,7 @@ namespace ProfilesGenerator
                 inventoryMaterial.Text = "";
                 description.Text = "";
                 nameOffset.Text = "";
+                itemPrice.Text = "";
 
                 if (ItemProfiles.Count > 0 && comboBox2.SelectedIndex < 0)
                 {
@@ -892,6 +899,7 @@ namespace ProfilesGenerator
                     newChar.OP = item["Opanowanie"].InnerText;
                     newChar.WY = item["Wytrzymalosc"].InnerText;
                     newChar.TalkRoot = item["DialogRoot"].InnerText;
+                    newChar.MnoznikSklepu = item["ShopMnoznik"].InnerText;
 
                     CharacterProfiles.Add(newChar);
                 }
@@ -1053,6 +1061,7 @@ namespace ProfilesGenerator
                 NPCs.WriteElementString("Sila", ch.SI);
                 NPCs.WriteElementString("Charyzma", ch.CH);
                 NPCs.WriteElementString("DialogRoot", ch.TalkRoot);
+                NPCs.WriteElementString("ShopMnoznik", ch.MnoznikSklepu);
 
                 NPCs.WriteEndElement();
             }
@@ -1403,6 +1412,7 @@ namespace ProfilesGenerator
                 Items.WriteElementString("nameoffsetx", x);
                 Items.WriteElementString("nameoffsety", y);
                 Items.WriteElementString("nameoffsetz", z);
+                Items.WriteElementString("price", ip.Price);
                 Items.WriteEndElement();
             }
 
@@ -1436,6 +1446,7 @@ namespace ProfilesGenerator
                     newChar.IsEquipment = item["isequipment"].InnerText;
                     newChar.IsContainer = item["iscontainer"].InnerText;
                     newChar.PrizeID = item["prizeid"].InnerText;
+                    newChar.Price = item["price"].InnerText;
 
                     ItemProfiles.Add(newChar);
                     comboBox2.Items.Add(newChar.IdString);
@@ -2598,6 +2609,18 @@ namespace ProfilesGenerator
         {
             if (dialogBox.SelectedIndex >= 0 && replyBox.SelectedIndex >= 0)
                 Dialogs[dialogBox.SelectedIndex].Replies[replyBox.SelectedIndex].Sound = soundReply.Text;
+        }
+
+        private void characterMnoznik_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0 && characterRadio.Checked)
+                CharacterProfiles[comboBox1.SelectedIndex].MnoznikSklepu = characterMnoznik.Text;
+        }
+
+        private void itemPrice_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+                ItemProfiles[comboBox2.SelectedIndex].Price = itemPrice.Text;
         }
     }
 }
