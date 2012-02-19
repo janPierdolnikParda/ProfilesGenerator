@@ -16,6 +16,7 @@ namespace ProfilesGenerator
         public String Text;
         public String Duration;
         public String Sound;
+        public String Activator;
 
         public TalkNode()
         {
@@ -26,6 +27,7 @@ namespace ProfilesGenerator
             ActionEdge = "";
             Duration = "3,0";
             Sound = "";
+            Activator = "";
         }
     }
 }

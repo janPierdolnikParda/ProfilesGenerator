@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.shopPrize = new System.Windows.Forms.ComboBox();
             this.label71 = new System.Windows.Forms.Label();
             this.characterMnoznik = new System.Windows.Forms.TextBox();
             this.label65 = new System.Windows.Forms.Label();
@@ -78,6 +80,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.iActivator = new System.Windows.Forms.TextBox();
+            this.label73 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
             this.itemPrice = new System.Windows.Forms.TextBox();
             this.itemPrize = new System.Windows.Forms.ComboBox();
@@ -126,6 +130,8 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.listaItemow = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label74 = new System.Windows.Forms.Label();
+            this.dActivator = new System.Windows.Forms.TextBox();
             this.label70 = new System.Windows.Forms.Label();
             this.soundReply = new System.Windows.Forms.TextBox();
             this.label69 = new System.Windows.Forms.Label();
@@ -223,8 +229,6 @@
             this.createQuest = new System.Windows.Forms.Button();
             this.questBox = new System.Windows.Forms.ComboBox();
             this.label56 = new System.Windows.Forms.Label();
-            this.shopPrize = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -243,7 +247,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(657, 652);
+            this.tabControl1.Size = new System.Drawing.Size(657, 684);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -300,10 +304,29 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(649, 626);
+            this.tabPage1.Size = new System.Drawing.Size(649, 658);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Character/Enemy";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(384, 352);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(63, 13);
+            this.label19.TabIndex = 74;
+            this.label19.Text = "Sklep(Prize)";
+            // 
+            // shopPrize
+            // 
+            this.shopPrize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shopPrize.FormattingEnabled = true;
+            this.shopPrize.Location = new System.Drawing.Point(499, 349);
+            this.shopPrize.Name = "shopPrize";
+            this.shopPrize.Size = new System.Drawing.Size(144, 21);
+            this.shopPrize.TabIndex = 73;
+            this.shopPrize.SelectedIndexChanged += new System.EventHandler(this.shopPrize_SelectedIndexChanged);
             // 
             // label71
             // 
@@ -742,6 +765,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.iActivator);
+            this.tabPage2.Controls.Add(this.label73);
             this.tabPage2.Controls.Add(this.label72);
             this.tabPage2.Controls.Add(this.itemPrice);
             this.tabPage2.Controls.Add(this.itemPrize);
@@ -774,10 +799,28 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(649, 626);
+            this.tabPage2.Size = new System.Drawing.Size(649, 658);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Items";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // iActivator
+            // 
+            this.iActivator.Location = new System.Drawing.Point(97, 357);
+            this.iActivator.Name = "iActivator";
+            this.iActivator.Size = new System.Drawing.Size(201, 20);
+            this.iActivator.TabIndex = 32;
+            this.iActivator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.iActivator.TextChanged += new System.EventHandler(this.iActivator_TextChanged);
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(6, 360);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(49, 13);
+            this.label73.TabIndex = 31;
+            this.label73.Text = "Activator";
             // 
             // label72
             // 
@@ -829,7 +872,7 @@
             // 
             // iSaveButton
             // 
-            this.iSaveButton.Location = new System.Drawing.Point(193, 366);
+            this.iSaveButton.Location = new System.Drawing.Point(193, 384);
             this.iSaveButton.Name = "iSaveButton";
             this.iSaveButton.Size = new System.Drawing.Size(158, 26);
             this.iSaveButton.TabIndex = 25;
@@ -839,7 +882,7 @@
             // 
             // iDeleteButton
             // 
-            this.iDeleteButton.Location = new System.Drawing.Point(5, 366);
+            this.iDeleteButton.Location = new System.Drawing.Point(3, 384);
             this.iDeleteButton.Name = "iDeleteButton";
             this.iDeleteButton.Size = new System.Drawing.Size(142, 26);
             this.iDeleteButton.TabIndex = 24;
@@ -1077,7 +1120,7 @@
             this.tabPage3.Controls.Add(this.listaItemow);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(649, 626);
+            this.tabPage3.Size = new System.Drawing.Size(649, 658);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Prize";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1242,6 +1285,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label74);
+            this.tabPage4.Controls.Add(this.dActivator);
             this.tabPage4.Controls.Add(this.label70);
             this.tabPage4.Controls.Add(this.soundReply);
             this.tabPage4.Controls.Add(this.label69);
@@ -1314,15 +1359,33 @@
             this.tabPage4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(649, 626);
+            this.tabPage4.Size = new System.Drawing.Size(649, 658);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Dialogi";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(106, 444);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(89, 13);
+            this.label74.TabIndex = 71;
+            this.label74.Text = "Activator do akcji";
+            // 
+            // dActivator
+            // 
+            this.dActivator.Location = new System.Drawing.Point(198, 441);
+            this.dActivator.Name = "dActivator";
+            this.dActivator.Size = new System.Drawing.Size(149, 20);
+            this.dActivator.TabIndex = 70;
+            this.dActivator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dActivator.TextChanged += new System.EventHandler(this.dActivator_TextChanged);
+            // 
             // label70
             // 
             this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(123, 552);
+            this.label70.Location = new System.Drawing.Point(123, 578);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(38, 13);
             this.label70.TabIndex = 69;
@@ -1330,7 +1393,7 @@
             // 
             // soundReply
             // 
-            this.soundReply.Location = new System.Drawing.Point(198, 549);
+            this.soundReply.Location = new System.Drawing.Point(198, 575);
             this.soundReply.Name = "soundReply";
             this.soundReply.Size = new System.Drawing.Size(361, 20);
             this.soundReply.TabIndex = 68;
@@ -1358,7 +1421,7 @@
             // label68
             // 
             this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(480, 526);
+            this.label68.Location = new System.Drawing.Point(480, 552);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(30, 13);
             this.label68.TabIndex = 65;
@@ -1366,7 +1429,7 @@
             // 
             // textDurationReply
             // 
-            this.textDurationReply.Location = new System.Drawing.Point(516, 523);
+            this.textDurationReply.Location = new System.Drawing.Point(516, 549);
             this.textDurationReply.Name = "textDurationReply";
             this.textDurationReply.Size = new System.Drawing.Size(43, 20);
             this.textDurationReply.TabIndex = 64;
@@ -1393,7 +1456,7 @@
             // 
             // saveDialogs
             // 
-            this.saveDialogs.Location = new System.Drawing.Point(71, 600);
+            this.saveDialogs.Location = new System.Drawing.Point(71, 626);
             this.saveDialogs.Name = "saveDialogs";
             this.saveDialogs.Size = new System.Drawing.Size(513, 23);
             this.saveDialogs.TabIndex = 61;
@@ -1403,7 +1466,7 @@
             // 
             // deleteReply
             // 
-            this.deleteReply.Location = new System.Drawing.Point(430, 467);
+            this.deleteReply.Location = new System.Drawing.Point(430, 493);
             this.deleteReply.Name = "deleteReply";
             this.deleteReply.Size = new System.Drawing.Size(129, 21);
             this.deleteReply.TabIndex = 60;
@@ -1453,7 +1516,7 @@
             // 
             // nDeleteReply
             // 
-            this.nDeleteReply.Location = new System.Drawing.Point(565, 442);
+            this.nDeleteReply.Location = new System.Drawing.Point(565, 468);
             this.nDeleteReply.Name = "nDeleteReply";
             this.nDeleteReply.Size = new System.Drawing.Size(19, 21);
             this.nDeleteReply.TabIndex = 55;
@@ -1475,7 +1538,7 @@
             // 
             this.rReactionsBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.rReactionsBox.FormattingEnabled = true;
-            this.rReactionsBox.Location = new System.Drawing.Point(226, 573);
+            this.rReactionsBox.Location = new System.Drawing.Point(226, 599);
             this.rReactionsBox.Name = "rReactionsBox";
             this.rReactionsBox.Size = new System.Drawing.Size(146, 21);
             this.rReactionsBox.TabIndex = 53;
@@ -1484,7 +1547,7 @@
             // label55
             // 
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(123, 576);
+            this.label55.Location = new System.Drawing.Point(123, 602);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(95, 13);
             this.label55.TabIndex = 52;
@@ -1493,7 +1556,7 @@
             // label54
             // 
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(123, 526);
+            this.label54.Location = new System.Drawing.Point(123, 552);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(34, 13);
             this.label54.TabIndex = 51;
@@ -1501,7 +1564,7 @@
             // 
             // replyText
             // 
-            this.replyText.Location = new System.Drawing.Point(198, 523);
+            this.replyText.Location = new System.Drawing.Point(198, 549);
             this.replyText.Name = "replyText";
             this.replyText.Size = new System.Drawing.Size(276, 20);
             this.replyText.TabIndex = 50;
@@ -1511,7 +1574,7 @@
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(123, 500);
+            this.label53.Location = new System.Drawing.Point(123, 526);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(45, 13);
             this.label53.TabIndex = 49;
@@ -1519,7 +1582,7 @@
             // 
             // replyID
             // 
-            this.replyID.Location = new System.Drawing.Point(198, 497);
+            this.replyID.Location = new System.Drawing.Point(198, 523);
             this.replyID.Name = "replyID";
             this.replyID.Size = new System.Drawing.Size(361, 20);
             this.replyID.TabIndex = 48;
@@ -1528,7 +1591,7 @@
             // 
             // createReply
             // 
-            this.createReply.Location = new System.Drawing.Point(282, 467);
+            this.createReply.Location = new System.Drawing.Point(282, 493);
             this.createReply.Name = "createReply";
             this.createReply.Size = new System.Drawing.Size(142, 20);
             this.createReply.TabIndex = 47;
@@ -1539,7 +1602,7 @@
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(5, 471);
+            this.label52.Location = new System.Drawing.Point(5, 497);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(80, 13);
             this.label52.TabIndex = 46;
@@ -1549,7 +1612,7 @@
             // 
             this.replyBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.replyBox.FormattingEnabled = true;
-            this.replyBox.Location = new System.Drawing.Point(101, 468);
+            this.replyBox.Location = new System.Drawing.Point(101, 494);
             this.replyBox.Name = "replyBox";
             this.replyBox.Size = new System.Drawing.Size(175, 21);
             this.replyBox.TabIndex = 45;
@@ -1559,14 +1622,14 @@
             // 
             this.nodeRepliesBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nodeRepliesBox.FormattingEnabled = true;
-            this.nodeRepliesBox.Location = new System.Drawing.Point(378, 442);
+            this.nodeRepliesBox.Location = new System.Drawing.Point(378, 468);
             this.nodeRepliesBox.Name = "nodeRepliesBox";
             this.nodeRepliesBox.Size = new System.Drawing.Size(181, 21);
             this.nodeRepliesBox.TabIndex = 44;
             // 
             // addReply
             // 
-            this.addReply.Location = new System.Drawing.Point(353, 441);
+            this.addReply.Location = new System.Drawing.Point(353, 467);
             this.addReply.Name = "addReply";
             this.addReply.Size = new System.Drawing.Size(19, 21);
             this.addReply.TabIndex = 43;
@@ -1577,7 +1640,7 @@
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(123, 444);
+            this.label49.Location = new System.Drawing.Point(123, 470);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(42, 13);
             this.label49.TabIndex = 42;
@@ -1587,7 +1650,7 @@
             // 
             this.nReplyBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nReplyBox.FormattingEnabled = true;
-            this.nReplyBox.Location = new System.Drawing.Point(198, 441);
+            this.nReplyBox.Location = new System.Drawing.Point(198, 467);
             this.nReplyBox.Name = "nReplyBox";
             this.nReplyBox.Size = new System.Drawing.Size(149, 21);
             this.nReplyBox.TabIndex = 41;
@@ -1742,7 +1805,7 @@
             // replyIsEnding
             // 
             this.replyIsEnding.AutoSize = true;
-            this.replyIsEnding.Location = new System.Drawing.Point(565, 525);
+            this.replyIsEnding.Location = new System.Drawing.Point(565, 551);
             this.replyIsEnding.Name = "replyIsEnding";
             this.replyIsEnding.Size = new System.Drawing.Size(66, 17);
             this.replyIsEnding.TabIndex = 23;
@@ -2007,7 +2070,7 @@
             this.tabPage5.Controls.Add(this.label56);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(649, 626);
+            this.tabPage5.Size = new System.Drawing.Size(649, 658);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Questy";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -2261,30 +2324,11 @@
             this.label56.TabIndex = 0;
             this.label56.Text = "Wybierz questa";
             // 
-            // shopPrize
-            // 
-            this.shopPrize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.shopPrize.FormattingEnabled = true;
-            this.shopPrize.Location = new System.Drawing.Point(499, 349);
-            this.shopPrize.Name = "shopPrize";
-            this.shopPrize.Size = new System.Drawing.Size(144, 21);
-            this.shopPrize.TabIndex = 73;
-            this.shopPrize.SelectedIndexChanged += new System.EventHandler(this.shopPrize_SelectedIndexChanged);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(384, 352);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(63, 13);
-            this.label19.TabIndex = 74;
-            this.label19.Text = "Sklep(Prize)";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 653);
+            this.ClientSize = new System.Drawing.Size(662, 686);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -2503,6 +2547,10 @@
         private System.Windows.Forms.TextBox itemPrice;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox shopPrize;
+        private System.Windows.Forms.TextBox iActivator;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.TextBox dActivator;
 
 
 

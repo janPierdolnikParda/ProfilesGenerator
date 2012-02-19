@@ -198,6 +198,7 @@ namespace ProfilesGenerator
                 description.Text = ItemProfiles[comboBox2.SelectedIndex].Description;
                 nameOffset.Text = ItemProfiles[comboBox2.SelectedIndex].NameOffset;
                 itemPrice.Text = ItemProfiles[comboBox2.SelectedIndex].Price;
+                iActivator.Text = ItemProfiles[comboBox2.SelectedIndex].Activator;
             }
 
             else
@@ -213,6 +214,7 @@ namespace ProfilesGenerator
                 description.Text = "";
                 nameOffset.Text = "";
                 itemPrice.Text = "";
+                iActivator.Text = "";
 
                 if (ItemProfiles.Count > 0 && comboBox2.SelectedIndex < 0)
                 {
@@ -302,6 +304,8 @@ namespace ProfilesGenerator
                 soundNode.Enabled = true;
                 soundReply.Enabled = true;
                 dialogID.Text = Dialogs[dialogBox.SelectedIndex].ID;
+                dActivator.Text = "";
+                dActivator.Enabled = true;
 
                 if (DialogChanged)
                 {
@@ -443,12 +447,14 @@ namespace ProfilesGenerator
                     nodeRepliesBox.Enabled = true;
                     textDurationNode.Enabled = true;
                     soundNode.Enabled = true;
+                    dActivator.Enabled = true;
 
                     nodeID.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ID;
                     nodeText.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Text;
                     textDurationNode.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Duration;
                     soundNode.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Sound;
-                    
+                    dActivator.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Activator;
+
                     nodeActionsBox.Items.Clear();
                     foreach (int i in Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Actions)
                         nodeActionsBox.Items.Add(actionBox.Items[i]);
@@ -515,6 +521,8 @@ namespace ProfilesGenerator
                     nodeRepliesBox.Enabled = false;
                     textDurationNode.Enabled = false;
                     soundNode.Enabled = false;
+                    dActivator.Enabled = false;
+                    dActivator.Text = "";
                 }
 
                 if (DialogChanged)
@@ -614,6 +622,7 @@ namespace ProfilesGenerator
                 textDurationReply.Enabled = false;
                 soundReply.Enabled = false;
                 soundNode.Enabled = false;
+                dActivator.Enabled = false;
             }
 
             if (questBox.SelectedIndex >= 0)
@@ -1382,6 +1391,7 @@ namespace ProfilesGenerator
                 Items.WriteElementString("ispickable", ip.IsPickable);
                 Items.WriteElementString("iscontainer", ip.IsContainer);
                 Items.WriteElementString("prizeid", ip.PrizeID);
+                Items.WriteElementString("activator", ip.Activator);
 
                 string x = "";
                 string y = "";
@@ -1449,6 +1459,7 @@ namespace ProfilesGenerator
                     newChar.IsContainer = item["iscontainer"].InnerText;
                     newChar.PrizeID = item["prizeid"].InnerText;
                     newChar.Price = item["price"].InnerText;
+                    newChar.Activator = item["activator"].InnerText;
 
                     ItemProfiles.Add(newChar);
                     comboBox2.Items.Add(newChar.IdString);
@@ -2144,6 +2155,7 @@ namespace ProfilesGenerator
                     Items.WriteElementString("Text", n.Text);
                     Items.WriteElementString("Duration", n.Duration);
                     Items.WriteElementString("Sound", n.Sound);
+                    Items.WriteElementString("Activator", n.Activator);
                     Items.WriteStartElement("NodeReplies");
 
                     foreach (String str in n.Replies)
@@ -2298,6 +2310,7 @@ namespace ProfilesGenerator
                         justNode.Text = tn["Text"].InnerText;
                         justNode.Duration = tn["Duration"].InnerText;
                         justNode.Sound = tn["Sound"].InnerText;
+                        justNode.Activator = tn["Activator"].InnerText;
 
                         XmlNodeList RepliesInNode = tn["NodeReplies"].ChildNodes;
 
@@ -2629,6 +2642,18 @@ namespace ProfilesGenerator
         {
             if (comboBox1.SelectedIndex >= 0 && characterRadio.Checked)
                 CharacterProfiles[comboBox1.SelectedIndex].ShopPrizeID = (String)shopPrize.SelectedItem;
+        }
+
+        private void iActivator_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0)
+                ItemProfiles[comboBox2.SelectedIndex].Activator = iActivator.Text;
+        }
+
+        private void dActivator_TextChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0)
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Activator = dActivator.Text;
         }
     }
 }
