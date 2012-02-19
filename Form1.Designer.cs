@@ -80,8 +80,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.iActivator = new System.Windows.Forms.TextBox();
-            this.label73 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
             this.itemPrice = new System.Windows.Forms.TextBox();
             this.itemPrize = new System.Windows.Forms.ComboBox();
@@ -765,8 +763,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.iActivator);
-            this.tabPage2.Controls.Add(this.label73);
             this.tabPage2.Controls.Add(this.label72);
             this.tabPage2.Controls.Add(this.itemPrice);
             this.tabPage2.Controls.Add(this.itemPrize);
@@ -803,24 +799,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Items";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // iActivator
-            // 
-            this.iActivator.Location = new System.Drawing.Point(97, 357);
-            this.iActivator.Name = "iActivator";
-            this.iActivator.Size = new System.Drawing.Size(201, 20);
-            this.iActivator.TabIndex = 32;
-            this.iActivator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.iActivator.TextChanged += new System.EventHandler(this.iActivator_TextChanged);
-            // 
-            // label73
-            // 
-            this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(6, 360);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(49, 13);
-            this.label73.TabIndex = 31;
-            this.label73.Text = "Activator";
             // 
             // label72
             // 
@@ -872,7 +850,7 @@
             // 
             // iSaveButton
             // 
-            this.iSaveButton.Location = new System.Drawing.Point(193, 384);
+            this.iSaveButton.Location = new System.Drawing.Point(193, 357);
             this.iSaveButton.Name = "iSaveButton";
             this.iSaveButton.Size = new System.Drawing.Size(158, 26);
             this.iSaveButton.TabIndex = 25;
@@ -882,7 +860,7 @@
             // 
             // iDeleteButton
             // 
-            this.iDeleteButton.Location = new System.Drawing.Point(3, 384);
+            this.iDeleteButton.Location = new System.Drawing.Point(3, 357);
             this.iDeleteButton.Name = "iDeleteButton";
             this.iDeleteButton.Size = new System.Drawing.Size(142, 26);
             this.iDeleteButton.TabIndex = 24;
@@ -2547,8 +2525,6 @@
         private System.Windows.Forms.TextBox itemPrice;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox shopPrize;
-        private System.Windows.Forms.TextBox iActivator;
-        private System.Windows.Forms.Label label73;
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.TextBox dActivator;
 

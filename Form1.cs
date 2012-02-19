@@ -198,7 +198,6 @@ namespace ProfilesGenerator
                 description.Text = ItemProfiles[comboBox2.SelectedIndex].Description;
                 nameOffset.Text = ItemProfiles[comboBox2.SelectedIndex].NameOffset;
                 itemPrice.Text = ItemProfiles[comboBox2.SelectedIndex].Price;
-                iActivator.Text = ItemProfiles[comboBox2.SelectedIndex].Activator;
             }
 
             else
@@ -214,7 +213,6 @@ namespace ProfilesGenerator
                 description.Text = "";
                 nameOffset.Text = "";
                 itemPrice.Text = "";
-                iActivator.Text = "";
 
                 if (ItemProfiles.Count > 0 && comboBox2.SelectedIndex < 0)
                 {
@@ -1391,7 +1389,6 @@ namespace ProfilesGenerator
                 Items.WriteElementString("ispickable", ip.IsPickable);
                 Items.WriteElementString("iscontainer", ip.IsContainer);
                 Items.WriteElementString("prizeid", ip.PrizeID);
-                Items.WriteElementString("activator", ip.Activator);
 
                 string x = "";
                 string y = "";
@@ -1459,7 +1456,6 @@ namespace ProfilesGenerator
                     newChar.IsContainer = item["iscontainer"].InnerText;
                     newChar.PrizeID = item["prizeid"].InnerText;
                     newChar.Price = item["price"].InnerText;
-                    newChar.Activator = item["activator"].InnerText;
 
                     ItemProfiles.Add(newChar);
                     comboBox2.Items.Add(newChar.IdString);
@@ -2642,12 +2638,6 @@ namespace ProfilesGenerator
         {
             if (comboBox1.SelectedIndex >= 0 && characterRadio.Checked)
                 CharacterProfiles[comboBox1.SelectedIndex].ShopPrizeID = (String)shopPrize.SelectedItem;
-        }
-
-        private void iActivator_TextChanged(object sender, EventArgs e)
-        {
-            if (comboBox2.SelectedIndex >= 0)
-                ItemProfiles[comboBox2.SelectedIndex].Activator = iActivator.Text;
         }
 
         private void dActivator_TextChanged(object sender, EventArgs e)
