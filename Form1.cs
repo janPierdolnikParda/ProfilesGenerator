@@ -377,7 +377,7 @@ namespace ProfilesGenerator
                         NodeChanged = false;
                     }
 
-                    if (Dialogs[dialogBox.SelectedIndex].Nodes.Count > 0 && Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].Node != null)
+                    if (Dialogs[dialogBox.SelectedIndex].Nodes.Count > 0 && connectedEdgesBox.SelectedIndex >= 0 && Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].Node != null)
                         //connectedNodeBox.SelectedIndex = connectedNodeBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges[connectedEdgesBox.SelectedIndex]);
                         connectedNodeBox.SelectedIndex = connectedNodeBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].Node);
                     else
