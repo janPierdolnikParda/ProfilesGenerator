@@ -23,6 +23,7 @@ namespace ProfilesGenerator
         bool ReactionsChanged = true;
         bool NodeChanged = true;
         bool RepliesChanged = true;
+        bool D = false;
 
         public Form1()
         {
@@ -307,6 +308,7 @@ namespace ProfilesGenerator
 
                 if (DialogChanged)
                 {
+                    DialogChanged = false;
                     while (reactionsBox.Items.Count > 0)
                         reactionsBox.Items.RemoveAt(0);
 
@@ -317,6 +319,20 @@ namespace ProfilesGenerator
                     {
                         //reactionsBox.SelectedIndex = 0;
                     }
+
+                    nodeBox.Items.Clear();
+                    foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
+                        nodeBox.Items.Add(n.ID);
+
+                    if (nodeBox.Items.Count > 0)
+                        nodeBox.SelectedIndex = 0;
+
+                    replyBox.Items.Clear();
+                    foreach (TalkReply r in Dialogs[dialogBox.SelectedIndex].Replies)
+                        replyBox.Items.Add(r.ID);
+
+                    if (replyBox.Items.Count > 0)
+                        replyBox.SelectedIndex = 0;
                 }
 
                 if (reactionsBox.SelectedIndex >= 0)
@@ -621,6 +637,12 @@ namespace ProfilesGenerator
                 soundReply.Enabled = false;
                 soundNode.Enabled = false;
                 dActivator.Enabled = false;
+            }
+
+                        if (D)
+            {
+                D = false;
+                DialogChanged = true;
             }
 
             if (questBox.SelectedIndex >= 0)
@@ -1730,6 +1752,8 @@ namespace ProfilesGenerator
             else
                 dialogBox.SelectedIndex = tym - 1;
 
+            DialogChanged = true;
+
             UpdateView();
         }
 
@@ -1744,9 +1768,10 @@ namespace ProfilesGenerator
         }
 
         private void dialogBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //DialogChanged = true;
-            UpdateView();
+        { 
+           DialogChanged = true;
+            //D = true;
+           UpdateView();
         }
 
         private void reactionsBox_SelectedIndexChanged(object sender, EventArgs e)
