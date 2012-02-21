@@ -162,7 +162,7 @@
             this.addAction = new System.Windows.Forms.Button();
             this.label51 = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
-            this.actionEdge = new System.Windows.Forms.ComboBox();
+            this.actionEdges = new System.Windows.Forms.ComboBox();
             this.actionQuest = new System.Windows.Forms.ComboBox();
             this.label48 = new System.Windows.Forms.Label();
             this.nodeActionsBox = new System.Windows.Forms.ComboBox();
@@ -227,6 +227,9 @@
             this.createQuest = new System.Windows.Forms.Button();
             this.questBox = new System.Windows.Forms.ComboBox();
             this.label56 = new System.Windows.Forms.Label();
+            this.addActionEdge = new System.Windows.Forms.Button();
+            this.DeleteActionEdge = new System.Windows.Forms.Button();
+            this.chosenAtionEdges = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1263,6 +1266,9 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.chosenAtionEdges);
+            this.tabPage4.Controls.Add(this.DeleteActionEdge);
+            this.tabPage4.Controls.Add(this.addActionEdge);
             this.tabPage4.Controls.Add(this.label74);
             this.tabPage4.Controls.Add(this.dActivator);
             this.tabPage4.Controls.Add(this.label70);
@@ -1297,7 +1303,7 @@
             this.tabPage4.Controls.Add(this.addAction);
             this.tabPage4.Controls.Add(this.label51);
             this.tabPage4.Controls.Add(this.label50);
-            this.tabPage4.Controls.Add(this.actionEdge);
+            this.tabPage4.Controls.Add(this.actionEdges);
             this.tabPage4.Controls.Add(this.actionQuest);
             this.tabPage4.Controls.Add(this.label48);
             this.tabPage4.Controls.Add(this.nodeActionsBox);
@@ -1661,15 +1667,15 @@
             this.label50.TabIndex = 38;
             this.label50.Text = "Quest do akcji";
             // 
-            // actionEdge
+            // actionEdges
             // 
-            this.actionEdge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.actionEdge.FormattingEnabled = true;
-            this.actionEdge.Location = new System.Drawing.Point(198, 414);
-            this.actionEdge.Name = "actionEdge";
-            this.actionEdge.Size = new System.Drawing.Size(149, 21);
-            this.actionEdge.TabIndex = 37;
-            this.actionEdge.SelectedIndexChanged += new System.EventHandler(this.actionEdge_SelectedIndexChanged);
+            this.actionEdges.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.actionEdges.FormattingEnabled = true;
+            this.actionEdges.Location = new System.Drawing.Point(198, 414);
+            this.actionEdges.Name = "actionEdges";
+            this.actionEdges.Size = new System.Drawing.Size(149, 21);
+            this.actionEdges.TabIndex = 37;
+            this.actionEdges.SelectedIndexChanged += new System.EventHandler(this.actionEdge_SelectedIndexChanged);
             // 
             // actionQuest
             // 
@@ -2302,6 +2308,35 @@
             this.label56.TabIndex = 0;
             this.label56.Text = "Wybierz questa";
             // 
+            // addActionEdge
+            // 
+            this.addActionEdge.Location = new System.Drawing.Point(353, 413);
+            this.addActionEdge.Name = "addActionEdge";
+            this.addActionEdge.Size = new System.Drawing.Size(19, 21);
+            this.addActionEdge.TabIndex = 72;
+            this.addActionEdge.Text = ">";
+            this.addActionEdge.UseVisualStyleBackColor = true;
+            this.addActionEdge.Click += new System.EventHandler(this.addActionEdge_Click);
+            // 
+            // DeleteActionEdge
+            // 
+            this.DeleteActionEdge.Location = new System.Drawing.Point(565, 413);
+            this.DeleteActionEdge.Name = "DeleteActionEdge";
+            this.DeleteActionEdge.Size = new System.Drawing.Size(19, 21);
+            this.DeleteActionEdge.TabIndex = 73;
+            this.DeleteActionEdge.Text = "-";
+            this.DeleteActionEdge.UseVisualStyleBackColor = true;
+            this.DeleteActionEdge.Click += new System.EventHandler(this.DeleteActionEdge_Click);
+            // 
+            // chosenAtionEdges
+            // 
+            this.chosenAtionEdges.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.chosenAtionEdges.FormattingEnabled = true;
+            this.chosenAtionEdges.Location = new System.Drawing.Point(378, 414);
+            this.chosenAtionEdges.Name = "chosenAtionEdges";
+            this.chosenAtionEdges.Size = new System.Drawing.Size(181, 21);
+            this.chosenAtionEdges.TabIndex = 74;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2441,7 +2476,7 @@
         private System.Windows.Forms.Button addAction;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.ComboBox actionEdge;
+        private System.Windows.Forms.ComboBox actionEdges;
         private System.Windows.Forms.ComboBox actionQuest;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.ComboBox nodeActionsBox;
@@ -2527,6 +2562,9 @@
         private System.Windows.Forms.ComboBox shopPrize;
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.TextBox dActivator;
+        private System.Windows.Forms.ComboBox chosenAtionEdges;
+        private System.Windows.Forms.Button DeleteActionEdge;
+        private System.Windows.Forms.Button addActionEdge;
 
 
 

@@ -275,7 +275,7 @@ namespace ProfilesGenerator
                 nodeActionsBox.Enabled = true;
                 actionBox.Enabled = true;
                 actionQuest.Enabled = true;
-                actionEdge.Enabled = true;
+                actionEdges.Enabled = true;
                 nReplyBox.Enabled = true;
                 nodeRepliesBox.Enabled = true;
                 replyBox.Enabled = true;
@@ -454,7 +454,7 @@ namespace ProfilesGenerator
                     deleteAction.Enabled = true;
                     nodeActionsBox.Enabled = true;
                     actionQuest.Enabled = true;
-                    actionEdge.Enabled = true;
+                    actionEdges.Enabled = true;
                     addReply.Enabled = true;
                     nDeleteReply.Enabled = true;
                     nReplyBox.Enabled = true;
@@ -484,12 +484,12 @@ namespace ProfilesGenerator
 
                     actionQuest.SelectedIndex = actionQuest.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionQuestID);
 
-                    actionEdge.Items.Clear();
-                    actionEdge.Items.Add("");
+                    actionEdges.Items.Clear();
+                    actionEdges.Items.Add("");
                     foreach(TalkEdge e in Dialogs[dialogBox.SelectedIndex].Edges)
-                        actionEdge.Items.Add(e.ID);// + "(" + Dialogs[dialogBox.SelectedIndex].ID + ")");
+                        actionEdges.Items.Add(e.ID);// + "(" + Dialogs[dialogBox.SelectedIndex].ID + ")");
 
-                    actionEdge.SelectedIndex = actionEdge.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge);
+                    //actionEdges.SelectedIndex = actionEdges.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge);
                     /*foreach(Dialog d in Dialogs)
                     {
                         if (d.ID != Dialogs[dialogBox.SelectedIndex].ID)
@@ -498,6 +498,11 @@ namespace ProfilesGenerator
                     }*/
 
                     //actionEdge.SelectedIndex = actionEdge.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge);
+
+                    chosenAtionEdges.Items.Clear();
+                    
+                    foreach (String str in Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge)
+                        chosenAtionEdges.Items.Add(str);
 
                     if (RepliesChanged)
                     {
@@ -528,7 +533,7 @@ namespace ProfilesGenerator
                     deleteAction.Enabled = false;
                     nodeActionsBox.Enabled = false;
                     actionQuest.Enabled = false;
-                    actionEdge.Enabled = false;
+                    actionEdges.Enabled = false;
                     addReply.Enabled = false;
                     nDeleteReply.Enabled = false;
                     nReplyBox.Enabled = false;
@@ -609,7 +614,7 @@ namespace ProfilesGenerator
                 nodeActionsBox.Enabled = false;
                 actionBox.Enabled = false;
                 actionQuest.Enabled = false;
-                actionEdge.Enabled = false;
+                actionEdges.Enabled = false;
                 nReplyBox.Enabled = false;
                 nodeRepliesBox.Enabled = false;
                 replyBox.Enabled = false;
@@ -1835,9 +1840,18 @@ namespace ProfilesGenerator
             Dialogs[dialogBox.SelectedIndex].Edges.RemoveAt(IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem));
             Dialogs[dialogBox.SelectedIndex].Reactions[reactionsBox.SelectedIndex].Edges.RemoveAt(connectedEdgesBox.SelectedIndex);
 
+            int q = 0;
+
             foreach (TalkNode n in Dialogs[dialogBox.SelectedIndex].Nodes)
-                if (n.ActionEdge == (String)connectedEdgesBox.SelectedItem)
-                    n.ActionEdge = "";
+            {
+                while (q < n.ActionEdge.Count)
+                {
+                    if (n.ActionEdge[q] == (String)connectedEdgesBox.SelectedItem)
+                        n.ActionEdge.RemoveAt(q);
+                    else
+                        q++;
+                }
+            }                        
 
             int tym = connectedEdgesBox.SelectedIndex;
             connectedEdgesBox.Items.RemoveAt(connectedEdgesBox.SelectedIndex);
@@ -1979,11 +1993,11 @@ namespace ProfilesGenerator
 
         private void actionEdge_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (nodeBox.SelectedIndex >= 0)
+            /*if (nodeBox.SelectedIndex >= 0)
             {
-                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge = (String)actionEdge.Items[actionEdge.SelectedIndex];
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge = (String)actionEdges.Items[actionEdges.SelectedIndex];
                 //UpdateView();
-            }
+            }*/
         }
 
         private void deleteNode_Click(object sender, EventArgs e)
@@ -2199,7 +2213,16 @@ namespace ProfilesGenerator
                     Items.WriteEndElement();
 
                     
-                    Items.WriteElementString("TalkEdgeID", n.ActionEdge);
+                    Items.WriteStartElement("TalkEdges");
+
+                    foreach (string str in n.ActionEdge)
+                    {
+                        Items.WriteStartElement("Edge");
+                        Items.WriteElementString("TalkEdgeID", str);
+                        Items.WriteEndElement();
+                    }
+
+                    Items.WriteEndElement();
 
                     
                     Items.WriteElementString("QuestID", n.ActionQuestID);
@@ -2351,7 +2374,12 @@ namespace ProfilesGenerator
                             //nodeActionsBox.SelectedIndex = 0;
                         }
 
-                        justNode.ActionEdge = tn["TalkEdgeID"].InnerText;
+                        XmlNodeList EdgesInNode = tn["TalkEdges"].ChildNodes;
+
+                        foreach (XmlNode ein in EdgesInNode)
+                        {
+                            justNode.ActionEdge.Add(ein["TalkEdgeID"].InnerText);
+                        }
                       
                         justNode.ActionQuestID = tn["QuestID"].InnerText;
                         justNode.ID = tn["TalkNodeID"].InnerText;
@@ -2395,7 +2423,7 @@ namespace ProfilesGenerator
                         }
                         justEdge.ID = te["TalkEdgeID"].InnerText;
                         justDialog.Edges.Add(justEdge);
-                        actionEdge.Items.Add(te["TalkEdgeID"].InnerText);
+                        actionEdges.Items.Add(te["TalkEdgeID"].InnerText);
                         //actionEdge.SelectedIndex = 0;
 
                         foreach (TalkReaction r in justDialog.Reactions)
@@ -2669,6 +2697,24 @@ namespace ProfilesGenerator
         {
             if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0)
                 Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Activator = dActivator.Text;
+        }
+
+        private void addActionEdge_Click(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0 && actionEdges.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge.Add((String)actionEdges.SelectedItem);
+                chosenAtionEdges.Items.Add(actionEdges.SelectedItem);
+            }
+        }
+
+        private void DeleteActionEdge_Click(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0 && chosenAtionEdges.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge.RemoveAt(chosenAtionEdges.SelectedIndex);
+                UpdateView();
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ProfilesGenerator
         public List<int> Actions;
         public List<String> Replies;
         public String ActionQuestID;
-        public String ActionEdge;
+        public List<String> ActionEdge;
         public String ActionEdgeDialog;
         public String Text;
         public String Duration;
@@ -20,11 +20,12 @@ namespace ProfilesGenerator
 
         public TalkNode()
         {
+            ActionEdge = new List<string>();
             ID = "NowyNode";
             Actions = new List<int>();
             Replies = new List<String>();
             ActionQuestID = "";
-            ActionEdge = "";
+            //ActionEdge = "";
             Duration = "3,0";
             Sound = "";
             Activator = "";
