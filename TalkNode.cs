@@ -17,6 +17,9 @@ namespace ProfilesGenerator
         public String Duration;
         public String Sound;
         public String Activator;
+        public String PrizeNPC;
+        public String PrizePlayer;
+        public String PrizePlayerRemove;
 
         public TalkNode()
         {
@@ -29,6 +32,9 @@ namespace ProfilesGenerator
             Duration = "3,0";
             Sound = "";
             Activator = "";
+            PrizeNPC = "";
+            PrizePlayer = "";
+            PrizePlayerRemove = "";
         }
     }
 }

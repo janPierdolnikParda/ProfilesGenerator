@@ -14,6 +14,8 @@ namespace ProfilesGenerator
         public bool GotQuest;
         public bool IsQuestDone;
         public bool IsQuestFinished;
+        public bool GotGold;
+        public String GoldRequired;
 
         public TalkEdge()
         {
@@ -22,7 +24,9 @@ namespace ProfilesGenerator
             GotQuest = false;
             IsQuestDone = false;
             IsQuestFinished = false;
+            GotGold = false;
             ConditionQuestID = "";
+            GoldRequired = "0";
         }
     }
 }

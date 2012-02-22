@@ -24,6 +24,7 @@ namespace ProfilesGenerator
         bool NodeChanged = true;
         bool RepliesChanged = true;
         bool D = false;
+        bool Beton = false;
 
         public Form1()
         {
@@ -49,6 +50,9 @@ namespace ProfilesGenerator
             actionBox.Items.Add("GiveQuest");
             actionBox.Items.Add("ActivateActivator");
             actionBox.Items.Add("StartShop");
+            actionBox.Items.Add("GivePrizeNPC");
+            actionBox.Items.Add("GivePrizePlayer");
+            actionBox.Items.Add("RemovePrizePlayer");
             actionBox.SelectedIndex = 0;
 
             LadujZPliku();
@@ -305,6 +309,14 @@ namespace ProfilesGenerator
                 dialogID.Text = Dialogs[dialogBox.SelectedIndex].ID;
                 dActivator.Text = "";
                 dActivator.Enabled = true;
+                goldRequired.Enabled = true;
+                GotGold.Enabled = true;
+                addActionEdge.Enabled = true;
+                DeleteActionEdge.Enabled = true;
+                chosenAtionEdges.Enabled = true;
+                PrizePlayerBox.Enabled = false;
+                PrizeNPCBox.Enabled = false;
+                PrizePlayerRemoveBox.Enabled = false;
 
                 if (DialogChanged)
                 {
@@ -390,6 +402,9 @@ namespace ProfilesGenerator
                         GotQuest.Checked = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].GotQuest;
                         IsQuestDone.Checked = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].IsQuestDone;
                         IsQuestFinished.Checked = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].IsQuestFinished;
+                        GotGold.Checked = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].GotGold;
+                        goldRequired.Enabled = GotGold.Checked;
+                        goldRequired.Text = Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].GoldRequired;
 
                         questIDBox.Items.Clear();
                         questIDBox.Items.Add("");
@@ -406,6 +421,8 @@ namespace ProfilesGenerator
                         GotQuest.Checked = false;
                         IsQuestDone.Checked = false;
                         IsQuestFinished.Checked = false;
+                        GotGold.Checked = false;
+                        goldRequired.Text = "";
                         questIDBox.Items.Clear();
                     }
                 }
@@ -433,6 +450,8 @@ namespace ProfilesGenerator
                     questIDBox.Enabled = false;
                     createEdge.Enabled = false;
                     deleteEdge.Enabled = false;
+                    GotGold.Enabled = false;
+                    goldRequired.Enabled = false;
                 }
 
                 if (DialogChanged)
@@ -462,6 +481,12 @@ namespace ProfilesGenerator
                     textDurationNode.Enabled = true;
                     soundNode.Enabled = true;
                     dActivator.Enabled = true;
+                    addActionEdge.Enabled = true;
+                    DeleteActionEdge.Enabled = true;
+                    chosenAtionEdges.Enabled = true;
+                    PrizePlayerBox.Enabled = true;
+                    PrizeNPCBox.Enabled = true;
+                    PrizePlayerRemoveBox.Enabled = true;
 
                     nodeID.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ID;
                     nodeText.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].Text;
@@ -504,6 +529,30 @@ namespace ProfilesGenerator
                     foreach (String str in Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge)
                         chosenAtionEdges.Items.Add(str);
 
+                    if (comboBox4.Items.Count > 0)
+                    {
+                        Beton = true;
+                        PrizePlayerBox.Items.Clear();
+                        PrizePlayerBox.Items.Add("");
+                        foreach (Object o in comboBox4.Items)
+                            PrizePlayerBox.Items.Add(o);
+                        PrizePlayerBox.SelectedIndex = PrizePlayerBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].PrizePlayer);
+
+                        PrizePlayerRemoveBox.Items.Clear();
+                        PrizePlayerRemoveBox.Items.Add("");
+                        foreach (Object o in comboBox4.Items)
+                            PrizePlayerRemoveBox.Items.Add(o);
+                        PrizePlayerRemoveBox.SelectedIndex = PrizePlayerBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].PrizePlayerRemove);
+
+
+                        PrizeNPCBox.Items.Clear();
+                        PrizeNPCBox.Items.Add("");
+                        foreach (Object o in comboBox4.Items)
+                            PrizeNPCBox.Items.Add(o);
+                        PrizeNPCBox.SelectedIndex = PrizePlayerBox.Items.IndexOf(Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].PrizeNPC);
+                        Beton = false;
+                    }
+
                     if (RepliesChanged)
                     {
                         nReplyBox.Items.Clear();
@@ -542,6 +591,9 @@ namespace ProfilesGenerator
                     soundNode.Enabled = false;
                     dActivator.Enabled = false;
                     dActivator.Text = "";
+                    PrizePlayerBox.Enabled = false;
+                    PrizeNPCBox.Enabled = false;
+                    PrizePlayerRemoveBox.Enabled = false;
                 }
 
                 if (DialogChanged)
@@ -642,6 +694,14 @@ namespace ProfilesGenerator
                 soundReply.Enabled = false;
                 soundNode.Enabled = false;
                 dActivator.Enabled = false;
+                goldRequired.Enabled = false;
+                GotGold.Enabled = false;
+                addActionEdge.Enabled = false;
+                DeleteActionEdge.Enabled = false;
+                chosenAtionEdges.Enabled = false;
+                PrizePlayerBox.Enabled = false;
+                PrizeNPCBox.Enabled = false;
+                PrizePlayerRemoveBox.Enabled = false;
             }
 
                         if (D)
@@ -2191,6 +2251,9 @@ namespace ProfilesGenerator
                     Items.WriteElementString("Duration", n.Duration);
                     Items.WriteElementString("Sound", n.Sound);
                     Items.WriteElementString("Activator", n.Activator);
+                    Items.WriteElementString("PrizePlayer", n.PrizePlayer);
+                    Items.WriteElementString("PrizeNPC", n.PrizeNPC);
+                    Items.WriteElementString("PrizePlayerRemove", n.PrizePlayerRemove);
                     Items.WriteStartElement("NodeReplies");
 
                     foreach (String str in n.Replies)
@@ -2237,6 +2300,7 @@ namespace ProfilesGenerator
                     Items.WriteStartElement("TalkEdge");
                     Items.WriteElementString("TalkEdgeID", e.ID);
                     Items.WriteElementString("ConditionQuestID", e.ConditionQuestID);
+                    Items.WriteElementString("GoldRequired", e.GoldRequired);
 
                     string fromWhere = "";
 
@@ -2274,6 +2338,13 @@ namespace ProfilesGenerator
                     {
                         Items.WriteStartElement("Condition");
                         Items.WriteElementString("ConditionType", "3");
+                        Items.WriteEndElement();
+                    }
+
+                    if (e.GotGold)
+                    {
+                        Items.WriteStartElement("Condition");
+                        Items.WriteElementString("ConditionType", "4");
                         Items.WriteEndElement();
                     }
 
@@ -2355,6 +2426,9 @@ namespace ProfilesGenerator
                         justNode.Duration = tn["Duration"].InnerText;
                         justNode.Sound = tn["Sound"].InnerText;
                         justNode.Activator = tn["Activator"].InnerText;
+                        justNode.PrizeNPC = tn["PrizeNPC"].InnerText;
+                        justNode.PrizePlayer = tn["PrizePlayer"].InnerText;
+                        justNode.PrizePlayerRemove = tn["PrizePlayerRemove"].InnerText;
 
                         XmlNodeList RepliesInNode = tn["NodeReplies"].ChildNodes;
 
@@ -2398,6 +2472,7 @@ namespace ProfilesGenerator
 
                         justEdge.Node = te["ToWhere"].InnerText;
                         justEdge.ConditionQuestID = te["ConditionQuestID"].InnerText;
+                        justEdge.GoldRequired = te["GoldRequired"].InnerText;
 
                         XmlNodeList ConditionsInEdge = te["Conditions"].ChildNodes;
 
@@ -2418,6 +2493,9 @@ namespace ProfilesGenerator
                                     break;
                                 case 3:
                                     justEdge.IsQuestFinished = true;
+                                    break;
+                                case 4:
+                                    justEdge.GotGold = true;
                                     break;
                             }
                         }
@@ -2715,6 +2793,42 @@ namespace ProfilesGenerator
                 Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].ActionEdge.RemoveAt(chosenAtionEdges.SelectedIndex);
                 UpdateView();
             }
+        }
+
+        private void GotGold_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && reactionsBox.SelectedIndex >= 0 && connectedEdgesBox.SelectedIndex >= 0)
+            {
+                Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].GotGold = GotGold.Checked;
+                UpdateView();
+            }
+        }
+
+        private void goldRequired_TextChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && reactionsBox.SelectedIndex >= 0 && connectedEdgesBox.SelectedIndex >= 0 && GotGold.Checked)
+                Dialogs[dialogBox.SelectedIndex].Edges[IndexOfEdgeWithID((String)connectedEdgesBox.SelectedItem)].GoldRequired = goldRequired.Text;
+        }
+
+        private void PrizePlayerBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0 && !Beton)
+            {
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].PrizePlayer = (String)PrizePlayerBox.SelectedItem;
+                label36.Text = Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].PrizePlayer;
+            }
+        }
+
+        private void PrizeNPCBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0 && !Beton)
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].PrizeNPC = (String)PrizeNPCBox.SelectedItem;
+        }
+
+        private void PrizePlayerRemoveBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0 && !Beton)
+                Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].PrizePlayerRemove = (String)PrizePlayerRemoveBox.SelectedItem;
         }
     }
 }

@@ -128,6 +128,12 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.listaItemow = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.goldRequired = new System.Windows.Forms.TextBox();
+            this.label73 = new System.Windows.Forms.Label();
+            this.GotGold = new System.Windows.Forms.CheckBox();
+            this.chosenAtionEdges = new System.Windows.Forms.ComboBox();
+            this.DeleteActionEdge = new System.Windows.Forms.Button();
+            this.addActionEdge = new System.Windows.Forms.Button();
             this.label74 = new System.Windows.Forms.Label();
             this.dActivator = new System.Windows.Forms.TextBox();
             this.label70 = new System.Windows.Forms.Label();
@@ -227,9 +233,12 @@
             this.createQuest = new System.Windows.Forms.Button();
             this.questBox = new System.Windows.Forms.ComboBox();
             this.label56 = new System.Windows.Forms.Label();
-            this.addActionEdge = new System.Windows.Forms.Button();
-            this.DeleteActionEdge = new System.Windows.Forms.Button();
-            this.chosenAtionEdges = new System.Windows.Forms.ComboBox();
+            this.PrizePlayerBox = new System.Windows.Forms.ComboBox();
+            this.PrizeNPCBox = new System.Windows.Forms.ComboBox();
+            this.PrizePlayerRemoveBox = new System.Windows.Forms.ComboBox();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -248,7 +257,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(657, 684);
+            this.tabControl1.Size = new System.Drawing.Size(788, 684);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -1101,7 +1110,7 @@
             this.tabPage3.Controls.Add(this.listaItemow);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(649, 658);
+            this.tabPage3.Size = new System.Drawing.Size(780, 658);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Prize";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1266,6 +1275,15 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label77);
+            this.tabPage4.Controls.Add(this.label76);
+            this.tabPage4.Controls.Add(this.label75);
+            this.tabPage4.Controls.Add(this.PrizePlayerRemoveBox);
+            this.tabPage4.Controls.Add(this.PrizeNPCBox);
+            this.tabPage4.Controls.Add(this.PrizePlayerBox);
+            this.tabPage4.Controls.Add(this.goldRequired);
+            this.tabPage4.Controls.Add(this.label73);
+            this.tabPage4.Controls.Add(this.GotGold);
             this.tabPage4.Controls.Add(this.chosenAtionEdges);
             this.tabPage4.Controls.Add(this.DeleteActionEdge);
             this.tabPage4.Controls.Add(this.addActionEdge);
@@ -1343,10 +1361,68 @@
             this.tabPage4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(649, 658);
+            this.tabPage4.Size = new System.Drawing.Size(780, 658);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Dialogi";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // goldRequired
+            // 
+            this.goldRequired.Location = new System.Drawing.Point(458, 220);
+            this.goldRequired.Name = "goldRequired";
+            this.goldRequired.Size = new System.Drawing.Size(101, 20);
+            this.goldRequired.TabIndex = 77;
+            this.goldRequired.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.goldRequired.TextChanged += new System.EventHandler(this.goldRequired_TextChanged);
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(394, 223);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(58, 13);
+            this.label73.TabIndex = 76;
+            this.label73.Text = "Ilosc golda";
+            // 
+            // GotGold
+            // 
+            this.GotGold.AutoSize = true;
+            this.GotGold.Location = new System.Drawing.Point(476, 196);
+            this.GotGold.Name = "GotGold";
+            this.GotGold.Size = new System.Drawing.Size(65, 17);
+            this.GotGold.TabIndex = 75;
+            this.GotGold.Text = "GotGold";
+            this.GotGold.UseVisualStyleBackColor = true;
+            this.GotGold.CheckedChanged += new System.EventHandler(this.GotGold_CheckedChanged);
+            // 
+            // chosenAtionEdges
+            // 
+            this.chosenAtionEdges.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.chosenAtionEdges.FormattingEnabled = true;
+            this.chosenAtionEdges.Location = new System.Drawing.Point(378, 414);
+            this.chosenAtionEdges.Name = "chosenAtionEdges";
+            this.chosenAtionEdges.Size = new System.Drawing.Size(181, 21);
+            this.chosenAtionEdges.TabIndex = 74;
+            // 
+            // DeleteActionEdge
+            // 
+            this.DeleteActionEdge.Location = new System.Drawing.Point(565, 413);
+            this.DeleteActionEdge.Name = "DeleteActionEdge";
+            this.DeleteActionEdge.Size = new System.Drawing.Size(19, 21);
+            this.DeleteActionEdge.TabIndex = 73;
+            this.DeleteActionEdge.Text = "-";
+            this.DeleteActionEdge.UseVisualStyleBackColor = true;
+            this.DeleteActionEdge.Click += new System.EventHandler(this.DeleteActionEdge_Click);
+            // 
+            // addActionEdge
+            // 
+            this.addActionEdge.Location = new System.Drawing.Point(353, 413);
+            this.addActionEdge.Name = "addActionEdge";
+            this.addActionEdge.Size = new System.Drawing.Size(19, 21);
+            this.addActionEdge.TabIndex = 72;
+            this.addActionEdge.Text = ">";
+            this.addActionEdge.UseVisualStyleBackColor = true;
+            this.addActionEdge.Click += new System.EventHandler(this.addActionEdge_Click);
             // 
             // label74
             // 
@@ -2308,40 +2384,68 @@
             this.label56.TabIndex = 0;
             this.label56.Text = "Wybierz questa";
             // 
-            // addActionEdge
+            // PrizePlayerBox
             // 
-            this.addActionEdge.Location = new System.Drawing.Point(353, 413);
-            this.addActionEdge.Name = "addActionEdge";
-            this.addActionEdge.Size = new System.Drawing.Size(19, 21);
-            this.addActionEdge.TabIndex = 72;
-            this.addActionEdge.Text = ">";
-            this.addActionEdge.UseVisualStyleBackColor = true;
-            this.addActionEdge.Click += new System.EventHandler(this.addActionEdge_Click);
+            this.PrizePlayerBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PrizePlayerBox.FormattingEnabled = true;
+            this.PrizePlayerBox.Location = new System.Drawing.Point(590, 360);
+            this.PrizePlayerBox.Name = "PrizePlayerBox";
+            this.PrizePlayerBox.Size = new System.Drawing.Size(183, 21);
+            this.PrizePlayerBox.TabIndex = 78;
+            this.PrizePlayerBox.SelectedIndexChanged += new System.EventHandler(this.PrizePlayerBox_SelectedIndexChanged);
             // 
-            // DeleteActionEdge
+            // PrizeNPCBox
             // 
-            this.DeleteActionEdge.Location = new System.Drawing.Point(565, 413);
-            this.DeleteActionEdge.Name = "DeleteActionEdge";
-            this.DeleteActionEdge.Size = new System.Drawing.Size(19, 21);
-            this.DeleteActionEdge.TabIndex = 73;
-            this.DeleteActionEdge.Text = "-";
-            this.DeleteActionEdge.UseVisualStyleBackColor = true;
-            this.DeleteActionEdge.Click += new System.EventHandler(this.DeleteActionEdge_Click);
+            this.PrizeNPCBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PrizeNPCBox.FormattingEnabled = true;
+            this.PrizeNPCBox.Location = new System.Drawing.Point(590, 414);
+            this.PrizeNPCBox.Name = "PrizeNPCBox";
+            this.PrizeNPCBox.Size = new System.Drawing.Size(183, 21);
+            this.PrizeNPCBox.TabIndex = 79;
+            this.PrizeNPCBox.SelectedIndexChanged += new System.EventHandler(this.PrizeNPCBox_SelectedIndexChanged);
             // 
-            // chosenAtionEdges
+            // PrizePlayerRemoveBox
             // 
-            this.chosenAtionEdges.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.chosenAtionEdges.FormattingEnabled = true;
-            this.chosenAtionEdges.Location = new System.Drawing.Point(378, 414);
-            this.chosenAtionEdges.Name = "chosenAtionEdges";
-            this.chosenAtionEdges.Size = new System.Drawing.Size(181, 21);
-            this.chosenAtionEdges.TabIndex = 74;
+            this.PrizePlayerRemoveBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PrizePlayerRemoveBox.FormattingEnabled = true;
+            this.PrizePlayerRemoveBox.Location = new System.Drawing.Point(590, 467);
+            this.PrizePlayerRemoveBox.Name = "PrizePlayerRemoveBox";
+            this.PrizePlayerRemoveBox.Size = new System.Drawing.Size(183, 21);
+            this.PrizePlayerRemoveBox.TabIndex = 80;
+            this.PrizePlayerRemoveBox.SelectedIndexChanged += new System.EventHandler(this.PrizePlayerRemoveBox_SelectedIndexChanged);
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(650, 344);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(59, 13);
+            this.label75.TabIndex = 81;
+            this.label75.Text = "PrizePlayer";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(650, 395);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(52, 13);
+            this.label76.TabIndex = 82;
+            this.label76.Text = "PrizeNPC";
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(629, 451);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(99, 13);
+            this.label77.TabIndex = 83;
+            this.label77.Text = "PrizePlayerRemove";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 686);
+            this.ClientSize = new System.Drawing.Size(792, 686);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -2565,6 +2669,15 @@
         private System.Windows.Forms.ComboBox chosenAtionEdges;
         private System.Windows.Forms.Button DeleteActionEdge;
         private System.Windows.Forms.Button addActionEdge;
+        private System.Windows.Forms.TextBox goldRequired;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.CheckBox GotGold;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.ComboBox PrizePlayerRemoveBox;
+        private System.Windows.Forms.ComboBox PrizeNPCBox;
+        private System.Windows.Forms.ComboBox PrizePlayerBox;
+        private System.Windows.Forms.Label label77;
 
 
 
