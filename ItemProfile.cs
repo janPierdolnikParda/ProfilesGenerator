@@ -19,6 +19,7 @@ namespace ProfilesGenerator
         public string NameOffset;
         public string PrizeID;
         public string Price;
+		public string HandleOffset;
 
         public ItemProfile()
         {
@@ -29,6 +30,7 @@ namespace ProfilesGenerator
             Type = "DescribedProfile";
             PrizeID = "";
             Price = "0";
+			HandleOffset = "x|y|z";
         }
     }
 }

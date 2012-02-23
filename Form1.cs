@@ -104,8 +104,9 @@ namespace ProfilesGenerator
                     opanowanie.Text = CharacterProfiles[comboBox1.SelectedIndex].OP;
                     zywotnosc.Text = CharacterProfiles[comboBox1.SelectedIndex].ZY;
                     charyzma.Text = CharacterProfiles[comboBox1.SelectedIndex].CH;
-                    Sila.Text = CharacterProfiles[comboBox1.SelectedIndex].SI;
-                    wytrzymalosc.Text = CharacterProfiles[comboBox1.SelectedIndex].WY;
+                    Krzepa.Text = CharacterProfiles[comboBox1.SelectedIndex].K;
+                    Odpornosc.Text = CharacterProfiles[comboBox1.SelectedIndex].ODP;
+					Ataki.Text = CharacterProfiles[comboBox1.SelectedIndex].Ataki;
                     comboBox5.SelectedIndex = int.Parse(CharacterProfiles[comboBox1.SelectedIndex].FriendlyType);
                     characterMnoznik.Enabled = true;
                     characterMnoznik.Text = CharacterProfiles[comboBox1.SelectedIndex].MnoznikSklepu;
@@ -136,8 +137,9 @@ namespace ProfilesGenerator
                     opanowanie.Text = EnemyProfiles[comboBox1.SelectedIndex].OP;
                     zywotnosc.Text = EnemyProfiles[comboBox1.SelectedIndex].ZY;
                     charyzma.Text = EnemyProfiles[comboBox1.SelectedIndex].CH;
-                    Sila.Text = EnemyProfiles[comboBox1.SelectedIndex].SI;
-                    wytrzymalosc.Text = EnemyProfiles[comboBox1.SelectedIndex].WY;
+                    Krzepa.Text = EnemyProfiles[comboBox1.SelectedIndex].K;
+                    Odpornosc.Text = EnemyProfiles[comboBox1.SelectedIndex].ODP;
+					Ataki.Text = EnemyProfiles[comboBox1.SelectedIndex].Ataki;
                     comboBox5.SelectedIndex = int.Parse(EnemyProfiles[comboBox1.SelectedIndex].FriendlyType);
                     characterMnoznik.Text = "";
                     characterMnoznik.Enabled = false;
@@ -176,6 +178,7 @@ namespace ProfilesGenerator
                 idString.Text = ItemProfiles[comboBox2.SelectedIndex].IdString;
                 name.Text = ItemProfiles[comboBox2.SelectedIndex].Name;
                 mesh.Text = ItemProfiles[comboBox2.SelectedIndex].Mesh;
+				HandleOffset.Text = ItemProfiles[comboBox2.SelectedIndex].HandleOffset;
 
                 Pickable.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsPickable));
                 Container.Checked = (bool.Parse(ItemProfiles[comboBox2.SelectedIndex].IsContainer));
@@ -998,13 +1001,14 @@ namespace ProfilesGenerator
                     newChar.BodyScaleFactor = item["BodyScaleFactor_x"].InnerText + "|" + item["BodyScaleFactor_y"].InnerText + "|" + item["BodyScaleFactor_z"].InnerText;
                     newChar.HeadOffset = item["HeadOffset_x"].InnerText + "|" + item["HeadOffset_y"].InnerText + "|" + item["HeadOffset_z"].InnerText;
                     newChar.WW = item["WalkaWrecz"].InnerText;
-                    newChar.SI = item["Sila"].InnerText;
+                    newChar.K = item["Krzepa"].InnerText;
                     newChar.FriendlyType = item["FriendlyType"].InnerText;
                     newChar.CH = item["Charyzma"].InnerText;
                     newChar.ZR = item["Zrecznosc"].InnerText;
                     newChar.ZY = item["Zywotnosc"].InnerText;
                     newChar.OP = item["Opanowanie"].InnerText;
-                    newChar.WY = item["Wytrzymalosc"].InnerText;
+                    newChar.ODP = item["Odpornosc"].InnerText;
+					newChar.Ataki = item["Ataki"].InnerText;
                     newChar.TalkRoot = item["DialogRoot"].InnerText;
                     newChar.MnoznikSklepu = item["ShopMnoznik"].InnerText;
                     newChar.ShopPrizeID = item["ShopPrizeID"].InnerText;
@@ -1033,13 +1037,14 @@ namespace ProfilesGenerator
                     newChar.BodyScaleFactor = item["BodyScaleFactor_x"].InnerText + "|" + item["BodyScaleFactor_y"].InnerText + "|" + item["BodyScaleFactor_z"].InnerText;
                     newChar.HeadOffset = item["HeadOffset_x"].InnerText + "|" + item["HeadOffset_y"].InnerText + "|" + item["HeadOffset_z"].InnerText;
                     newChar.WW = item["WalkaWrecz"].InnerText;
-                    newChar.SI = item["Sila"].InnerText;
+                    newChar.K = item["Krzepa"].InnerText;
+					newChar.Ataki = item["Ataki"].InnerText;
                     newChar.FriendlyType = item["FriendlyType"].InnerText;
                     newChar.CH = item["Charyzma"].InnerText;
                     newChar.ZR = item["Zrecznosc"].InnerText;
                     newChar.ZY = item["Zywotnosc"].InnerText;
                     newChar.OP = item["Opanowanie"].InnerText;
-                    newChar.WY = item["Wytrzymalosc"].InnerText;
+                    newChar.ODP = item["Odpornosc"].InnerText;
                     newChar.ZasiegOgolny = item["ZasiegOgolny"].InnerText;
                     newChar.ZasiegWzroku = item["ZasiegWzroku"].InnerText;
 
@@ -1164,9 +1169,10 @@ namespace ProfilesGenerator
                 NPCs.WriteElementString("WalkaWrecz", ch.WW);
                 NPCs.WriteElementString("Zywotnosc", ch.ZY);
                 NPCs.WriteElementString("Opanowanie", ch.OP);
-                NPCs.WriteElementString("Wytrzymalosc", ch.WY);
+                NPCs.WriteElementString("Odpornosc", ch.ODP);
                 NPCs.WriteElementString("Zrecznosc", ch.ZR);
-                NPCs.WriteElementString("Sila", ch.SI);
+                NPCs.WriteElementString("Krzepa", ch.K);
+				NPCs.WriteElementString("Ataki", ch.Ataki);
                 NPCs.WriteElementString("Charyzma", ch.CH);
                 NPCs.WriteElementString("DialogRoot", ch.TalkRoot);
                 NPCs.WriteElementString("ShopMnoznik", ch.MnoznikSklepu);
@@ -1293,9 +1299,10 @@ namespace ProfilesGenerator
                 Enemies.WriteElementString("WalkaWrecz", en.WW);
                 Enemies.WriteElementString("Zywotnosc", en.ZY);
                 Enemies.WriteElementString("Opanowanie", en.OP);
-                Enemies.WriteElementString("Wytrzymalosc", en.WY);
+                Enemies.WriteElementString("Odpornosc", en.ODP);
                 Enemies.WriteElementString("Zrecznosc", en.ZR);
-                Enemies.WriteElementString("Sila", en.SI);
+                Enemies.WriteElementString("Krzepa", en.K);
+				Enemies.WriteElementString("Ataki", en.Ataki);
                 Enemies.WriteElementString("Charyzma", en.CH);
                 Enemies.WriteElementString("ZasiegWzroku", en.ZasiegWzroku);
                 Enemies.WriteElementString("ZasiegOgolny", en.ZasiegOgolny);
@@ -1509,6 +1516,40 @@ namespace ProfilesGenerator
                 Items.WriteElementString("nameoffsetx", x);
                 Items.WriteElementString("nameoffsety", y);
                 Items.WriteElementString("nameoffsetz", z);
+
+				x = "";
+				y = "";
+				z = "";
+
+
+				while (ip.HandleOffset[licznik] != '|')
+				{
+					x += ip.HandleOffset[licznik];
+					licznik++;
+				}
+
+				licznik++;
+
+				while (ip.HandleOffset[licznik] != '|')
+				{
+					y += ip.HandleOffset[licznik];
+					licznik++;
+				}
+
+				licznik++;
+
+				while (ip.HandleOffset.Length != licznik)
+				{
+					z += ip.HandleOffset[licznik];
+					licznik++;
+				}
+
+				licznik = 0;
+
+				Items.WriteElementString("handleoffsetx", x);
+				Items.WriteElementString("handleoffsety", y);
+				Items.WriteElementString("handleoffsetz", z);
+
                 Items.WriteElementString("price", ip.Price);
                 Items.WriteEndElement();
             }
@@ -1536,6 +1577,7 @@ namespace ProfilesGenerator
                     newChar.Name = item["name"].InnerText;
                     newChar.Mass = item["mass"].InnerText;
                     newChar.NameOffset = item["nameoffsetx"].InnerText + "|" + item["nameoffsety"].InnerText + "|" + item["nameoffsetz"].InnerText;
+					newChar.HandleOffset = item["handleoffsetx"].InnerText + "|" + item["handleoffsety"].InnerText + "|" + item["handleoffsetz"].InnerText;
                     newChar.Type = item["type"].InnerText;
                     newChar.Description = item["description"].InnerText;
                     newChar.InventoryMaterial = item["inventory_material"].InnerText;
@@ -1726,10 +1768,10 @@ namespace ProfilesGenerator
         private void Sila_TextChanged(object sender, EventArgs e)
         {
             if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
-                CharacterProfiles[comboBox1.SelectedIndex].SI = Sila.Text;
+                CharacterProfiles[comboBox1.SelectedIndex].K = Krzepa.Text;
 
             if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
-                EnemyProfiles[comboBox1.SelectedIndex].SI = Sila.Text;
+                EnemyProfiles[comboBox1.SelectedIndex].K = Krzepa.Text;
         }
 
         private void zrecznosc_TextChanged(object sender, EventArgs e)
@@ -1753,10 +1795,10 @@ namespace ProfilesGenerator
         private void wytrzymalosc_TextChanged(object sender, EventArgs e)
         {
             if (characterRadio.Checked && comboBox1.SelectedIndex >= 0)
-                CharacterProfiles[comboBox1.SelectedIndex].WY = wytrzymalosc.Text;
+                CharacterProfiles[comboBox1.SelectedIndex].ODP = Odpornosc.Text;
 
             if (enemyRadio.Checked && comboBox1.SelectedIndex >= 0)
-                EnemyProfiles[comboBox1.SelectedIndex].WY = wytrzymalosc.Text;
+                EnemyProfiles[comboBox1.SelectedIndex].ODP = Odpornosc.Text;
         }
 
         private void opanowanie_TextChanged(object sender, EventArgs e)
@@ -2830,5 +2872,22 @@ namespace ProfilesGenerator
             if (dialogBox.SelectedIndex >= 0 && nodeBox.SelectedIndex >= 0 && !Beton)
                 Dialogs[dialogBox.SelectedIndex].Nodes[nodeBox.SelectedIndex].PrizePlayerRemove = (String)PrizePlayerRemoveBox.SelectedItem;
         }
+
+		private void HandleOffset_TextChanged(object sender, EventArgs e)
+		{
+			if (comboBox2.SelectedIndex >= 0)
+				ItemProfiles[comboBox2.SelectedIndex].HandleOffset = HandleOffset.Text;
+		}
+
+		private void Ataki_TextChanged(object sender, EventArgs e)
+		{
+			if (comboBox1.SelectedIndex >= 0)
+			{
+				if (characterRadio.Checked)
+					CharacterProfiles[comboBox1.SelectedIndex].Ataki = Ataki.Text;
+				else
+					CharacterProfiles[comboBox1.SelectedIndex].Ataki = Ataki.Text;
+			}
+		}
     }
 }

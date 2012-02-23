@@ -21,8 +21,9 @@ namespace ProfilesGenerator
         public String ZY;
         public String OP;
         public String CH;
-        public String SI;
-        public String WY;
+        public String K;
+        public String ODP;
+		public String Ataki;
         public String FriendlyType;
         public String TalkRoot;
         public String MnoznikSklepu;
@@ -37,13 +38,14 @@ namespace ProfilesGenerator
             BodyScaleFactor = "x|y|z";
             Type = "DescribedProfile";
 
-            WW = "30";
-            SI = "2";
-            ZR = "30";
+            WW = "20";
+            K = "20";
+            ZR = "20";
             ZY = "4";
-            OP = "30";
-            WY = "2";
-            CH = "30";
+            OP = "20";
+            ODP = "20";
+            CH = "20";
+			Ataki = "1";
 
             FriendlyType = "0";
             TalkRoot = "";
