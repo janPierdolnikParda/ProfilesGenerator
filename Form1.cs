@@ -206,6 +206,11 @@ namespace ProfilesGenerator
                 description.Text = ItemProfiles[comboBox2.SelectedIndex].Description;
                 nameOffset.Text = ItemProfiles[comboBox2.SelectedIndex].NameOffset;
                 itemPrice.Text = ItemProfiles[comboBox2.SelectedIndex].Price;
+
+                iloscrzutow.Enabled = itemSwordRadio.Checked;
+                jakoscrzutow.Enabled = itemSwordRadio.Checked;
+                iloscrzutow.Text = ItemProfiles[comboBox2.SelectedIndex].IloscRzutow;
+                jakoscrzutow.Text = ItemProfiles[comboBox2.SelectedIndex].JakoscRzutow;
             }
 
             else
@@ -1355,6 +1360,7 @@ namespace ProfilesGenerator
             if (comboBox2.SelectedIndex >= 0 && describedRadio.Checked)
             {
                 ItemProfiles[comboBox2.SelectedIndex].Type = "DescribedProfile";
+                UpdateView();
             }
         }
 
@@ -1363,6 +1369,7 @@ namespace ProfilesGenerator
             if (comboBox2.SelectedIndex >= 0 && itemSwordRadio.Checked)
             {
                 ItemProfiles[comboBox2.SelectedIndex].Type = "ItemSword";
+                UpdateView();
             }
         }
 
@@ -1483,6 +1490,8 @@ namespace ProfilesGenerator
                 Items.WriteElementString("ispickable", ip.IsPickable);
                 Items.WriteElementString("iscontainer", ip.IsContainer);
                 Items.WriteElementString("prizeid", ip.PrizeID);
+                Items.WriteElementString("iloscrzutow", ip.IloscRzutow);
+                Items.WriteElementString("jakoscrzutow", ip.JakoscRzutow);
 
                 string x = "";
                 string y = "";
@@ -1585,6 +1594,8 @@ namespace ProfilesGenerator
                     newChar.IsContainer = item["iscontainer"].InnerText;
                     newChar.PrizeID = item["prizeid"].InnerText;
                     newChar.Price = item["price"].InnerText;
+                    newChar.JakoscRzutow = item["jakoscrzutow"].InnerText;
+                    newChar.IloscRzutow = item["iloscrzutow"].InnerText;
 
                     ItemProfiles.Add(newChar);
                     comboBox2.Items.Add(newChar.IdString);
@@ -2889,5 +2900,17 @@ namespace ProfilesGenerator
 					CharacterProfiles[comboBox1.SelectedIndex].Ataki = Ataki.Text;
 			}
 		}
+
+        private void iloscrzutow_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0 && itemSwordRadio.Checked)
+                ItemProfiles[comboBox2.SelectedIndex].IloscRzutow = iloscrzutow.Text;
+        }
+
+        private void jakoscrzutow_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex >= 0 && itemSwordRadio.Checked)
+                ItemProfiles[comboBox2.SelectedIndex].JakoscRzutow = jakoscrzutow.Text;
+        }
     }
 }

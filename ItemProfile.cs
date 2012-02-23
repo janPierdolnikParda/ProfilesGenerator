@@ -20,6 +20,8 @@ namespace ProfilesGenerator
         public string PrizeID;
         public string Price;
 		public string HandleOffset;
+        public string IloscRzutow;
+        public string JakoscRzutow;
 
         public ItemProfile()
         {
@@ -31,6 +33,8 @@ namespace ProfilesGenerator
             PrizeID = "";
             Price = "0";
 			HandleOffset = "x|y|z";
+            IloscRzutow = "1";
+            JakoscRzutow = "6";
         }
     }
 }
