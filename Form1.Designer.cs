@@ -82,6 +82,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
+            this.jakoscrzutow = new System.Windows.Forms.TextBox();
+            this.iloscrzutow = new System.Windows.Forms.TextBox();
             this.label78 = new System.Windows.Forms.Label();
             this.HandleOffset = new System.Windows.Forms.TextBox();
             this.label72 = new System.Windows.Forms.Label();
@@ -243,10 +247,6 @@
             this.createQuest = new System.Windows.Forms.Button();
             this.questBox = new System.Windows.Forms.ComboBox();
             this.label56 = new System.Windows.Forms.Label();
-            this.iloscrzutow = new System.Windows.Forms.TextBox();
-            this.jakoscrzutow = new System.Windows.Forms.TextBox();
-            this.label80 = new System.Windows.Forms.Label();
-            this.label81 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -351,9 +351,9 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(384, 386);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(63, 13);
+            this.label19.Size = new System.Drawing.Size(63, 26);
             this.label19.TabIndex = 74;
-            this.label19.Text = "Sklep(Prize)";
+            this.label19.Text = "Sklep(Prize)\r\nDrop(Prize)";
             // 
             // shopPrize
             // 
@@ -792,7 +792,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(432, 410);
+            this.saveButton.Location = new System.Drawing.Point(474, 410);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(169, 37);
             this.saveButton.TabIndex = 26;
@@ -844,6 +844,42 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Items";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(327, 130);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(77, 13);
+            this.label81.TabIndex = 36;
+            this.label81.Text = "JakoscRzutow";
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Location = new System.Drawing.Point(327, 104);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(98, 13);
+            this.label80.TabIndex = 35;
+            this.label80.Text = "IloscRzutowKostka";
+            // 
+            // jakoscrzutow
+            // 
+            this.jakoscrzutow.Location = new System.Drawing.Point(431, 127);
+            this.jakoscrzutow.Name = "jakoscrzutow";
+            this.jakoscrzutow.Size = new System.Drawing.Size(168, 20);
+            this.jakoscrzutow.TabIndex = 34;
+            this.jakoscrzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.jakoscrzutow.TextChanged += new System.EventHandler(this.jakoscrzutow_TextChanged);
+            // 
+            // iloscrzutow
+            // 
+            this.iloscrzutow.Location = new System.Drawing.Point(431, 101);
+            this.iloscrzutow.Name = "iloscrzutow";
+            this.iloscrzutow.Size = new System.Drawing.Size(168, 20);
+            this.iloscrzutow.TabIndex = 33;
+            this.iloscrzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.iloscrzutow.TextChanged += new System.EventHandler(this.iloscrzutow_TextChanged);
             // 
             // label78
             // 
@@ -2491,42 +2527,6 @@
             this.label56.Size = new System.Drawing.Size(94, 13);
             this.label56.TabIndex = 0;
             this.label56.Text = "Wybierz questa";
-            // 
-            // iloscrzutow
-            // 
-            this.iloscrzutow.Location = new System.Drawing.Point(431, 101);
-            this.iloscrzutow.Name = "iloscrzutow";
-            this.iloscrzutow.Size = new System.Drawing.Size(168, 20);
-            this.iloscrzutow.TabIndex = 33;
-            this.iloscrzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.iloscrzutow.TextChanged += new System.EventHandler(this.iloscrzutow_TextChanged);
-            // 
-            // jakoscrzutow
-            // 
-            this.jakoscrzutow.Location = new System.Drawing.Point(431, 127);
-            this.jakoscrzutow.Name = "jakoscrzutow";
-            this.jakoscrzutow.Size = new System.Drawing.Size(168, 20);
-            this.jakoscrzutow.TabIndex = 34;
-            this.jakoscrzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.jakoscrzutow.TextChanged += new System.EventHandler(this.jakoscrzutow_TextChanged);
-            // 
-            // label80
-            // 
-            this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(327, 104);
-            this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(98, 13);
-            this.label80.TabIndex = 35;
-            this.label80.Text = "IloscRzutowKostka";
-            // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(327, 130);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(77, 13);
-            this.label81.TabIndex = 36;
-            this.label81.Text = "JakoscRzutow";
             // 
             // Form1
             // 

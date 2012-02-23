@@ -144,7 +144,10 @@ namespace ProfilesGenerator
                     characterMnoznik.Text = "";
                     characterMnoznik.Enabled = false;
                     talkRootBox.Enabled = false;
-                    shopPrize.Enabled = false;
+                    shopPrize.Enabled = true;
+
+                    if (shopPrize.Items.Count > 0)
+                        shopPrize.SelectedIndex = shopPrize.Items.IndexOf(EnemyProfiles[comboBox1.SelectedIndex].DropPrize);
                 }
             }
 
@@ -1052,6 +1055,7 @@ namespace ProfilesGenerator
                     newChar.ODP = item["Odpornosc"].InnerText;
                     newChar.ZasiegOgolny = item["ZasiegOgolny"].InnerText;
                     newChar.ZasiegWzroku = item["ZasiegWzroku"].InnerText;
+                    newChar.DropPrize = item["DropPrize"].InnerText;
 
                     EnemyProfiles.Add(newChar);
                 }
@@ -1201,6 +1205,7 @@ namespace ProfilesGenerator
                 Enemies.WriteElementString("MeshName", en.MeshName);
                 Enemies.WriteElementString("BodyMass", en.BodyMass);
                 Enemies.WriteElementString("WalkSpeed", en.WalkSpeed);
+                Enemies.WriteElementString("DropPrize", en.DropPrize);
 
                 string x = "";
                 string y = "";
@@ -2822,6 +2827,9 @@ namespace ProfilesGenerator
         {
             if (comboBox1.SelectedIndex >= 0 && characterRadio.Checked)
                 CharacterProfiles[comboBox1.SelectedIndex].ShopPrizeID = (String)shopPrize.SelectedItem;
+
+            if (comboBox1.SelectedIndex >= 0 && enemyRadio.Checked)
+                EnemyProfiles[comboBox1.SelectedIndex].DropPrize = (String)shopPrize.SelectedItem;
         }
 
         private void dActivator_TextChanged(object sender, EventArgs e)

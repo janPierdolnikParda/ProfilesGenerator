@@ -26,6 +26,7 @@ namespace ProfilesGenerator
 		public String ODP;
 		public String Ataki;
         public String FriendlyType;
+        public String DropPrize;
 
         public Enemy()
         {
@@ -46,6 +47,7 @@ namespace ProfilesGenerator
 
 
             FriendlyType = "0";
+            DropPrize = "";
         }
     }
 }
