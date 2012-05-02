@@ -247,6 +247,10 @@
             this.createQuest = new System.Windows.Forms.Button();
             this.questBox = new System.Windows.Forms.ComboBox();
             this.label56 = new System.Windows.Forms.Label();
+            this.eIloscRzutow = new System.Windows.Forms.TextBox();
+            this.eJakoscRzutow = new System.Windows.Forms.TextBox();
+            this.label82 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -270,6 +274,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label83);
+            this.tabPage1.Controls.Add(this.label82);
+            this.tabPage1.Controls.Add(this.eJakoscRzutow);
+            this.tabPage1.Controls.Add(this.eIloscRzutow);
             this.tabPage1.Controls.Add(this.label79);
             this.tabPage1.Controls.Add(this.Ataki);
             this.tabPage1.Controls.Add(this.label19);
@@ -2528,6 +2536,42 @@
             this.label56.TabIndex = 0;
             this.label56.Text = "Wybierz questa";
             // 
+            // eIloscRzutow
+            // 
+            this.eIloscRzutow.Location = new System.Drawing.Point(126, 349);
+            this.eIloscRzutow.Name = "eIloscRzutow";
+            this.eIloscRzutow.Size = new System.Drawing.Size(227, 20);
+            this.eIloscRzutow.TabIndex = 77;
+            this.eIloscRzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.eIloscRzutow.TextChanged += new System.EventHandler(this.eIloscRzutow_TextChanged);
+            // 
+            // eJakoscRzutow
+            // 
+            this.eJakoscRzutow.Location = new System.Drawing.Point(126, 375);
+            this.eJakoscRzutow.Name = "eJakoscRzutow";
+            this.eJakoscRzutow.Size = new System.Drawing.Size(227, 20);
+            this.eJakoscRzutow.TabIndex = 78;
+            this.eJakoscRzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.eJakoscRzutow.TextChanged += new System.EventHandler(this.eJakoscRzutow_TextChanged);
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(12, 352);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(65, 13);
+            this.label82.TabIndex = 79;
+            this.label82.Text = "IloscRzutow";
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(12, 378);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(77, 13);
+            this.label83.TabIndex = 80;
+            this.label83.Text = "JakoscRzutow";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2773,6 +2817,10 @@
         private System.Windows.Forms.Label label80;
         private System.Windows.Forms.TextBox jakoscrzutow;
         private System.Windows.Forms.TextBox iloscrzutow;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.TextBox eJakoscRzutow;
+        private System.Windows.Forms.TextBox eIloscRzutow;
 
 
 

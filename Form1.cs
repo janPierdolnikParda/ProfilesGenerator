@@ -99,6 +99,8 @@ namespace ProfilesGenerator
                     HeadOffset.Text = CharacterProfiles[comboBox1.SelectedIndex].HeadOffset;
                     zasiegOgl.Enabled = false;
                     zasiegWzr.Enabled = false;
+                    eIloscRzutow.Enabled = false;
+                    eJakoscRzutow.Enabled = false;
                     walkaWrecz.Text = CharacterProfiles[comboBox1.SelectedIndex].WW;
                     zrecznosc.Text = CharacterProfiles[comboBox1.SelectedIndex].ZR;
                     opanowanie.Text = CharacterProfiles[comboBox1.SelectedIndex].OP;
@@ -130,6 +132,10 @@ namespace ProfilesGenerator
                     HeadOffset.Text = EnemyProfiles[comboBox1.SelectedIndex].HeadOffset;
                     zasiegOgl.Enabled = true;
                     zasiegWzr.Enabled = true;
+                    eIloscRzutow.Enabled = true;
+                    eJakoscRzutow.Enabled = true;
+                    eJakoscRzutow.Text = EnemyProfiles[comboBox1.SelectedIndex].JakoscRzutow;
+                    eIloscRzutow.Text = EnemyProfiles[comboBox1.SelectedIndex].IloscRzutow;
                     zasiegOgl.Text = EnemyProfiles[comboBox1.SelectedIndex].ZasiegOgolny;
                     zasiegWzr.Text = EnemyProfiles[comboBox1.SelectedIndex].ZasiegWzroku;
                     walkaWrecz.Text = EnemyProfiles[comboBox1.SelectedIndex].WW;
@@ -162,6 +168,8 @@ namespace ProfilesGenerator
                 BodyScaleFactor.Text = "";
                 HeadOffset.Text = "";
                 characterMnoznik.Text = "";
+                eIloscRzutow.Text = "";
+                eJakoscRzutow.Text = "";
 
                 if (characterRadio.Checked && CharacterProfiles.Count > 0)
                 {
@@ -1056,6 +1064,8 @@ namespace ProfilesGenerator
                     newChar.ZasiegOgolny = item["ZasiegOgolny"].InnerText;
                     newChar.ZasiegWzroku = item["ZasiegWzroku"].InnerText;
                     newChar.DropPrize = item["DropPrize"].InnerText;
+                    newChar.IloscRzutow = item["IloscRzutow"].InnerText;
+                    newChar.JakoscRzutow = item["JakoscRzutow"].InnerText;
 
                     EnemyProfiles.Add(newChar);
                 }
@@ -1316,6 +1326,8 @@ namespace ProfilesGenerator
                 Enemies.WriteElementString("Charyzma", en.CH);
                 Enemies.WriteElementString("ZasiegWzroku", en.ZasiegWzroku);
                 Enemies.WriteElementString("ZasiegOgolny", en.ZasiegOgolny);
+                Enemies.WriteElementString("JakoscRzutow", en.JakoscRzutow);
+                Enemies.WriteElementString("IloscRzutow", en.IloscRzutow);
 
                 Enemies.WriteEndElement();
             }
@@ -2919,6 +2931,18 @@ namespace ProfilesGenerator
         {
             if (comboBox2.SelectedIndex >= 0 && itemSwordRadio.Checked)
                 ItemProfiles[comboBox2.SelectedIndex].JakoscRzutow = jakoscrzutow.Text;
+        }
+
+        private void eIloscRzutow_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0 && enemyRadio.Checked)
+                EnemyProfiles[comboBox1.SelectedIndex].IloscRzutow = eIloscRzutow.Text;
+        }
+
+        private void eJakoscRzutow_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0 && enemyRadio.Checked)
+                EnemyProfiles[comboBox1.SelectedIndex].JakoscRzutow = eJakoscRzutow.Text;
         }
     }
 }
