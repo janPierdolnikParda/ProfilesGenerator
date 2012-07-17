@@ -112,6 +112,8 @@ namespace ProfilesGenerator
                     comboBox5.SelectedIndex = int.Parse(CharacterProfiles[comboBox1.SelectedIndex].FriendlyType);
                     characterMnoznik.Enabled = true;
                     characterMnoznik.Text = CharacterProfiles[comboBox1.SelectedIndex].MnoznikSklepu;
+                    contactDistance.Enabled = false;
+                    contactDistance.Text = "";
 
                     if (talkRootBox.Items.Count > 0)
                         talkRootBox.SelectedIndex = talkRootBox.Items.IndexOf(CharacterProfiles[comboBox1.SelectedIndex].TalkRoot);
@@ -151,6 +153,8 @@ namespace ProfilesGenerator
                     characterMnoznik.Enabled = false;
                     talkRootBox.Enabled = false;
                     shopPrize.Enabled = true;
+                    contactDistance.Enabled = true;
+                    contactDistance.Text = EnemyProfiles[comboBox1.SelectedIndex].ContactDistance;
 
                     if (shopPrize.Items.Count > 0)
                         shopPrize.SelectedIndex = shopPrize.Items.IndexOf(EnemyProfiles[comboBox1.SelectedIndex].DropPrize);
@@ -170,6 +174,7 @@ namespace ProfilesGenerator
                 characterMnoznik.Text = "";
                 eIloscRzutow.Text = "";
                 eJakoscRzutow.Text = "";
+                contactDistance.Text = "";
 
                 if (characterRadio.Checked && CharacterProfiles.Count > 0)
                 {
@@ -1066,6 +1071,7 @@ namespace ProfilesGenerator
                     newChar.DropPrize = item["DropPrize"].InnerText;
                     newChar.IloscRzutow = item["IloscRzutow"].InnerText;
                     newChar.JakoscRzutow = item["JakoscRzutow"].InnerText;
+                    newChar.ContactDistance = item["DystansKontaktu"].InnerText;
 
                     EnemyProfiles.Add(newChar);
                 }
@@ -1328,6 +1334,7 @@ namespace ProfilesGenerator
                 Enemies.WriteElementString("ZasiegOgolny", en.ZasiegOgolny);
                 Enemies.WriteElementString("JakoscRzutow", en.JakoscRzutow);
                 Enemies.WriteElementString("IloscRzutow", en.IloscRzutow);
+                Enemies.WriteElementString("DystansKontaktu", en.ContactDistance);
 
                 Enemies.WriteEndElement();
             }
@@ -2943,6 +2950,12 @@ namespace ProfilesGenerator
         {
             if (comboBox1.SelectedIndex >= 0 && enemyRadio.Checked)
                 EnemyProfiles[comboBox1.SelectedIndex].JakoscRzutow = eJakoscRzutow.Text;
+        }
+
+        private void contactDistance_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0 && enemyRadio.Checked)
+                EnemyProfiles[comboBox1.SelectedIndex].ContactDistance = contactDistance.Text;
         }
     }
 }

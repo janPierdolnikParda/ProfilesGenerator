@@ -30,6 +30,10 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.eJakoscRzutow = new System.Windows.Forms.TextBox();
+            this.eIloscRzutow = new System.Windows.Forms.TextBox();
             this.label79 = new System.Windows.Forms.Label();
             this.Ataki = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -247,10 +251,8 @@
             this.createQuest = new System.Windows.Forms.Button();
             this.questBox = new System.Windows.Forms.ComboBox();
             this.label56 = new System.Windows.Forms.Label();
-            this.eIloscRzutow = new System.Windows.Forms.TextBox();
-            this.eJakoscRzutow = new System.Windows.Forms.TextBox();
-            this.label82 = new System.Windows.Forms.Label();
-            this.label83 = new System.Windows.Forms.Label();
+            this.contactDistance = new System.Windows.Forms.TextBox();
+            this.label84 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -274,6 +276,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label84);
+            this.tabPage1.Controls.Add(this.contactDistance);
             this.tabPage1.Controls.Add(this.label83);
             this.tabPage1.Controls.Add(this.label82);
             this.tabPage1.Controls.Add(this.eJakoscRzutow);
@@ -336,6 +340,42 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Character/Enemy";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(12, 378);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(77, 13);
+            this.label83.TabIndex = 80;
+            this.label83.Text = "JakoscRzutow";
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(12, 352);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(65, 13);
+            this.label82.TabIndex = 79;
+            this.label82.Text = "IloscRzutow";
+            // 
+            // eJakoscRzutow
+            // 
+            this.eJakoscRzutow.Location = new System.Drawing.Point(126, 375);
+            this.eJakoscRzutow.Name = "eJakoscRzutow";
+            this.eJakoscRzutow.Size = new System.Drawing.Size(227, 20);
+            this.eJakoscRzutow.TabIndex = 78;
+            this.eJakoscRzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.eJakoscRzutow.TextChanged += new System.EventHandler(this.eJakoscRzutow_TextChanged);
+            // 
+            // eIloscRzutow
+            // 
+            this.eIloscRzutow.Location = new System.Drawing.Point(126, 349);
+            this.eIloscRzutow.Name = "eIloscRzutow";
+            this.eIloscRzutow.Size = new System.Drawing.Size(227, 20);
+            this.eIloscRzutow.TabIndex = 77;
+            this.eIloscRzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.eIloscRzutow.TextChanged += new System.EventHandler(this.eIloscRzutow_TextChanged);
             // 
             // label79
             // 
@@ -596,7 +636,7 @@
             // 
             // DeleteProfileButton
             // 
-            this.DeleteProfileButton.Location = new System.Drawing.Point(174, 410);
+            this.DeleteProfileButton.Location = new System.Drawing.Point(161, 432);
             this.DeleteProfileButton.Name = "DeleteProfileButton";
             this.DeleteProfileButton.Size = new System.Drawing.Size(151, 37);
             this.DeleteProfileButton.TabIndex = 47;
@@ -800,7 +840,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(474, 410);
+            this.saveButton.Location = new System.Drawing.Point(474, 432);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(169, 37);
             this.saveButton.TabIndex = 26;
@@ -2536,41 +2576,23 @@
             this.label56.TabIndex = 0;
             this.label56.Text = "Wybierz questa";
             // 
-            // eIloscRzutow
+            // contactDistance
             // 
-            this.eIloscRzutow.Location = new System.Drawing.Point(126, 349);
-            this.eIloscRzutow.Name = "eIloscRzutow";
-            this.eIloscRzutow.Size = new System.Drawing.Size(227, 20);
-            this.eIloscRzutow.TabIndex = 77;
-            this.eIloscRzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.eIloscRzutow.TextChanged += new System.EventHandler(this.eIloscRzutow_TextChanged);
+            this.contactDistance.Location = new System.Drawing.Point(126, 401);
+            this.contactDistance.Name = "contactDistance";
+            this.contactDistance.Size = new System.Drawing.Size(227, 20);
+            this.contactDistance.TabIndex = 81;
+            this.contactDistance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.contactDistance.TextChanged += new System.EventHandler(this.contactDistance_TextChanged);
             // 
-            // eJakoscRzutow
+            // label84
             // 
-            this.eJakoscRzutow.Location = new System.Drawing.Point(126, 375);
-            this.eJakoscRzutow.Name = "eJakoscRzutow";
-            this.eJakoscRzutow.Size = new System.Drawing.Size(227, 20);
-            this.eJakoscRzutow.TabIndex = 78;
-            this.eJakoscRzutow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.eJakoscRzutow.TextChanged += new System.EventHandler(this.eJakoscRzutow_TextChanged);
-            // 
-            // label82
-            // 
-            this.label82.AutoSize = true;
-            this.label82.Location = new System.Drawing.Point(12, 352);
-            this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(65, 13);
-            this.label82.TabIndex = 79;
-            this.label82.Text = "IloscRzutow";
-            // 
-            // label83
-            // 
-            this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(12, 378);
-            this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(77, 13);
-            this.label83.TabIndex = 80;
-            this.label83.Text = "JakoscRzutow";
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(12, 404);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(88, 13);
+            this.label84.TabIndex = 82;
+            this.label84.Text = "DystansKontaktu";
             // 
             // Form1
             // 
@@ -2821,6 +2843,8 @@
         private System.Windows.Forms.Label label82;
         private System.Windows.Forms.TextBox eJakoscRzutow;
         private System.Windows.Forms.TextBox eIloscRzutow;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.TextBox contactDistance;
 
 
 

@@ -29,6 +29,7 @@ namespace ProfilesGenerator
         public String DropPrize;
         public String IloscRzutow;
         public String JakoscRzutow;
+        public String ContactDistance;
 
         public Enemy()
         {
@@ -48,6 +49,7 @@ namespace ProfilesGenerator
 			Ataki = "1";
             IloscRzutow = "0";
             JakoscRzutow = "0";
+            ContactDistance = "1";
 
             FriendlyType = "0";
             DropPrize = "";
